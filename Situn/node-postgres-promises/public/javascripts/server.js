@@ -334,7 +334,7 @@ function updateTU(req, res, next) {
       return next(err);
     });
 }
-
+//Prueba
 //-------- ACTUALIZACION DE LA TABLA TC ----------
 function updateTC(req, res, next) {
   db.none('update TC set TC_2=${TC_2}, TC_3=${TC_3},TC_4=${TC_4}, TC_5=${TC_5},'+
