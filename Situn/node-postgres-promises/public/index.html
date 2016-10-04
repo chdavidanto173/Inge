@@ -168,6 +168,7 @@
   
  function insertTC(){
 	//let a3 = document.getElementById('a3').value;
+  if(validar() == false) return;
 	let b3 = $('#IC1').val();
 	let c3 = $('#IC2').val(); 
 	let d3 = $('#IC3').val();
@@ -198,7 +199,103 @@
   .catch(function(error) {  
    console.log('Request failed', error);  
   });
+     reset();
   }
+	
+<!--valida todos los campos--->
+function validar(){	
+	clear();
+	IC1 = true;
+	IC2 = true;
+	IC3 = true;
+	IC4 = true;
+	IC5 = true;
+	IC6 = true
+	IC7 = true
+	IC8 = true
+	IC9 = true
+	IC10 = true
+	if(document.getElementById("IC1").value == ""){
+		document.getElementById("IC1").className = "error" ;
+		document.getElementById("IC1").title = "Campo Obligatoria" ;
+		IC1 = false;
+	}
+	if(document.getElementById("IC2").value == ""){
+		document.getElementById("IC2").className = "error" ;
+		document.getElementById("IC2").title = "Campo Obligatorio";
+		IC2 = false;
+	}
+	if(document.getElementById("IC3").value == ""){
+		document.getElementById("IC3").className = "error" ;
+		document.getElementById("IC3").title = "Campo Obligatorio";
+		IC3 = false;
+	}
+	if(document.getElementById("IC4").value == ""){
+		document.getElementById("IC4").className = "error" ;
+		document.getElementById("IC4").title = "Campo Obligatorio";
+		IC4 = false;
+	}
+	if(document.getElementById("IC5").value == ""){
+		document.getElementById("IC5").className = "error" ;
+		document.getElementById("IC5").title = "Campo Obligatorio";
+		IC5 = false;
+	}
+	if(document.getElementById("IC6").value == ""){
+		document.getElementById("IC6").className = "error" ;
+		document.getElementById("IC6").title = "Campo Obligatorio";
+		IC6 = false;
+	}
+	if(document.getElementById("IC7").value == ""){
+		document.getElementById("IC7").className = "error" ;
+		document.getElementById("IC7").title = "Campo Obligatorio";
+		IC7 = false;
+	}
+	if(document.getElementById("IC8").value == ""){
+		document.getElementById("IC8").className = "error" ;
+		document.getElementById("IC8").title = "Campo Obligatorio";
+		IC8 = false;
+	}
+	if(document.getElementById("IC9").value == ""){
+		document.getElementById("IC9").className = "error" ;
+		document.getElementById("IC9").title = "Campo Obligatorio";
+		IC9 = false;
+	}
+	if(document.getElementById("IC10").value == ""){
+		document.getElementById("IC10").className = "error" ;
+		document.getElementById("IC10").title = "Campo Obligatorio";
+		IC10 = false;
+	}
+	if(IC1 == true && IC2 == true && IC3 == true && IC4 == true 
+	&& IC5 == true && IC6 == true && IC7 == true && IC8 == true 
+	&& IC9 == true && IC10 == true)
+		return true;
+	else return false;
+}
+
+<!--limpia todos los campos--->
+function reset(){
+	textoRojo = 0;
+	Formulario.IC1.value = "";
+	Formulario.IC2.value = "";
+	Formulario.IC3.value = "";
+	Formulario.IC4.value = "";
+	Formulario.IC5.value = "";
+	Formulario.IC6.value = "";
+	Formulario.IC7.value = "";
+	Formulario.IC8.value = "";
+	Formulario.IC9.value = "";
+	Formulario.IC10.value = "";
+	clear();
+}
+
+function clear(){
+	selected = document.querySelectorAll(".error");
+	for(i=0;i<selected.length;i++){
+		selected[i].className = "ok2";	
+		selected[i].title = "";
+	}
+}
+
 </script>
 
 
