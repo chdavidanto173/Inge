@@ -10,15 +10,14 @@
 	  
  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
    
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="\node_modules\bootstrap\dist\css\bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <link href="C:\Users\Alexandra\Desktop\inge\node_modules\bootstrap\dist\css\bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <script src="\node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+  <link href="\node_modules\bootstrap\dist\css\bootstrap-datetimepicker.min.css" rel="stylesheet">
   <script type="text/javascript"src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
-    <script type="text/javascript"src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
-    <script type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js"></script>
-  
+    <!--script type="text/javascript"src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script-->
+    <script type="text/javascript"src="\node_modules\bootstrap\dist\js\bootstrap-datetimepicker.min.js"></script>
+    
     </head>
     <body>
        
@@ -169,16 +168,16 @@
   
  function insertTC(){
 	//let a3 = document.getElementById('a3').value;
-	let b3 = document.getElementById('IC1').value;
-	let c3 = document.getElementById('IC2').value; 
-	let d3 = document.getElementById('IC3').value;
-	let e3 = document.getElementById('IC4').value;
-	let f3 = document.getElementById('IC5').value;
-	let g3 = document.getElementById('IC6').value;
-	let h3 = document.getElementById('IC7').value;
-	let i3 = document.getElementById('IC8').value;
-	let j3 = document.getElementById('IC9').value;
-    let k3 = document.getElementById('IC10').value;
+	let b3 = $('#IC1').val();
+	let c3 = $('#IC2').val(); 
+	let d3 = $('#IC3').val();
+	let e3 = $('#IC4').val();
+	let f3 = $('#IC5').val();
+	let g3 = $('#IC6').val();
+	let h3 = $('#IC7').val();
+	let i3 = $('#IC8').val();
+	let j3 = $('#IC9').val();
+    let k3 = $('#IC10').val();
  fetch( 'http://localhost:3000/api/TC/I', {  
     method: 'POST', 
     datatype:'json',
