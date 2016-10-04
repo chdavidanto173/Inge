@@ -4,7 +4,7 @@ var app = express();
 
 //-------- LA PAGINA PRINCIPAL QUE SE VA ABRIR AL COLOCAR http://localhost:3000/ ----------------
 app.get('/', function(req, res){
-	res.sendfile(_dirname +'/public/node_modules/bootstrap/dist/paginas/index.html');
+	res.sendfile(_dirname +'/public/index.html');
 });
 
 
@@ -16,7 +16,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:admin123@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -60,8 +60,8 @@ function createTU(req, res, next) {
 
 //-------- CREACION DE UN NUEVO TC EN LA TABLA ----------
 function createTC(req, res, next) {
-     db.none('insert into TC (TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, TC_9, TC_10)' +
-      'values(${TC_2}, ${TC_3}, ${TC_4}, ${TC_5}, ${TC_6},${TC_7}, ${TC_8}, ${TC_9}, ${TC_10})',
+     db.none('insert into TC (TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, TC_9, TC_10, TC_11)' +
+      'values(${TC_2}, ${TC_3}, ${TC_4}, ${TC_5}, ${TC_6},${TC_7}, ${TC_8}, ${TC_9}, ${TC_10}, ${TC_11})',
 	     req.body)
     .then(function () {
       res.status(200)
@@ -196,10 +196,10 @@ function getSingleTU(req, res, next) {
     });
 }
 
-//------ RETORNO DE UN TC ESPECIFICO SEGUN TC_4 ---------------------
+//------ RETORNO DE UN TC ESPECIFICO SEGUN TC_3 ---------------------
 function getALLTC1(req, res, next) {
- req.body.TC_4 = req.body.TC_4+'%';
-  db.any('select * from TC where TC_4 LIKE ${TC_4}', req.body)
+ req.body.TC_3 = req.body.TC_3+'%';
+  db.any('select * from TC where TC_3 LIKE ${TC_3}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -230,10 +230,10 @@ function getALLTC2(req, res, next) {
     });
 }
 
-//------ RETORNO DE UN TC ESPECIFICO SEGUN TC_6 ---------------------
+//------ RETORNO DE UN TC ESPECIFICO SEGUN TC_7 ---------------------
 function getALLTC3(req, res, next) {
-  req.body.TC_6 =  req.body.TC_6+'%';
-  db.any('select * from TC where TC_6 LIKE ${TC_6}', req.body)
+  req.body.TC_7 =  req.body.TC_7+'%';
+  db.any('select * from TC where TC_7 LIKE ${TC_7}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -247,10 +247,10 @@ function getALLTC3(req, res, next) {
     });
 }
 
-//------ RETORNO DE UN TC ESPECIFICO SEGUN TC_7 ---------------------
+//------ RETORNO DE UN TC ESPECIFICO SEGUN TC_8 ---------------------
 function getALLTC4(req, res, next) {
- req.body.TC_7 =  req.body.TC_7+'%';
-  db.any('select * from TC where TC_7 LIKE ${TC_7}', req.body)
+ req.body.TC_8 =  req.body.TC_8+'%';
+  db.any('select * from TC where TC_8 LIKE ${TC_8}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -334,11 +334,11 @@ function updateTU(req, res, next) {
       return next(err);
     });
 }
-
+//Prueba
 //-------- ACTUALIZACION DE LA TABLA TC ----------
 function updateTC(req, res, next) {
   db.none('update TC set TC_2=${TC_2}, TC_3=${TC_3},TC_4=${TC_4}, TC_5=${TC_5},'+
-          'TC_6=${TC_6} ,TC_7=${TC_7}, TC_8=${TC_8}, TC_9=${TC_9}, TC_10=${TC_10} where TC_1=${TC_1}',
+          'TC_6=${TC_6} ,TC_7=${TC_7}, TC_8=${TC_8}, TC_9=${TC_9}, TC_10=${TC_10}, TC_11=${TC_11} where TC_1=${TC_1}',
     req.body)
     .then(function () {
       res.status(200)

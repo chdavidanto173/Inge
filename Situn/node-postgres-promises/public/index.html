@@ -10,15 +10,14 @@
 	  
  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
    
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="\node_modules\bootstrap\dist\css\bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <link href="C:\Users\Alexandra\Desktop\inge\node_modules\bootstrap\dist\css\bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <script src="\node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+  <link href="\node_modules\bootstrap\dist\css\bootstrap-datetimepicker.min.css" rel="stylesheet">
   <script type="text/javascript"src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
-    <script type="text/javascript"src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
-    <script type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js"></script>
-  
+    <!--script type="text/javascript"src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script-->
+    <script type="text/javascript"src="\node_modules\bootstrap\dist\js\bootstrap-datetimepicker.min.js"></script>
+    
     </head>
     <body>
        
@@ -65,52 +64,52 @@
                     <td><span class="text-danger">Fecha recibido</span></td>
                     <td> 
 					<div id="datetimepicker4" class="input-append form-group">	<!-- Calendario--->
-					<input data-format="dd-MM-yyyy" type="text"></input>
+					<input id="IC1" data-format="dd-MM-yyyy" type="text"></input>
 					<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">N° Oficio</span> </td>
-                    <td><div  class="form-group"><input type="text" class="form-control"  id = "Mtelefono"></input></div></td>
+                    <td><div  class="form-group"><input id="IC2" type="text" class="form-control"  id = "Mtelefono"></input></div></td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Fecha Oficio</span></td>
-                    <td> <div id="datetimepicker3" class="input-append form-group"><input data-format="dd-MM-yyyy" type="text"></input>  
+                    <td> <div id="datetimepicker3" class="input-append form-group"><input id="IC3" data-format="dd-MM-yyyy" type="text"></input>  
 					<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Destinatario </span></td>
-                    <td><div  class="form-group"><input type="text" class="form-control"  id = "Mtelefono"></input></div></td>
+                    <td><div  class="form-group"><input id="IC4" type="text" class="form-control"  id = "Mtelefono"></input></div></td>
                 </tr>
 				 <tr>
                     <td> <span class="text-danger">Copia </span></td>
-                    <td><div  class="form-group"><input type="text" class="form-control"  id = "Mtelefono"></input></div></td>
+                    <td><div  class="form-group"><input id="IC5" type="text" class="form-control"  id = "Mtelefono"></input></div></td>
                 </tr>
 				 <tr>
                     <td> <span class="text-danger">Remitente </span></td>
-                    <td><div  class="form-group"><input type="text" class="form-control"  id = "Mtelefono"></input></div></td>
+                    <td><div  class="form-group"><input id="IC6" type="text" class="form-control"  id = "Mtelefono"></input></div></td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Asunto</span></td>
-                    <td><div class="form-group"><textarea type="text" rows=4 cols=30  id = "Descripcion"></textarea></input></div></td>
+                    <td><div class="form-group"><textarea id="IC7" type="text" rows=4 cols=30  id = "Descripcion"></textarea></input></div></td>
                 </tr>
 				<tr>
                     <td> <span class="text-danger">Recibido</span></td>
-                    <td><div class="form-group"><input type="text"class="form-control" id = "Mcorreo"></input> <div></td>
+                    <td><div class="form-group"><input id="IC8" type="text"class="form-control" id = "Mcorreo"></input> <div></td>
                 </tr>
 				<tr>
                     <td> <span class="text-danger">Estado</span></td>
-                    <td><div class="form-group"><input type="text"  class="form-control" id = "Mcorreo"></input></div></td>
+                    <td><div class="form-group"><input type="text"  id="IC9" class="form-control" id = "Mcorreo"></input></div></td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Observaciones</span></td>
-                    <td><div class="form-group"><textarea type="text" rows=4 cols=30  id = "Descripcion"></textarea></input></div></td>
+                    <td><div class="form-group"><textarea type="text" id="IC10" rows=4 cols=30  id = "Descripcion"></textarea></input></div></td>
                 </tr>
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default">Guardar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick="insertTC()">Guardar</button></td>
                     <td ><center><button type="button" class="btn btn-default">Cancelar</button></td>
                 </tr>
 						</tbody>
@@ -166,6 +165,40 @@
     });
   });
   
+  
+ function insertTC(){
+	//let a3 = document.getElementById('a3').value;
+	let b3 = $('#IC1').val();
+	let c3 = $('#IC2').val(); 
+	let d3 = $('#IC3').val();
+	let e3 = $('#IC4').val();
+	let f3 = $('#IC5').val();
+	let g3 = $('#IC6').val();
+	let h3 = $('#IC7').val();
+	let i3 = $('#IC8').val();
+	let j3 = $('#IC9').val();
+    let k3 = $('#IC10').val();
+ fetch( 'http://localhost:3000/api/TC/I', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded"  
+      } ,
+    body: "TC_2="+ b3+ "&TC_3="+c3+
+	"&TC_4="+ d3 + "&TC_5="+ e3 +"&TC_6="+ f3 + 
+	"&TC_7="+ g3 + "&TC_8="+ h3 +"&TC_9="+ i3+"&TC_10="+ j3+ "&TC_11="+ k3
+      }
+	  )
+  .then(function(response) {
+  return response.text().then(function(res) {
+    console.log("Resultado: "+res);
+    
+  });
+})
+  .catch(function(error) {  
+   console.log('Request failed', error);  
+  });
+  }
 </script>
 
 
