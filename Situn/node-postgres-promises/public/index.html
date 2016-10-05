@@ -64,53 +64,53 @@
                     <td><span class="text-danger">Fecha recibido</span></td>
                     <td> 
 					<div id="datetimepicker4" class="input-append form-group">	<!-- Calendario--->
-					<input id="IC1" data-format="dd-MM-yyyy" type="text"></input>
+					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text"></input>
 					<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">N° Oficio</span> </td>
-                    <td><div  class="form-group"><input id="IC2" type="text" class="form-control"  ></input></div></td>
+                    <td><div  id="div2"class="form-group"><input id="IC2" type="text" class="form-control" ></input></div></td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Fecha Oficio</span></td>
-                    <td> <div id="datetimepicker3" class="input-append form-group"><input id="IC3" data-format="dd-MM-yyyy" type="text"></input>  
+                    <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text"></input>  
 					<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Destinatario </span></td>
-                    <td><div  class="form-group"><input id="IC4" type="text" class="form-control"  ></input></div></td>
+                    <td><div id="div4" class="form-group"><input id="IC4" type="text" class="form-control"  ></input></div></td>
                 </tr>
 				 <tr>
                     <td> <span class="text-danger">Copia </span></td>
-                    <td><div  class="form-group"><input id="IC5" type="text" class="form-control" ></input></div></td>
+                    <td><div id="div5" class="form-group"><input id="IC5" type="text" class="form-control" ></input></div></td>
                 </tr>
 				 <tr>
                     <td> <span class="text-danger">Remitente </span></td>
-                    <td><div  class="form-group"><input id="IC6" type="text" class="form-control" ></input></div></td>
+                    <td><div id="div6" class="form-group"><input id="IC6" type="text" class="form-control" ></input></div></td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Asunto</span></td>
-                    <td><div class="form-group"><textarea id="IC7" type="text" rows=4 cols=30 ></textarea></input></div></td>
+                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 ></textarea></input></div></td>
                 </tr>
 				<tr>
                     <td> <span class="text-danger">Recibido</span></td>
-                    <td><div class="form-group"><input id="IC8" type="text"class="form-control" value="Gretel Castro Cruz" disabled></input> <div></td>
+                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" ></input> <div></td>
                 </tr>
 				<tr>
                     <td> <span class="text-danger">Estado</span></td>
-                    <td><div class="form-group"><input type="text"  id="IC9"  ></input></div></td>
+                    <td><div id="div9"class="form-group"><input type="text" class="form-control" id="IC9"  ></input></div></td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Observaciones</span></td>
-                    <td><div class="form-group"><textarea type="text" id="IC10" rows=4 cols=30  ></textarea></input></div></td>
+                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10" rows=4 cols=30  ></textarea></input></div></td>
                 </tr>
                 <tr>
                     <td ><center><button type="button" class="btn btn-default" onclick="insertTC()">Guardar</button></td>
-                    <td ><center><button type="button" class="btn btn-default">Cancelar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick="cambioClase()">Cancelar</button></td>
                 </tr>
 						</tbody>
 		           </table>  
@@ -129,10 +129,13 @@
 				<Option value="Nd" Selected>Ninguna
 			</select>	
 			<div  style="display:none"><span class="text-danger"><h4>Cantidad de días:</h4></span>
-				<input type="text"  class="form-control" id = "Mcorreo"></input>
+				<input type="text"  class="form-control" id = ""></input>
 			</div>
 			<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button style="margin-top:15px"type="button" class="btn btn-default">Enlace</button></a>
-	 	</div>
+	 	
+		<div id="mensaje"></div>
+		
+		</div>
 	
 		<div class="col-md-1 "></div><!--Genera el espacio entre componentes---->	
 			<div class="col-md-3 panel panel-danger"  style=" border-radius: 5px 5px 5px 5px;"> 	
@@ -169,16 +172,16 @@
  function insertTC(){
 	//let a3 = document.getElementById('a3').value;
   if(validar() == false)return; 
-	let b3 = $('#IC1').val();
-	let c3 = $('#IC2').val(); 
-	let d3 = $('#IC3').val();
-	let e3 = $('#IC4').val();
-	let f3 = $('#IC5').val();
-	let g3 = $('#IC6').val();
-	let h3 = $('#IC7').val();
-	let i3 = "1";
-	let j3 = $('#IC9').val();
-    let k3 = $('#IC10').val();
+	let b3 = $('#IC1').val().toUpperCase();
+	let c3 = $('#IC2').val().toUpperCase(); 
+	let d3 = $('#IC3').val().toUpperCase();
+	let e3 = $('#IC4').val().toUpperCase();
+	let f3 = $('#IC5').val().toUpperCase();
+	let g3 = $('#IC6').val().toUpperCase();
+	let h3 = $('#IC7').val().toUpperCase();
+	let i3 = '1'; // cambiar solo lo puse por que si no mamaron al ingresar
+	let j3 = $('#IC9').val().toUpperCase();
+    let k3 = $('#IC10').val().toUpperCase();
  fetch( 'http://localhost:3000/api/TC/I', {  
     method: 'POST', 
     datatype:'json',
@@ -192,14 +195,16 @@
 	  )
   .then(function(response) {
   return response.text().then(function(res) {
+  document.getElementById("mensaje").innerHTML="Acción realizada con exito";
     console.log("Resultado: "+res);
     
   });
 })
   .catch(function(error) {  
+   document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
    console.log('Request failed', error);  
   });
-  reset();
+  
 }
 	
 <!--valida todos los campos--->
@@ -216,54 +221,104 @@ function validar(){
 	IC9 = true
 	IC10 = true
 	if(document.getElementById("IC1").value == ""){
-		document.getElementById("IC1").className = "error" ;
+		document.getElementById("datetimepicker4").className ="input-append  form-group has-error" ;
 		document.getElementById("IC1").title = "Campo Obligatoria" ;
 		IC1 = false;
 	}
+	else{
+	document.getElementById("datetimepicker4").className ="input-append  form-group" ;
+	document.getElementById("IC1").title = "" ;
+		IC1 = true;
+	}
 	if(document.getElementById("IC2").value == ""){
-		document.getElementById("IC2").className = "error" ;
+		document.getElementById("div2").className = "form-group has-error" ;
 		document.getElementById("IC2").title = "Campo Obligatorio";
 		IC2 = false;
 	}
+	else{
+	document.getElementById("div2").className ="  form-group" ;
+	document.getElementById("IC2").title = "" ;
+		IC2 = true;
+	}
+	
 	if(document.getElementById("IC3").value == ""){
-		document.getElementById("IC3").className = "error" ;
+		document.getElementById("datetimepicker3").className = " input-append  form-group has-error" ;
 		document.getElementById("IC3").title = "Campo Obligatorio";
 		IC3 = false;
 	}
+	else{
+	document.getElementById("datetimepicker3").className ="input-append  form-group" ;
+	document.getElementById("IC3").title = "" ;
+		IC3 = true;
+	}
 	if(document.getElementById("IC4").value == ""){
-		document.getElementById("IC4").className = "error" ;
+		document.getElementById("div4").className ="form-group has-error" ;
 		document.getElementById("IC4").title = "Campo Obligatorio";
 		IC4 = false;
 	}
+	else{
+	document.getElementById("div4").className =" form-group" ;
+	document.getElementById("IC4").title = "" ;
+		IC4 = true;
+	}
 	if(document.getElementById("IC5").value == ""){
-		document.getElementById("IC5").className = "error" ;
+		document.getElementById("div5").className = "form-group has-error" ;
 		document.getElementById("IC5").title = "Campo Obligatorio";
 		IC5 = false;
 	}
+	else{
+	document.getElementById("div5").className ="  form-group" ;
+	document.getElementById("IC5").title = "" ;
+		IC5 = true;
+	}
 	if(document.getElementById("IC6").value == ""){
-		document.getElementById("IC6").className = "error" ;
+		document.getElementById("div6").className = "form-group has-error" ;
 		document.getElementById("IC6").title = "Campo Obligatorio";
 		IC6 = false;
 	}
+	else{
+	document.getElementById("div6").className ="  form-group" ;
+	document.getElementById("IC6").title = "" ;
+		IC6 = true;
+	}
 	if(document.getElementById("IC7").value == ""){
-		document.getElementById("IC7").className = "error" ;
+		document.getElementById("div7").className = "form-group has-error" ;
 		document.getElementById("IC7").title = "Campo Obligatorio";
 		IC7 = false;
 	}
+	else{
+	document.getElementById("div7").className ="form-group" ;
+	document.getElementById("IC7").title = "" ;
+		IC7 = true;
+	}
 	if(document.getElementById("IC8").value == ""){
-		document.getElementById("IC8").className = "error" ;
+		document.getElementById("div8").className = "form-group has-error" ;
 		document.getElementById("IC8").title = "Campo Obligatorio";
 		IC8 = false;
 	}
+	else{
+	document.getElementById("div8").className ="  form-group" ;
+	document.getElementById("IC8").title = "" ;
+		IC8 = true;
+	}
 	if(document.getElementById("IC9").value == ""){
-		document.getElementById("IC9").className = "error" ;
+		document.getElementById("div9").className ="form-group has-error" ;
 		document.getElementById("IC9").title = "Campo Obligatorio";
 		IC9 = false;
 	}
+	else{
+	document.getElementById("div9").className ="  form-group" ;
+	document.getElementById("IC9").title = "" ;
+		IC9 = true;
+	}
 	if(document.getElementById("IC10").value == ""){
-		document.getElementById("IC10").className = "error" ;
+		document.getElementById("div10").className = "form-group has-error" ;
 		document.getElementById("IC10").title = "Campo Obligatorio";
 		IC10 = false;
+	}else{
+	document.getElementById("div10").className ="  form-group" ;
+	document.getElementById("IC10").title = "" ;
+		IC10 = true;
 	}
 	if(IC1 == true && IC2 == true && IC3 == true && IC4 == true 
 	&& IC5 == true && IC6 == true && IC7 == true && IC8 == true 
@@ -271,22 +326,42 @@ function validar(){
 		return true;
 	else return false;
 }
-
 <!--limpia todos los campos--->
-function reset(){
-	textoRojo = 0;
-	Formulario.IC1.value = "";
-	Formulario.IC2.value = "";
-	Formulario.IC3.value = "";
-	Formulario.IC4.value = "";
-	Formulario.IC5.value = "";
-	Formulario.IC6.value = "";
-	Formulario.IC7.value = "";
-	Formulario.IC8.value = "";
-	Formulario.IC9.value = "";
-	Formulario.IC10.value = "";
-	clear();
-}
+function cambioClase(){
+document.getElementById("datetimepicker4").className ="input-append  form-group" ;
+	document.getElementById("div2").className ="  form-group" ;
+	document.getElementById("datetimepicker3").className ="input-append  form-group" ;
+	document.getElementById("div4").className ="  form-group" ;
+	document.getElementById("div5").className ="  form-group" ;
+	document.getElementById("div5").className ="  form-group" ;
+	document.getElementById("div6").className ="  form-group" ;
+	document.getElementById("div7").className ="  form-group" ;
+	document.getElementById("div8").className ="  form-group" ;
+	document.getElementById("div9").className ="  form-group" ;
+	document.getElementById("div10").className ="  form-group" ;
+	document.getElementById("IC1").value = "";
+	document.getElementById("IC2").value = "";
+	document.getElementById("IC3").value = "";
+	document.getElementById("IC4").value = "";
+	document.getElementById("IC5").value = "";
+	document.getElementById("IC6").value = "";
+	document.getElementById("IC7").value = "";
+	document.getElementById("IC8").value = "";
+	document.getElementById("IC9").value = "";
+	document.getElementById("IC10").value = "";	
+	document.getElementById("IC1").title = "";
+	document.getElementById("IC2").title = "";
+	document.getElementById("IC3").title = "";
+	document.getElementById("IC4").title = "";
+	document.getElementById("IC5").title = "";
+	document.getElementById("IC6").title = "";
+	document.getElementById("IC7").title = "";
+	document.getElementById("IC8").title = "";
+	document.getElementById("IC9").title = "";
+	document.getElementById("IC10").title = "";
+	}
+
+
 
 function clear(){
 	selected = document.querySelectorAll(".error");
@@ -300,3 +375,4 @@ function clear(){
 
     </body>
 </html>
+
