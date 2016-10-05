@@ -169,16 +169,16 @@
  function insertTC(){
 	//let a3 = document.getElementById('a3').value;
   if(validar() == false)return; 
-	let b3 = $('#IC1').val();
-	let c3 = $('#IC2').val(); 
-	let d3 = $('#IC3').val();
-	let e3 = $('#IC4').val();
-	let f3 = $('#IC5').val();
-	let g3 = $('#IC6').val();
-	let h3 = $('#IC7').val();
+	let b3 = $('#IC1').val().toUpperCase();
+	let c3 = $('#IC2').val().toUpperCase(); 
+	let d3 = $('#IC3').val().toUpperCase();
+	let e3 = $('#IC4').val().toUpperCase();
+	let f3 = $('#IC5').val().toUpperCase();
+	let g3 = $('#IC6').val().toUpperCase();
+	let h3 = $('#IC7').val().toUpperCase();
 	let i3 = '1'; // cambiar solo lo puse por que si no mamaron al ingresar
-	let j3 = $('#IC9').val();
-    let k3 = $('#IC10').val();
+	let j3 = $('#IC9').val().toUpperCase();
+    let k3 = $('#IC10').val().toUpperCase();
  fetch( 'http://localhost:3000/api/TC/I', {  
     method: 'POST', 
     datatype:'json',
@@ -282,7 +282,7 @@ function validar(){
 		IC7 = false;
 	}
 	else{
-	document.getElementById("div7").className ="  form-group" ;
+	document.getElementById("div7").className ="form-group" ;
 	document.getElementById("IC7").title = "" ;
 		IC7 = true;
 	}
