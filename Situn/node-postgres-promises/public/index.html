@@ -132,7 +132,10 @@
 				<input type="text"  class="form-control" id = ""></input>
 			</div>
 			<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button style="margin-top:15px"type="button" class="btn btn-default">Enlace</button></a>
-	 	</div>
+	 	
+		<div id="mensaje"></div>
+		
+		</div>
 	
 		<div class="col-md-1 "></div><!--Genera el espacio entre componentes---->	
 			<div class="col-md-3 panel panel-danger"  style=" border-radius: 5px 5px 5px 5px;"> 	
@@ -192,11 +195,13 @@
 	  )
   .then(function(response) {
   return response.text().then(function(res) {
+  document.getElementById("mensaje").innerHTML="Acción realizada con exito";
     console.log("Resultado: "+res);
     
   });
 })
   .catch(function(error) {  
+   document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
    console.log('Request failed', error);  
   });
   
