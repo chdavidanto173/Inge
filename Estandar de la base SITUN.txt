@@ -1,5 +1,4 @@
 BD_SITUN // Nombre de la base de datos
-
 TC // Tabla de Correspondencia
 TA // Tabla de Alarmas
 TU // Tabla de Usuarios
@@ -43,4 +42,3 @@ TD // Tabla de Enlace
    TA_4 // Mensaje
    TA_5 // Si se realizo seria un numero (0,1,2) = revisada, espera, entrego
    TA_6 // Tipo de recordatorio
-
