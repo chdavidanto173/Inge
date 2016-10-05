@@ -17,7 +17,7 @@
   <script type="text/javascript"src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
     <!--script type="text/javascript"src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script-->
     <script type="text/javascript"src="\node_modules\bootstrap\dist\js\bootstrap-datetimepicker.min.js"></script>
-    
+    	<link rel="stylesheet" href="\node_modules\bootstrap\dist\css\style.css">
     </head>
     <body>
        
@@ -71,7 +71,7 @@
                 </tr>
                 <tr>
                     <td> <span class="text-danger">N° Oficio</span> </td>
-                    <td><div  class="form-group"><input id="IC2" type="text" class="form-control"  ></input></div></td>
+                    <td><div  class="form-group"><input id="IC2" type="text"  ></input></div></td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Fecha Oficio</span></td>
@@ -82,15 +82,15 @@
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Destinatario </span></td>
-                    <td><div  class="form-group"><input id="IC4" type="text" class="form-control"  ></input></div></td>
+                    <td><div  class="form-group"><input id="IC4" type="text"></input></div></td>
                 </tr>
 				 <tr>
                     <td> <span class="text-danger">Copia </span></td>
-                    <td><div  class="form-group"><input id="IC5" type="text" class="form-control" ></input></div></td>
+                    <td><div  class="form-group"><input id="IC5" type="text" ></input></div></td>
                 </tr>
 				 <tr>
                     <td> <span class="text-danger">Remitente </span></td>
-                    <td><div  class="form-group"><input id="IC6" type="text" class="form-control" ></input></div></td>
+                    <td><div  id="div6" class="form-group"><input id="IC6" type="text" ></input></div></td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Asunto</span></td>
@@ -98,11 +98,13 @@
                 </tr>
 				<tr>
                     <td> <span class="text-danger">Recibido</span></td>
-                    <td><div class="form-group"><input id="IC8" type="text"class="form-control" value="Gretel Castro Cruz" disabled></input> <div></td>
+                    <td><div class="form-group"><input id="IC8" type="text" value="Gretel Castro Cruz" disabled></input> <div></td>
                 </tr>
 				<tr>
+				
                     <td> <span class="text-danger">Estado</span></td>
-                    <td><div class="form-group"><input type="text"  id="IC9" class="form-control" ></input></div></td>
+					<td><div id="div9"class="form-group"><input type="text" class="form-control" id="IC9"></div></td>
+                   
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Observaciones</span></td>
@@ -110,7 +112,7 @@
                 </tr>
                 <tr>
                     <td ><center><button type="button" class="btn btn-default" onclick="insertTC()">Guardar</button></td>
-                    <td ><center><button type="button" class="btn btn-default">Cancelar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick= "reset()">Cancelar</button></td>
                 </tr>
 						</tbody>
 		           </table>  
@@ -168,6 +170,7 @@
   
  function insertTC(){
 	//let a3 = document.getElementById('a3').value;
+	if(validar() == false) return;
 	let b3 = $('#IC1').val();
 	let c3 = $('#IC2').val(); 
 	let d3 = $('#IC3').val();
@@ -175,7 +178,7 @@
 	let f3 = $('#IC5').val();
 	let g3 = $('#IC6').val();
 	let h3 = $('#IC7').val();
-	let i3 = $('#IC8').val();
+	let i3 = "1";
 	let j3 = $('#IC9').val();
     let k3 = $('#IC10').val();
  fetch( 'http://localhost:3000/api/TC/I', {  
@@ -198,7 +201,103 @@
   .catch(function(error) {  
    console.log('Request failed', error);  
   });
+   reset();
   }
+  
+  
+  <!--valida todos los campos--->
+function validar(){	
+	clear();
+	IC1 = true;
+	IC2 = true;
+	IC3 = true;
+	IC4	= true;
+	IC5 = true;
+	IC6 = true
+	IC7 = true
+	IC8 = true
+	IC9 = true
+	IC10 = true
+	if(document.getElementById("IC1").value == ""){
+		document.getElementById("IC1").className = "error" ;
+		document.getElementById("IC1").title = "Campo Obligatoria" ;
+		IC1 = false;
+	}
+	if(document.getElementById("IC2").value == ""){
+		document.getElementById("IC2").className = "error" ;
+		document.getElementById("IC2").title = "Campo Obligatorio";
+		IC2 = false;
+	}
+	if(document.getElementById("IC3").value == ""){
+		document.getElementById("IC3").className = "error" ;
+		document.getElementById("IC3").title = "Campo Obligatorio";
+		IC3 = false;
+	}
+	if(document.getElementById("IC4").value == ""){
+		document.getElementById("IC4").className = "error" ;
+		document.getElementById("IC4").title = "Campo Obligatorio";
+		IC4 = false;
+	}
+	if(document.getElementById("IC5").value == ""){
+		document.getElementById("IC5").className = "error" ;
+		document.getElementById("IC5").title = "Campo Obligatorio";
+		IC5 = false;
+	}
+	if(document.getElementById("IC6").value == ""){
+		document.getElementById("div6").className = "error" ;
+		document.getElementById("IC6").title = "Campo Obligatorio";
+		IC6 = false;
+	}
+	if(document.getElementById("IC7").value == ""){
+		document.getElementById("IC7").className = "error" ;
+		document.getElementById("IC7").title = "Campo Obligatorio";
+		IC7 = false;
+	}
+	if(document.getElementById("IC8").value == ""){
+		document.getElementById("IC8").className = "error" ;
+		document.getElementById("IC8").title = "Campo Obligatorio";
+		IC8 = false;
+	}
+	if(document.getElementById("IC9").value == ""){
+		document.getElementById("div9").className = "form-group has-error" ;
+		document.getElementById("IC9").title = "Campo Obligatorio";
+		IC9 = false;
+	}
+	if(document.getElementById("IC10").value == ""){
+		document.getElementById("IC10").className = "error" ;
+		document.getElementById("IC10").title = "Campo Obligatorio";
+		IC10 = false;
+	}
+	if(IC1 == true && IC2 == true && IC3 == true && IC4 == true 
+	&& IC5 == true && IC6 == true && IC7 == true && IC8 == true 
+	&& IC9 == true && IC10 == true)
+		return true;
+	else return false;
+}
+
+<!--limpia todos los campos--->
+function reset(){
+	textoRojo = 0;
+	Formulario.IC1.value = "";
+	Formulario.IC2.value = "";
+	Formulario.IC3.value = "";
+	Formulario.IC4.value = "";
+	Formulario.IC5.value = "";
+	Formulario.IC6.value = "";
+	Formulario.IC7.value = "";
+	Formulario.IC8.value = "";
+	Formulario.IC9.value = "";
+	Formulario.IC10.value = "";
+	clear();
+}
+
+function clear(){
+	selected = document.querySelectorAll(".error");
+	for(i=0;i<selected.length;i++){
+		selected[i].className = "ok2";	
+		selected[i].title = "";
+	}
+}
 </script>
 
 
