@@ -43,4 +43,3 @@ TD // Tabla de Enlace
    TA_4 // Mensaje
    TA_5 // Si se realizo seria un numero (0,1,2) = revisada, espera, entrego
    TA_6 // Tipo de recordatorio
-
