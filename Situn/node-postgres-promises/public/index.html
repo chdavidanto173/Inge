@@ -60,53 +60,53 @@
             <form name = "Formulario">
             <table id ="tablaIC">
                 <tbody>
-				<tr>
+						<tr>
                     <td><span class="text-danger">Fecha recibido</span></td>
                     <td> 
-					<div id="datetimepicker4" class="input-append form-group">	<!-- Calendario--->
-					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text"></input>
-					<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+					<div id="datetimepicker4" class="input-append form-group" >	<!-- Calendario--->
+					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text" onfocus= "clear2(1)" ></input> <!--****** NUEVO ***********-->
+					<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar" onclick= "clear2(1)"></i></span> <!--****** NUEVO ***********-->
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">N° Oficio</span> </td>
-                    <td><div  id="div2"class="form-group"><input id="IC2" type="text" class="form-control" ></input></div></td>
+                    <td><div  id="div2"class="form-group"><input id="IC2" type="text" class="form-control" onfocus="clear2(2)"></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Fecha Oficio</span></td>
-                    <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text"></input>  
-					<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+                    <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text" onfocus="clear2(3)" > <!--****** NUEVO ***********-->
+					<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar" onclick="clear2(3)"></i></span> <!--****** NUEVO ***********-->
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Destinatario </span></td>
-                    <td><div id="div4" class="form-group"><input id="IC4" type="text" class="form-control"  ></input></div></td>
+                    <td><div id="div4" class="form-group"><input id="IC4" type="text" class="form-control"  onfocus="clear2(4)"></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
 				 <tr>
                     <td> <span class="text-danger">Copia </span></td>
-                    <td><div id="div5" class="form-group"><input id="IC5" type="text" class="form-control" ></input></div></td>
+                    <td><div id="div5" class="form-group"><input id="IC5" type="text" class="form-control" onfocus="clear2(5)"></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
 				 <tr>
                     <td> <span class="text-danger">Remitente </span></td>
-                    <td><div id="div6" class="form-group"><input id="IC6" type="text" class="form-control" ></input></div></td>
+                    <td><div id="div6" class="form-group"><input id="IC6" type="text" class="form-control" onfocus="clear2(6)"></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Asunto</span></td>
-                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 ></textarea></input></div></td>
+                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 onfocus="clear2(7)"></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
 				<tr>
                     <td> <span class="text-danger">Recibido</span></td>
-                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" ></input> <div></td>
+                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" onfocus="clear2(8)" value="GRETTEL CASTRO CRUZ" disabled></input> <div></td> <!--****** NUEVO ***********-->
                 </tr>
 				<tr>
                     <td> <span class="text-danger">Estado</span></td>
-                    <td><div id="div9"class="form-group"><input type="text" class="form-control" id="IC9"  ></input></div></td>
+                    <td><div id="div9"class="form-group"><input type="text" class="form-control" id="IC9"  onfocus="clear2(9)"></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td> <span class="text-danger">Observaciones</span></td>
-                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10" rows=4 cols=30  ></textarea></input></div></td>
+                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10" rows=4 cols=30  onfocus="clear2(10)"></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td ><center><button type="button" class="btn btn-default" onclick="insertTC()">Guardar</button></td>
@@ -132,7 +132,10 @@
 				<input type="text"  class="form-control" id = ""></input>
 			</div>
 			<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button style="margin-top:15px"type="button" class="btn btn-default">Enlace</button></a>
-	 	</div>
+	 	
+		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
+		
+		</div>
 	
 		<div class="col-md-1 "></div><!--Genera el espacio entre componentes---->	
 			<div class="col-md-3 panel panel-danger"  style=" border-radius: 5px 5px 5px 5px;"> 	
@@ -179,6 +182,7 @@
 	let i3 = '1'; // cambiar solo lo puse por que si no mamaron al ingresar
 	let j3 = $('#IC9').val().toUpperCase();
     let k3 = $('#IC10').val().toUpperCase();
+	
  fetch( 'http://localhost:3000/api/TC/I', {  
     method: 'POST', 
     datatype:'json',
@@ -193,10 +197,16 @@
   .then(function(response) {
   return response.text().then(function(res) {
     console.log("Resultado: "+res);
+	
+	//if(res.indexOf("error")==-1)
+ // document.getElementById("mensaje").innerHTML="Acción realizada con exito";
+  //else
+  //document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
     
   });
 })
   .catch(function(error) {  
+  // document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
    console.log('Request failed', error);  
   });
   
@@ -204,7 +214,6 @@
 	
 <!--valida todos los campos--->
 function validar(){	
-	clear();
 	IC1 = true;
 	IC2 = true;
 	IC3 = true;
@@ -223,7 +232,6 @@ function validar(){
 	else{
 	document.getElementById("datetimepicker4").className ="input-append  form-group" ;
 	document.getElementById("IC1").title = "" ;
-		IC1 = true;
 	}
 	if(document.getElementById("IC2").value == ""){
 		document.getElementById("div2").className = "form-group has-error" ;
@@ -233,7 +241,6 @@ function validar(){
 	else{
 	document.getElementById("div2").className ="  form-group" ;
 	document.getElementById("IC2").title = "" ;
-		IC2 = true;
 	}
 	
 	if(document.getElementById("IC3").value == ""){
@@ -244,7 +251,6 @@ function validar(){
 	else{
 	document.getElementById("datetimepicker3").className ="input-append  form-group" ;
 	document.getElementById("IC3").title = "" ;
-		IC3 = true;
 	}
 	if(document.getElementById("IC4").value == ""){
 		document.getElementById("div4").className ="form-group has-error" ;
@@ -254,7 +260,6 @@ function validar(){
 	else{
 	document.getElementById("div4").className =" form-group" ;
 	document.getElementById("IC4").title = "" ;
-		IC4 = true;
 	}
 	if(document.getElementById("IC5").value == ""){
 		document.getElementById("div5").className = "form-group has-error" ;
@@ -264,7 +269,6 @@ function validar(){
 	else{
 	document.getElementById("div5").className ="  form-group" ;
 	document.getElementById("IC5").title = "" ;
-		IC5 = true;
 	}
 	if(document.getElementById("IC6").value == ""){
 		document.getElementById("div6").className = "form-group has-error" ;
@@ -274,7 +278,6 @@ function validar(){
 	else{
 	document.getElementById("div6").className ="  form-group" ;
 	document.getElementById("IC6").title = "" ;
-		IC6 = true;
 	}
 	if(document.getElementById("IC7").value == ""){
 		document.getElementById("div7").className = "form-group has-error" ;
@@ -284,7 +287,6 @@ function validar(){
 	else{
 	document.getElementById("div7").className ="form-group" ;
 	document.getElementById("IC7").title = "" ;
-		IC7 = true;
 	}
 	if(document.getElementById("IC8").value == ""){
 		document.getElementById("div8").className = "form-group has-error" ;
@@ -294,7 +296,6 @@ function validar(){
 	else{
 	document.getElementById("div8").className ="  form-group" ;
 	document.getElementById("IC8").title = "" ;
-		IC8 = true;
 	}
 	if(document.getElementById("IC9").value == ""){
 		document.getElementById("div9").className ="form-group has-error" ;
@@ -304,7 +305,6 @@ function validar(){
 	else{
 	document.getElementById("div9").className ="  form-group" ;
 	document.getElementById("IC9").title = "" ;
-		IC9 = true;
 	}
 	if(document.getElementById("IC10").value == ""){
 		document.getElementById("div10").className = "form-group has-error" ;
@@ -313,27 +313,20 @@ function validar(){
 	}else{
 	document.getElementById("div10").className ="  form-group" ;
 	document.getElementById("IC10").title = "" ;
-		IC10 = true;
 	}
 	if(IC1 == true && IC2 == true && IC3 == true && IC4 == true 
 	&& IC5 == true && IC6 == true && IC7 == true && IC8 == true 
-	&& IC9 == true && IC10 == true)
-		return true;
-	else return false;
+	&& IC9 == true && IC10 == true&& validarFecha()==true)
+	return true;
+	else
+	return false;
 }
 <!--limpia todos los campos--->
 function cambioClase(){
-document.getElementById("datetimepicker4").className ="input-append  form-group" ;
-	document.getElementById("div2").className ="  form-group" ;
-	document.getElementById("datetimepicker3").className ="input-append  form-group" ;
-	document.getElementById("div4").className ="  form-group" ;
-	document.getElementById("div5").className ="  form-group" ;
-	document.getElementById("div5").className ="  form-group" ;
-	document.getElementById("div6").className ="  form-group" ;
-	document.getElementById("div7").className ="  form-group" ;
-	document.getElementById("div8").className ="  form-group" ;
-	document.getElementById("div9").className ="  form-group" ;
-	document.getElementById("div10").className ="  form-group" ;
+//************************************ NUEVO ***********************************
+for(let i=0;i<10;i++){
+clear2(i);
+}
 	document.getElementById("IC1").value = "";
 	document.getElementById("IC2").value = "";
 	document.getElementById("IC3").value = "";
@@ -341,23 +334,50 @@ document.getElementById("datetimepicker4").className ="input-append  form-group"
 	document.getElementById("IC5").value = "";
 	document.getElementById("IC6").value = "";
 	document.getElementById("IC7").value = "";
-	document.getElementById("IC8").value = "";
+	//document.getElementById("IC8").value = "";
 	document.getElementById("IC9").value = "";
 	document.getElementById("IC10").value = "";
+	 document.getElementById("mensaje").innerHTML="";
 
 	}
 
 
-
-function clear(){
-	selected = document.querySelectorAll(".error");
-	for(i=0;i<selected.length;i++){
-		selected[i].className = "ok2";	
-		selected[i].title = "";
+//************************************ NUEVO ***********************************
+function clear2(op){
+	switch(op){
+	case 1: document.getElementById("datetimepicker4").className= "input-append form-group";break;
+	case 2: document.getElementById("div2").className ="form-group" ; break;
+	case 3: document.getElementById("datetimepicker3").className ="input-append  form-group" ; break;
+	case 4: document.getElementById("div4").className ="  form-group" ;break;
+	case 5: document.getElementById("div5").className ="  form-group" ;break;
+	case 6: document.getElementById("div6").className ="  form-group" ;break;
+	case 7: document.getElementById("div7").className ="  form-group" ;break;
+	case 8: document.getElementById("div8").className ="  form-group" ;break;
+	case 9: document.getElementById("div9").className ="  form-group" ;break;
+	case 10: document.getElementById("div10").className ="  form-group" ;break
+	
+	default: break;
 	}
 }	
+function validarFecha(){
+let t=$("#IC1").val();
+let r=$("#IC3").val();
+	if(t>=r){
+	document.getElementById("datetimepicker4").className ="input-append  form-group " ;
+	document.getElementById("IC1").title = "" ;
+	document.getElementById("datetimepicker3").className ="input-append  form-group " ;
+	document.getElementById("IC3").title = "" ;
+	return true;}
+	else{
+	document.getElementById("datetimepicker4").className ="input-append  form-group has-error" ;
+	document.getElementById("IC1").title = "Fecha de oficio mayor a la de recibido" ;
+	document.getElementById("datetimepicker3").className ="input-append  form-group has-error" ;
+		document.getElementById("IC3").title = "Fecha de oficio mayor a la de recibido" ;
+	return false;}
+}
 </script>
 
 
     </body>
 </html>
+
