@@ -198,15 +198,15 @@
   return response.text().then(function(res) {
     console.log("Resultado: "+res);
 	
-	if(res.indexOf("error")==-1)
-  document.getElementById("mensaje").innerHTML="Acción realizada con exito";
-  else
-  document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
+	//if(res.indexOf("error")==-1)
+ // document.getElementById("mensaje").innerHTML="Acción realizada con exito";
+  //else
+  //document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
     
   });
 })
   .catch(function(error) {  
-   document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
+  // document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
    console.log('Request failed', error);  
   });
   
@@ -318,7 +318,8 @@ function validar(){
 	&& IC5 == true && IC6 == true && IC7 == true && IC8 == true 
 	&& IC9 == true && IC10 == true&& validarFecha()==true)
 	return true;
-	
+	else
+	return false;
 }
 <!--limpia todos los campos--->
 function cambioClase(){
@@ -336,6 +337,7 @@ clear2(i);
 	//document.getElementById("IC8").value = "";
 	document.getElementById("IC9").value = "";
 	document.getElementById("IC10").value = "";
+	 document.getElementById("mensaje").innerHTML="";
 
 	}
 
