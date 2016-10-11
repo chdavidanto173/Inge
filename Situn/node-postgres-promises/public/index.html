@@ -130,7 +130,7 @@
 			<div  style="display:none"><span class="text-danger"><h4>Cantidad de días:</h4></span>
 				<input type="text"  class="form-control" id = ""></input>
 			</div>
-			<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button style="margin-top:15px"type="button" class="btn btn-default">Enlace</button></a>
+	<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button id="IC11" style="margin-top:15px"type="button" class="btn btn-default"disabled>Enlace</button></a>
 	 	
 		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
 		
@@ -220,8 +220,10 @@
   return response.text().then(function(res) {
     console.log("Resultado: "+res);
 	
-	if(res.indexOf("error")==-1)
+	if(res.indexOf("error")==-1){
   document.getElementById("mensaje").innerHTML="Acción realizada con exito";
+  document.getElementById("IC11").disabled=false;
+  }
   else
   document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
     

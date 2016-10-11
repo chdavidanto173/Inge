@@ -522,6 +522,5 @@ module.exports = {
   updateTU: updateTU,
   updateTC: updateTC,
   updateTD: updateTD,
-  updateTA: updateTA,
-  getLastTC: getLastTC
+  updateTA: updateTA
 };
