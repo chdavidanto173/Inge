@@ -495,6 +495,7 @@ function getLastTC(req, res, next) {
 
 
 
+
 //------ EXPORTACIONES DE LOS MODULOS ---------
 module.exports = {
   getAllTP: getAllTP,
