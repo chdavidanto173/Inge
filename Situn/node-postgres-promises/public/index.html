@@ -65,51 +65,51 @@
                     <td><label class="text-danger">Fecha recibido</label></td>
                     <td> 
 					<div id="datetimepicker4" class="input-append form-group" >	<!-- Calendario--->
-					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text" onfocus= "clear2(1)" ></input> 
-					<span class="add-on"><i  data-date-icon="icon-calendar" onclick= "clear2(1)"></i></span> 
+					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text" onfocus= "MIC_04(1)" ></input> 
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick= "MIC_04(1)"></i></span> 
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">N° Oficio</label> </td>
-                    <td><div  id="div2"class="form-group"><textarea id="IC2" type="text" class="form-control" onfocus="clear2(2)"></textarea></div></td>                </tr>
+                    <td><div  id="div2"class="form-group"><textarea id="IC2" type="text" class="form-control" onfocus="MIC_04(2)"></textarea></div></td>                </tr>
                 <tr>
                     <td> <label class="text-danger">Fecha Oficio</label></td>
-                    <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text" onfocus="clear2(3)" > <!--****** NUEVO ***********-->
-					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="clear2(3)"></i></span> 
+                    <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text" onfocus="MIC_04(3)" > <!--****** NUEVO ***********-->
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_04(3)"></i></span> 
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Destinatario </label></td>
-                    <td><div id="div4" class="form-group"><textarea id="IC4" type="text" class="form-control"  onfocus="clear2(4)"></textarea></div></td> 
+                    <td><div id="div4" class="form-group"><textarea id="IC4" type="text" class="form-control"  onfocus="MIC_04(4)"></textarea></div></td> 
                 </tr>
 				 <tr>
                     <td> <label class="text-danger">Copia </label></td>
-                    <td><div id="div5" class="form-group"><textarea id="IC5" type="text" class="form-control" onfocus="clear2(5)"></textarea></div></td> 
+                    <td><div id="div5" class="form-group"><textarea id="IC5" type="text" class="form-control" onfocus="MIC_04(5)"></textarea></div></td> 
                 </tr>
 				 <tr>
                     <td> <label class="text-danger">Remitente </label></td>
-                    <td><div id="div6" class="form-group"><textarea id="IC6" type="text" class="form-control" onfocus="clear2(6)"></textarea></div></td>                </tr>
+                    <td><div id="div6" class="form-group"><textarea id="IC6" type="text" class="form-control" onfocus="MIC_04(6)"></textarea></div></td>                </tr>
                 <tr>
                     <td> <label class="text-danger">Asunto</label></td>
-                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 onfocus="clear2(7)"></textarea></input></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 onfocus="MIC_04(7)"></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
 				<tr>
                     <td> <label class="text-danger">Recibido</label></td>
-                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" onfocus="clear2(8)" value="GRETTEL CASTRO CRUZ" disabled></input> <div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" onfocus="MIC_04(8)" value="GRETTEL CASTRO CRUZ" disabled></input> <div></td> <!--****** NUEVO ***********-->
                 </tr>
 				<tr>
                     <td> <label class="text-danger">Estado</label></td>
-                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onfocus="clear2(9)"></textarea></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onfocus="MIC_04(9)"></textarea></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Observaciones</label></td>
-                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  onfocus="clear2(10)"></textarea></input></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  onfocus="MIC_04(10)"></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default" onclick="insertTC()">Guardar</button></td>
-                    <td ><center><button type="button" class="btn btn-default" onclick="cambioClase()">Cancelar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick="MTC_01()">Guardar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_03()">Cancelar</button></td>
                 </tr>
 						</tbody>
 		           </table>  
@@ -191,9 +191,9 @@
   });
   
   
- function insertTC(){
+ function MTC_01(){
 	//let a3 = document.getElementById('a3').value;
-  if(validar() == false)return; 
+  if(MIC_02() == false)return; 
 	let b3 = $('#IC1').val().toUpperCase();
 	let c3 = $('#IC2').val().toUpperCase(); 
 	let d3 = $('#IC3').val().toUpperCase();
@@ -235,7 +235,7 @@
 }
 	
 <!--valida todos los campos--->
-function validar(){	
+function MIC_02(){	
 	IC1 = true;
 	IC2 = true;
 	IC3 = true;
@@ -331,16 +331,16 @@ function validar(){
 
 	if(IC1 == true && IC2 == true && IC3 == true && IC4 == true 
 	&& IC5 == true && IC6 == true && IC7 == true && IC8 == true 
-	&& IC9 == true && validarFecha()==true)
+	&& IC9 == true && MIC_05()==true)
 	return true;
 	else
 	return false;
 }
 <!--limpia todos los campos--->
-function cambioClase(){
+function MIC_03(){
 //************************************ NUEVO ***********************************
 for(let i=0;i<10;i++){
-clear2(i);
+MIC_04(i);
 }
 	document.getElementById("IC1").value = "";
 	document.getElementById("IC2").value = "";
@@ -358,7 +358,7 @@ clear2(i);
 
 
 //************************************ NUEVO ***********************************
-function clear2(op){
+function MIC_04(op){
 	switch(op){
 	case 1: document.getElementById("datetimepicker4").className= "input-append form-group";break;
 	case 2: document.getElementById("div2").className ="form-group" ; break;
@@ -374,7 +374,7 @@ function clear2(op){
 	default: break;
 	}
 }	
-function validarFecha(){
+function MIC_05(){
 let t=$("#IC1").val();
 let r=$("#IC3").val();
 	if(t>=r){
