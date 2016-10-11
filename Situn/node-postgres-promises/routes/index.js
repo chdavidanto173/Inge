@@ -9,6 +9,7 @@ router.post('/api/TP/ALL',db.getAllTP);       // Busqueda todos lo TP
 router.post('/api/TU/ALL',db.getAllTU);		// Busqueda todos lo TU
 router.post('/api/TC/ALL',db.getAllTC);		// Busqueda todos lo TC
 
+
 //----------- DEVOLUCION DE DATOS DE UNA TABLA SEGUN UNA CONDICION ----------
 router.post('/api/TP/B', db.getSingleTP); // Busqueda TP especifico
 router.post('/api/TU/B', db.getSingleTU); // Busqueda TU especifico

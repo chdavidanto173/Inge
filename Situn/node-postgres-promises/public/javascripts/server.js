@@ -475,6 +475,24 @@ function removeTA(req, res, next) {
     });
 }
 
+/* METODO QUE RECUPERA EL ULTIMO ID
+function getLastTC(req, res, next) {
+
+  db.any('select  MAX (tc_1) from  TC')
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ONE TC'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}*/
+
+
 
 
 //------ EXPORTACIONES DE LOS MODULOS ---------
