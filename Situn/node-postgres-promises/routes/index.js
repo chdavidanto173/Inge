@@ -19,6 +19,7 @@ router.post('/api/TC/BR', db.getALLTC3); // Busqueda TC  remitente
 router.post('/api/TC/BA', db.getALLTC4); // Busqueda TC  asunto
 router.post('/api/TD/ALL_ONE',db.getALLTD_ONE);	// Busqueda Todos los enlaces sobre un documento
 router.post('/api/TA/ALL_FECHA',db.getALLTA_FECHA);	// Busqueda Todos las alarmas antes de la fecha
+router.get('/api/TC/BC',db.getLastTC); // Busqueda TC recupera ultimo id de la tabla TC
 
 //----------- INSERTAR EN TABLAS ----------------------------------------
 router.post('/api/TP/I', db.createTP);	// Insertando en TP
