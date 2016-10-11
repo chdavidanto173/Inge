@@ -3,11 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ingreso Correspondencia</title>
-    </head>
-    <body>
      
-	</style>
-	  
+  
  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
    
   <link rel="stylesheet" href="\node_modules\bootstrap\dist\css\bootstrap.min.css">
@@ -19,30 +16,30 @@
     <!--script type="text/javascript"src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script-->
     <script type="text/javascript"src="\node_modules\bootstrap\dist\js\bootstrap-datetimepicker.min.js"></script>
 
-     <link href="\node_modules\bootstrap\dist\css\style.css" rel="stylesheet">
+     <!--Eliminar este archivo de css---link href="\node_modules\bootstrap\dist\css\style.css" rel="stylesheet"--->
  
  <link rel="stylesheet" href="datepicker.css">
         <link rel="stylesheet" href="bootstrap.css">   
    </head>
-    <body>      
-	  	   
-	   <nav class="navbar navbar-default" style="background-color:#60161E;">
-  <div class="container-fluid">
+   
+    <body>      	  	   
+	<nav class="navbar navbar-default" style="background-color:#60161E;">
+    <div class="container-fluid">
     <!-- REsponsive -->
     <div class="navbar-header" >
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><span style="color:#FFFFFF;">SITUN</span></a>
+    </button>
+    <a class="navbar-brand" href="#"><span style="color:#FFFFFF;">SITUN</span></a>
     </div>
-
+	
     <!-- Menu -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li ><a href="index.html"style="color:#FFFFFF;">Ingreso Correspondencia</span> </a></li>
-        <li><a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"  style="color:#FFFFFF;">Enlace Documentos</a></li>
+        <li ><a href=""style="color:#FFFFFF;">Ingreso Correspondencia</span> </a></li>
+        <li><a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"style="color:#FFFFFF;">Enlace Documentos</a></li>
         <li><a href="\node_modules\bootstrap\dist\paginas\Busqueda.html"style="color:#FFFFFF;">Búsqueda</a></li>
 		<li><a href="#"style="color:#FFFFFF;">Reportes</a></li>
 		<li><a href="#"style="color:#FFFFFF;">Escanear</a></li>
@@ -50,8 +47,7 @@
 		<li><a href="#" style="color:#FFFFFF;">Ayuda</a></li>
       </ul>
     
-		<IMG SRC="img/situn2.png" WIDTH=100 HEIGHT=100  class="nav navbar-nav navbar-right">
-       
+        <IMG SRC="img/situn2.png" WIDTH=100 HEIGHT=100  class="nav navbar-nav navbar-right">
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -141,19 +137,23 @@
 		</div>
 	
 		<div class="col-md-1 "></div><!--Genera el espacio entre componentes---->	
+		
 			
-			<div class="col-md-3 "> 
+			<div class="col-md-3 "> 			
+			
 			<div class="panel panel-danger"  style=" border-radius: 5px 5px 5px 5px;"><!---div alarmas--->
 			<center><span class="text-danger"><h4>Alarmas del día</h4></span>
 			<div> No hay disponibles</div></center>	
 			</div> 
 
-			<!--div class="date hero-unit"  style="background-color:#60161E; margin-top:200px; color:white;" ><!-- div calendario----->
+			<!---div class="date hero-unit"  style="background-color:#60161E; margin-top:200px; color:white;" ><!-- div calendario----->
           
-            <center><div class="date panel panel-danger "  style="background-color:#60161E; margin-top:230px; color:white;" ></center><!-- div calendario----->
+            <center><div class="date panel panel-danger "  style="background-color:#60161E;  color:white;" ></center><!-- div calendario----->
 			   
 				 <script src="bootstrap-datepicker.js"></script> <!---Si se borra el pierde trate de acomodarlo 
 		        en donde estan los otros js pero dice que no se encuentran, como que este y el bootstrap-datepicker.min.js chocan--->	
+			
+			
 				
         </div>
         </div>
@@ -220,10 +220,10 @@
   return response.text().then(function(res) {
     console.log("Resultado: "+res);
 	
-	//if(res.indexOf("error")==-1)
- // document.getElementById("mensaje").innerHTML="Acción realizada con exito";
-  //else
-  //document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
+	if(res.indexOf("error")==-1)
+  document.getElementById("mensaje").innerHTML="Acción realizada con exito";
+  else
+  document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
     
   });
 })
@@ -328,17 +328,10 @@ function validar(){
 	document.getElementById("div9").className ="  form-group" ;
 	document.getElementById("IC9").title = "" ;
 	}
-	if(document.getElementById("IC10").value == ""){
-		document.getElementById("div10").className = "form-group has-error" ;
-		document.getElementById("IC10").title = "Campo Obligatorio";
-		IC10 = false;
-	}else{
-	document.getElementById("div10").className ="  form-group" ;
-	document.getElementById("IC10").title = "" ;
-	}
+
 	if(IC1 == true && IC2 == true && IC3 == true && IC4 == true 
 	&& IC5 == true && IC6 == true && IC7 == true && IC8 == true 
-	&& IC9 == true && IC10 == true&& validarFecha()==true)
+	&& IC9 == true && validarFecha()==true)
 	return true;
 	else
 	return false;
