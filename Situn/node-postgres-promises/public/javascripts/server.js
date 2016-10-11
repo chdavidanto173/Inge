@@ -476,6 +476,7 @@ function removeTA(req, res, next) {
 }
 
 
+
 //------ EXPORTACIONES DE LOS MODULOS ---------
 module.exports = {
   getAllTP: getAllTP,
@@ -503,5 +504,6 @@ module.exports = {
   updateTU: updateTU,
   updateTC: updateTC,
   updateTD: updateTD,
-  updateTA: updateTA
+  updateTA: updateTA,
+  getLastTC: getLastTC
 };

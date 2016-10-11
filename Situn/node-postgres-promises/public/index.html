@@ -390,6 +390,37 @@ let r=$("#IC3").val();
 		document.getElementById("IC3").title = "Fecha de oficio mayor a la de recibido" ;
 	return false;}
 }
+
+ function MTC_06(){
+
+ fetch( 'http://localhost:3000/api/TC/I', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded"  
+      } ,
+    body: "TC_2="+ b3+ "&TC_3="+c3+
+	"&TC_4="+ d3 + "&TC_5="+ e3 +"&TC_6="+ f3 + 
+	"&TC_7="+ g3 + "&TC_8="+ h3 +"&TC_9="+ i3+"&TC_10="+ j3+ "&TC_11="+ k3
+      }
+	  )
+  .then(function(response) {
+  return response.text().then(function(res) {
+    console.log("Resultado: "+res);
+	
+	if(res.indexOf("error")==-1)
+  document.getElementById("mensaje").innerHTML="Acción realizada con exito";
+  else
+  document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
+    
+  });
+})
+  .catch(function(error) {  
+  // document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
+   console.log('Request failed', error);  
+  });
+  
+}
 </script>
 
 
