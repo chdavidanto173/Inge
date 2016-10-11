@@ -108,7 +108,7 @@
                     <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  onfocus="MIC_04(10)"></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default" onclick="MTC_01()">Guardar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_01()">Guardar</button></td>
                     <td ><center><button type="button" class="btn btn-default" onclick="MIC_03()">Cancelar</button></td>
                 </tr>
 						</tbody>
@@ -130,9 +130,9 @@
 			<div  style="display:none"><span class="text-danger"><h4>Cantidad de días:</h4></span>
 				<input type="text"  class="form-control" id = ""></input>
 			</div>
-			<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button style="margin-top:15px"type="button" class="btn btn-default">Enlace</button></a>
+			<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button style="margin-top:15px"type="button" class="btn btn-default" onclick="MIC_06()">Enlace</button></a>
 	 	
-		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
+		<div style="margin-top:60px" id="prueba"><label id="mensaje" class="text-danger"></label></div>
 		
 		</div>
 	
@@ -152,7 +152,7 @@
 			   
 				 <script src="bootstrap-datepicker.js"></script> <!---Si se borra el pierde trate de acomodarlo 
 		        en donde estan los otros js pero dice que no se encuentran, como que este y el bootstrap-datepicker.min.js chocan--->	
-			
+			      <script src="Correspondencia.js"></script>
 			
 				
         </div>
@@ -390,6 +390,25 @@ let r=$("#IC3").val();
 		document.getElementById("IC3").title = "Fecha de oficio mayor a la de recibido" ;
 	return false;}
 }
+
+function 	MIC_06 () {
+
+	//AQUI VA LO DE FETCH
+	
+	
+
+     let correspondencia = new Correspondencia(document.getElementById("IC2").value,4,true); // Aqui necesitamos los datos de la correspondencia de la BD
+    localStorage.setItem("user",JSON.stringify(correspondencia));
+
+
+		
+			
+	
+    }
+
+	
+	
+	
 </script>
 
 

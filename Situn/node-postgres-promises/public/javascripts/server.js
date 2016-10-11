@@ -16,7 +16,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:postgres@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -475,6 +475,24 @@ function removeTA(req, res, next) {
     });
 }
 
+/* METODO QUE RECUPERA EL ULTIMO ID
+function getLastTC(req, res, next) {
+
+  db.any('select  MAX (tc_1) from  TC')
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ONE TC'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}*/
+
+
 
 //------ EXPORTACIONES DE LOS MODULOS ---------
 module.exports = {
@@ -503,5 +521,6 @@ module.exports = {
   updateTU: updateTU,
   updateTC: updateTC,
   updateTD: updateTD,
-  updateTA: updateTA
+  updateTA: updateTA,
+  getLastTC: getLastTC
 };
