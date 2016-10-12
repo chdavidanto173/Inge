@@ -130,7 +130,7 @@
 			<div  style="display:none"><span class="text-danger"><h4>Cantidad de días:</h4></span>
 				<input type="text"  class="form-control" id = ""></input>
 			</div>
-	<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button></a>
+	<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default">Enlace</button></a>
 	 	
 		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
 		
@@ -406,6 +406,7 @@ fetch( 'http://localhost:3000/api/TC/BC', {
 	  )
    .then(res =>res.json())
    .then(obj =>{
+   localStorage.clear();
    let y=obj.data[0].max;
     let correspondencia = new Correspondencia(document.getElementById("IC2").value,y,true); // Aqui necesitamos los datos de la correspondencia de la BD
    localStorage.setItem("user",JSON.stringify(correspondencia));
