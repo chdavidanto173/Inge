@@ -249,8 +249,9 @@ function getALLTC3(req, res, next) {
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_8 ---------------------
 function getALLTC4(req, res, next) {
- req.body.TC_8 =  req.body.TC_8+'%';
-  db.any('select * from TC where TC_8 LIKE ${TC_8}', req.body)
+	let low = req.body.TC_8.toLowerCase();
+ req.body.TC_8 =  '%' +low+'%';
+  db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
