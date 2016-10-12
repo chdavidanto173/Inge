@@ -130,7 +130,7 @@
 			<div  style="display:none"><span class="text-danger"><h4>Cantidad de días:</h4></span>
 				<input type="text"  class="form-control" id = ""></input>
 			</div>
-	<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button id="IC11" style="margin-top:15px"type="button" class="btn btn-default"disabled>Enlace</button></a>
+	<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button></a>
 	 	
 		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
 		
@@ -162,7 +162,7 @@
       
     
 
-
+ <script src="Correspondencia.js"></script>
 	   
 	  
 
@@ -355,6 +355,7 @@ MIC_04(i);
 	document.getElementById("IC9").value = "";
 	document.getElementById("IC10").value = "";
 	 document.getElementById("mensaje").innerHTML="";
+	   document.getElementById("IC11").disabled=true;
 
 	}
 
@@ -393,34 +394,32 @@ let r=$("#IC3").val();
 	return false;}
 }
 
- function MTC_06(){
+ function MIC_06(){
 
- fetch( 'http://localhost:3000/api/TC/I', {  
-    method: 'POST', 
+fetch( 'http://localhost:3000/api/TC/BC', {  
+    method: 'GET', 
     datatype:'json',
     headers: {  
       "Content-type": "application/x-www-form-urlencoded"  
-      } ,
-    body: "TC_2="+ b3+ "&TC_3="+c3+
-	"&TC_4="+ d3 + "&TC_5="+ e3 +"&TC_6="+ f3 + 
-	"&TC_7="+ g3 + "&TC_8="+ h3 +"&TC_9="+ i3+"&TC_10="+ j3+ "&TC_11="+ k3
+      } 
       }
 	  )
-  .then(function(response) {
-  return response.text().then(function(res) {
-    console.log("Resultado: "+res);
-	
-	if(res.indexOf("error")==-1)
-  document.getElementById("mensaje").innerHTML="Acción realizada con exito";
-  else
-  document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
-    
-  });
-})
+   .then(res =>res.json())
+   .then(obj =>{
+   let y=obj.data[0].max;
+    let correspondencia = new Correspondencia(document.getElementById("IC2").value,y,true); // Aqui necesitamos los datos de la correspondencia de la BD
+   localStorage.setItem("user",JSON.stringify(correspondencia));
+  
+   })
+   
+
   .catch(function(error) {  
   // document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
    console.log('Request failed', error);  
   });
+   	
+ 	
+ 
   
 }
 </script>
