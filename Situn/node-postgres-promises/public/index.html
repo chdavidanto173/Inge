@@ -130,7 +130,7 @@
 			<div  style="display:none"><span class="text-danger"><h4>Cantidad de días:</h4></span>
 				<input type="text"  class="form-control" id = ""></input>
 			</div>
-	<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"><button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button></a>
+	<button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
 	 	
 		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
 		
@@ -412,7 +412,10 @@ fetch( 'http://localhost:3000/api/TC/BC', {
    localStorage.setItem("user",JSON.stringify(correspondencia));
   
    })
+   .then( _ => window.location.href='http://localhost:3000/node_modules/bootstrap/dist/paginas/Enlace%20de%20Documentos.html')
    
+//<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html">
+
 
   .catch(function(error) {  
   // document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
