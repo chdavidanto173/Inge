@@ -108,7 +108,7 @@
                     <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  onfocus="MIC_04(10)"></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default" onclick="MTC_01()">Guardar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_07()">Guardar</button></td>
                     <td ><center><button type="button" class="btn btn-default" onclick="MIC_03()">Cancelar</button></td>
                 </tr>
 						</tbody>
@@ -191,7 +191,7 @@
   });
   
   
- function MTC_01(){
+ function MIC_01(){
 	//let a3 = document.getElementById('a3').value;
   if(MIC_02() == false)return; 
 	let b3 = $('#IC1').val().toUpperCase();
@@ -418,10 +418,37 @@ fetch( 'http://localhost:3000/api/TC/BC', {
    console.log('Request failed', error);  
   });
    	
- 	
+ 	}
+function MIC_07(){
+	
+		let parametro = $('#IC2').val().toUpperCase(); 
+	fetch( 'http://localhost:3000/api/TC/BO', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded"  
+      } ,
+    body: "TC_3="+ parametro
+      }
+	)	 
+	.then(res => res.json())
+     .then(obj => {
+	   if(obj.data[0]==null)
+	MIC_01();
+	else {
+	if(obj.data[0].tc_3=="SIN OFICIO")
+	MIC_01();
+	else
+	  document.getElementById("mensaje").innerHTML="Fallo al realizar la acción, la correspondencia a ingresar ya existe";
+	  }
+   })
+		.catch(err => {
+		 document.getElementById("mensaje").innerHTML="Fallo al realizar la acción, la correspondencia a ingresar ya existe";
+		console.log('Request failed', err)});
+		
+	}
+
  
-  
-}
 </script>
 
 
