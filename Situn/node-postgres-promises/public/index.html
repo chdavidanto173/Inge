@@ -23,7 +23,7 @@
    </head>
    
     <body>      	  	   
-	<nav class="navbar navbar-default" style="background-color:#60161E;">
+	<nav class="navbar navbar-default" style="background-color:#60161E; ">
     <div class="container-fluid">
     <!-- REsponsive -->
     <div class="navbar-header" >
@@ -32,12 +32,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#"><span style="color:#FFFFFF;">SITUN</span></a>
+    <IMG SRC="img/situn2.png" WIDTH=90 HEIGHT=90  class="nav navbar-nav navbar-right" >
     </div>
 	
     <!-- Menu -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav"  style="margin-top:7px;">
         <li ><a href=""style="color:#FFFFFF;">Ingreso Correspondencia</span> </a></li>
         <li><a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html"style="color:#FFFFFF;">Enlace Documentos</a></li>
         <li><a href="\node_modules\bootstrap\dist\paginas\Busqueda.html"style="color:#FFFFFF;">Búsqueda</a></li>
@@ -47,7 +47,7 @@
 		<li><a href="#" style="color:#FFFFFF;">Ayuda</a></li>
       </ul>
     
-        <IMG SRC="img/situn2.png" WIDTH=100 HEIGHT=100  class="nav navbar-nav navbar-right">
+        <IMG SRC="img/situn2.png" WIDTH=90 HEIGHT=90  class="nav navbar-nav navbar-right">
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -64,15 +64,16 @@
 						<tr>
                     <td><label class="text-danger">Fecha recibido</label></td>
                     <td> 
-					<div id="datetimepicker4" class="input-append form-group" >	<!-- Calendario--->
-					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text" onfocus= "MIC_04(1)" ></input> 
-					<span class="add-on"><i  data-date-icon="icon-calendar" onclick= "MIC_04(1)"></i></span> 
+					<div id="datetimepicker4" class=" form-group" >	<!-- Calendario--->
+					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text" onfocus= "MIC_04(1)" disabled></input> 
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">N° Oficio</label> </td>
-                    <td><div  id="div2"class="form-group"><textarea id="IC2" type="text" class="form-control" onfocus="MIC_04(2)"></textarea></div></td>                </tr>
+                    <td><div  id="div2"class="form-group"><textarea id="IC2" type="text" class="form-control" onfocus="MIC_04(2)"></textarea>
+					<label class="text-danger" style=""><input  type="checkbox" id="IC12" value="first_checkbox" onchange="me()">Sin Oficio</label></div></td>           
+					</tr>
                 <tr>
                     <td> <label class="text-danger">Fecha Oficio</label></td>
                     <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text" onfocus="MIC_04(3)" > <!--****** NUEVO ***********-->
@@ -101,7 +102,7 @@
                 </tr>
 				<tr>
                     <td> <label class="text-danger">Estado</label></td>
-                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onfocus="MIC_04(9)"></textarea></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onclick = "MIC_09", onfocus="MIC_04(9)"></textarea></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Observaciones</label></td>
@@ -109,7 +110,7 @@
                 </tr>
                 <tr>
                     <td ><center><button type="button" class="btn btn-default" onclick="MIC_07()">Guardar</button></td>
-                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_03()">Cancelar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_10()">Cancelar</button></td>
                 </tr>
 						</tbody>
 		           </table>  
@@ -167,22 +168,34 @@
 	  
 
   
-	   
+
 	   
 <script type="text/javascript">
+ document.addEventListener("DOMContentLoaded", MIC_08);
+ 
+function MIC_08(){  
+	var f = new Date();
+	document.getElementById("IC1").value=f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
+}
+function me(){
+if(document.getElementById("IC12").checked==true){
+	document.getElementById("IC2").value="SIN OFICIO";
+	document.getElementById("IC2").disabled=true;
+	}
+	else{
+	document.getElementById("IC2").value="";
+	document.getElementById("IC2").disabled=false;
+	}
+}
+
  $(document).ready(function () {
                 
                 $('.date').datepicker({
-                    
+                     
                 });
             
      });
-  $(function() {
-    $('#datetimepicker4').datetimepicker({
-	
-      pickTime: false
-    });
-  });
+
    $(function() {
     $('#datetimepicker3').datetimepicker({
 
@@ -222,7 +235,9 @@
 	
 	if(res.indexOf("error")==-1){
   document.getElementById("mensaje").innerHTML="Acción realizada con exito";
+  MIC_03();
   document.getElementById("IC11").disabled=false;
+  
   }
   else
   document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
@@ -248,6 +263,7 @@ function MIC_02(){
 	IC8 = true
 	IC9 = true
 	IC10 = true
+	
 	if(document.getElementById("IC1").value == ""){
 		document.getElementById("datetimepicker4").className ="input-append  form-group has-error" ;
 		document.getElementById("IC1").title = "Campo Obligatoria" ;
@@ -257,6 +273,10 @@ function MIC_02(){
 	document.getElementById("datetimepicker4").className ="input-append  form-group" ;
 	document.getElementById("IC1").title = "" ;
 	}
+	/*if(document.getElementById("IC12").checked==true){
+	document.getElementById("IC2").value="SIN OFICIO";
+	document.getElementById("IC2").disabled=true;
+	}*/
 	if(document.getElementById("IC2").value == ""){
 		document.getElementById("div2").className = "form-group has-error" ;
 		document.getElementById("IC2").title = "Campo Obligatorio";
@@ -339,12 +359,15 @@ function MIC_02(){
 	return false;
 }
 <!--limpia todos los campos--->
+function MIC_09(){
+MIC_03();
+limpiarMensaje();
+}
+
 function MIC_03(){
-//************************************ NUEVO ***********************************
 for(let i=0;i<10;i++){
 MIC_04(i);
 }
-	document.getElementById("IC1").value = "";
 	document.getElementById("IC2").value = "";
 	document.getElementById("IC3").value = "";
 	document.getElementById("IC4").value = "";
@@ -354,13 +377,16 @@ MIC_04(i);
 	//document.getElementById("IC8").value = "";
 	document.getElementById("IC9").value = "";
 	document.getElementById("IC10").value = "";
-	 document.getElementById("mensaje").innerHTML="";
-	   document.getElementById("IC11").disabled=true;
+	//document.getElementById("mensaje").innerHTML="";
+	document.getElementById("IC11").disabled=true;
+	document.getElementById("IC12").checked=false;
+	document.getElementById("IC2").disabled=false;
 
 	}
 
-
-//************************************ NUEVO ***********************************
+function limpiarMensaje(){
+document.getElementById("mensaje").innerHTML="";
+}
 function MIC_04(op){
 	switch(op){
 	case 1: document.getElementById("datetimepicker4").className= "input-append form-group";break;
@@ -407,10 +433,9 @@ fetch( 'http://localhost:3000/api/TC/BC', {
    .then(res =>res.json())
    .then(obj =>{
    localStorage.clear();
-   let y=obj.data[0].max;
-    let correspondencia = new Correspondencia(document.getElementById("IC2").value,y,true); // Aqui necesitamos los datos de la correspondencia de la BD
+   let y=obj.data[0].tc_1; // TC_1
+    let correspondencia = new Correspondencia(obj.data[0].tc_3,y,true); // // Aqui necesitamos los datos de la correspondencia de la BD
    localStorage.setItem("user",JSON.stringify(correspondencia));
-  
    })
    .then( _ => window.location.href='http://localhost:3000/node_modules/bootstrap/dist/paginas/Enlace%20de%20Documentos.html')
    
@@ -441,7 +466,11 @@ function MIC_07(){
 	MIC_01();
 	else {
 	if(obj.data[0].tc_3=="SIN OFICIO")
-	MIC_01();
+	{
+		console.log("El size es: " + obj.data[0].tc_3.lenght);
+		MIC_01();
+	}
+	
 	else
 	  document.getElementById("mensaje").innerHTML="Fallo al realizar la acción, la correspondencia a ingresar ya existe";
 	  }
@@ -452,7 +481,7 @@ function MIC_07(){
 		
 	}
 
- 
+	
 </script>
 
 
