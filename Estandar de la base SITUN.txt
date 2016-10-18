@@ -38,7 +38,6 @@ TD // Tabla de Enlace
   
    TA_1 // Codigo de correspondencia (genera sistema)
    TA_2 // Fecha Maxima
-   TA_3 // Quien la programo codigo de persona
-   TA_4 // Mensaje
-   TA_5 // Si se realizo seria un numero (0,1,2) = revisada, espera, entrego
-   TA_6 // Tipo de recordatorio
+   TA_3 // Asunto por ahora
+   TA_4 // Si se realizo seria un numero (0,1,2,3) = atendida, espera, omitido ,cancelado
+   
