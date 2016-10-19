@@ -65,52 +65,52 @@
                     <td><label class="text-danger">Fecha recibido</label></td>
                     <td> 
 					<div id="datetimepicker4" class=" form-group" >	<!-- Calendario--->
-					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text" onfocus= "MIC_04(1)" disabled></input> 
+					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text" onfocus= "clear_focus(1)" disabled></input> 
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">N° Oficio</label> </td>
-                    <td><div  id="div2"class="form-group"><textarea id="IC2" type="text" class="form-control" onfocus="MIC_04(2)"></textarea>
+                    <td><div  id="div2"class="form-group"><textarea id="IC2" type="text" class="form-control" onfocus="clear_focus(2)"></textarea>
 					<label class="text-danger" style=""><input  type="checkbox" id="IC12" value="first_checkbox" onchange="me()">Sin Oficio</label></div></td>           
 					</tr>
                 <tr>
                     <td> <label class="text-danger">Fecha Oficio</label></td>
-                    <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text" onfocus="MIC_04(3)" > <!--****** NUEVO ***********-->
-					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_04(3)"></i></span> 
+                    <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text" onfocus="clear_focus(3)" > <!--****** NUEVO ***********-->
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="clear_focus(3)"></i></span> 
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Destinatario </label></td>
-                    <td><div id="div4" class="form-group"><textarea id="IC4" type="text" class="form-control"  onfocus="MIC_04(4)"></textarea></div></td> 
+                    <td><div id="div4" class="form-group"><textarea id="IC4" type="text" class="form-control"  onfocus="clear_focus(4)"></textarea></div></td> 
                 </tr>
 				 <tr>
                     <td> <label class="text-danger">Copia </label></td>
-                    <td><div id="div5" class="form-group"><textarea id="IC5" type="text" class="form-control" onfocus="MIC_04(5)"></textarea></div></td> 
+                    <td><div id="div5" class="form-group"><textarea id="IC5" type="text" class="form-control" onfocus="clear_focus(5)"></textarea></div></td> 
                 </tr>
 				 <tr>
                     <td> <label class="text-danger">Remitente </label></td>
-                    <td><div id="div6" class="form-group"><textarea id="IC6" type="text" class="form-control" onfocus="MIC_04(6)"></textarea></div></td>                </tr>
+                    <td><div id="div6" class="form-group"><textarea id="IC6" type="text" class="form-control" onfocus="clear_focus(6)"></textarea></div></td>                </tr>
                 <tr>
                     <td> <label class="text-danger">Asunto</label></td>
-                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 onfocus="MIC_04(7)"></textarea></input></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 onfocus="clear_focus(7)"></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
 				<tr>
                     <td> <label class="text-danger">Recibido</label></td>
-                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" onfocus="MIC_04(8)" value="GRETTEL CASTRO CRUZ" disabled></input> <div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" onfocus="clear_focus(8)" value="GRETTEL CASTRO CRUZ" disabled></input> <div></td> <!--****** NUEVO ***********-->
                 </tr>
 				<tr>
                     <td> <label class="text-danger">Estado</label></td>
-                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onclick = "MIC_09", onfocus="MIC_04(9)"></textarea></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onfocus="clear_focus(9)"></textarea></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Observaciones</label></td>
-                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  onfocus="MIC_04(10)"></textarea></input></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  ></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td ><center><button type="button" class="btn btn-default" onclick="MIC_07()">Guardar</button></td>
-                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_10()">Cancelar</button></td>
+                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_09()">Cancelar</button></td>
                 </tr>
 						</tbody>
 		           </table>  
@@ -120,7 +120,7 @@
 	   
 	   
 		<div class="col-md-2 form-group"><!--Genera el espacio entre componentes---->	 
-			<span class="text-danger"><h4>Alarma</h4></span>
+			<span class="text-danger"><h4>Limite de respuesta</h4></span>
 			<Select >
 				<Option Selected value="3d" >3 días
 				<Option value="5d">5 días
@@ -173,9 +173,14 @@
 <script type="text/javascript">
  document.addEventListener("DOMContentLoaded", MIC_08);
  
+ function clear_focus(n){
+  limpiarMensaje();
+  MIC_04(n);
+ }
+ 
 function MIC_08(){  
 	var f = new Date();
-	document.getElementById("IC1").value=f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
+	$("#IC1").val(f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear());
 }
 function me(){
 if(document.getElementById("IC12").checked==true){
@@ -206,7 +211,6 @@ if(document.getElementById("IC12").checked==true){
   
  function MIC_01(){
 	//let a3 = document.getElementById('a3').value;
-  if(MIC_02() == false)return; 
 	let b3 = $('#IC1').val().toUpperCase();
 	let c3 = $('#IC2').val().toUpperCase(); 
 	let d3 = $('#IC3').val().toUpperCase();
@@ -234,7 +238,7 @@ if(document.getElementById("IC12").checked==true){
     console.log("Resultado: "+res);
 	
 	if(res.indexOf("error")==-1){
-  document.getElementById("mensaje").innerHTML="Acción realizada con exito";
+ $("#mensaje").text("Acción realizada con exito");
   MIC_03();
   document.getElementById("IC11").disabled=false;
   
@@ -264,7 +268,7 @@ function MIC_02(){
 	IC9 = true
 	IC10 = true
 	
-	if(document.getElementById("IC1").value == ""){
+	if($("#IC1").val().length == 0){
 		document.getElementById("datetimepicker4").className ="input-append  form-group has-error" ;
 		document.getElementById("IC1").title = "Campo Obligatoria" ;
 		IC1 = false;
@@ -273,11 +277,7 @@ function MIC_02(){
 	document.getElementById("datetimepicker4").className ="input-append  form-group" ;
 	document.getElementById("IC1").title = "" ;
 	}
-	/*if(document.getElementById("IC12").checked==true){
-	document.getElementById("IC2").value="SIN OFICIO";
-	document.getElementById("IC2").disabled=true;
-	}*/
-	if(document.getElementById("IC2").value == ""){
+	if($("#IC2").val().length == 0){
 		document.getElementById("div2").className = "form-group has-error" ;
 		document.getElementById("IC2").title = "Campo Obligatorio";
 		IC2 = false;
@@ -287,7 +287,7 @@ function MIC_02(){
 	document.getElementById("IC2").title = "" ;
 	}
 	
-	if(document.getElementById("IC3").value == ""){
+	if($("#IC3").val().length == 0){
 		document.getElementById("datetimepicker3").className = " input-append  form-group has-error" ;
 		document.getElementById("IC3").title = "Campo Obligatorio";
 		IC3 = false;
@@ -296,7 +296,7 @@ function MIC_02(){
 	document.getElementById("datetimepicker3").className ="input-append  form-group" ;
 	document.getElementById("IC3").title = "" ;
 	}
-	if(document.getElementById("IC4").value == ""){
+	if($("#IC4").val().length == 0){
 		document.getElementById("div4").className ="form-group has-error" ;
 		document.getElementById("IC4").title = "Campo Obligatorio";
 		IC4 = false;
@@ -305,7 +305,7 @@ function MIC_02(){
 	document.getElementById("div4").className =" form-group" ;
 	document.getElementById("IC4").title = "" ;
 	}
-	if(document.getElementById("IC5").value == ""){
+	if($("#IC5").val().length == 0){
 		document.getElementById("div5").className = "form-group has-error" ;
 		document.getElementById("IC5").title = "Campo Obligatorio";
 		IC5 = false;
@@ -314,7 +314,7 @@ function MIC_02(){
 	document.getElementById("div5").className ="  form-group" ;
 	document.getElementById("IC5").title = "" ;
 	}
-	if(document.getElementById("IC6").value == ""){
+	if($("#IC6").val().length == 0){
 		document.getElementById("div6").className = "form-group has-error" ;
 		document.getElementById("IC6").title = "Campo Obligatorio";
 		IC6 = false;
@@ -323,7 +323,7 @@ function MIC_02(){
 	document.getElementById("div6").className ="  form-group" ;
 	document.getElementById("IC6").title = "" ;
 	}
-	if(document.getElementById("IC7").value == ""){
+	if($("#IC7").val().length == 0){
 		document.getElementById("div7").className = "form-group has-error" ;
 		document.getElementById("IC7").title = "Campo Obligatorio";
 		IC7 = false;
@@ -332,7 +332,7 @@ function MIC_02(){
 	document.getElementById("div7").className ="form-group" ;
 	document.getElementById("IC7").title = "" ;
 	}
-	if(document.getElementById("IC8").value == ""){
+	if($("#IC8").val().length == 0){
 		document.getElementById("div8").className = "form-group has-error" ;
 		document.getElementById("IC8").title = "Campo Obligatorio";
 		IC8 = false;
@@ -341,7 +341,7 @@ function MIC_02(){
 	document.getElementById("div8").className ="  form-group" ;
 	document.getElementById("IC8").title = "" ;
 	}
-	if(document.getElementById("IC9").value == ""){
+	if($("#IC9").val().length == 0){
 		document.getElementById("div9").className ="form-group has-error" ;
 		document.getElementById("IC9").title = "Campo Obligatorio";
 		IC9 = false;
@@ -351,12 +351,7 @@ function MIC_02(){
 	document.getElementById("IC9").title = "" ;
 	}
 
-	if(IC1 == true && IC2 == true && IC3 == true && IC4 == true 
-	&& IC5 == true && IC6 == true && IC7 == true && IC8 == true 
-	&& IC9 == true && MIC_05()==true)
-	return true;
-	else
-	return false;
+	return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
 }
 <!--limpia todos los campos--->
 function MIC_09(){
@@ -368,15 +363,15 @@ function MIC_03(){
 for(let i=0;i<10;i++){
 MIC_04(i);
 }
-	document.getElementById("IC2").value = "";
-	document.getElementById("IC3").value = "";
-	document.getElementById("IC4").value = "";
-	document.getElementById("IC5").value = "";
-	document.getElementById("IC6").value = "";
-	document.getElementById("IC7").value = "";
+	$("#IC2").val("");
+	$("#IC3").val("");
+	$("#IC4").val("");
+	$("#IC5").val("");
+	$("#IC6").val("");
+	$("#IC7").val("");
 	//document.getElementById("IC8").value = "";
-	document.getElementById("IC9").value = "";
-	document.getElementById("IC10").value = "";
+	$("#IC9").val("");
+	$("#IC10").val("");
 	//document.getElementById("mensaje").innerHTML="";
 	document.getElementById("IC11").disabled=true;
 	document.getElementById("IC12").checked=false;
@@ -385,7 +380,7 @@ MIC_04(i);
 	}
 
 function limpiarMensaje(){
-document.getElementById("mensaje").innerHTML="";
+$("#mensaje").text("");
 }
 function MIC_04(op){
 	switch(op){
@@ -398,7 +393,7 @@ function MIC_04(op){
 	case 7: document.getElementById("div7").className ="  form-group" ;break;
 	case 8: document.getElementById("div8").className ="  form-group" ;break;
 	case 9: document.getElementById("div9").className ="  form-group" ;break;
-	case 10: document.getElementById("div10").className ="  form-group" ;break
+	//case 10: document.getElementById("div10").className ="  form-group" ;break
 	
 	default: break;
 	}
@@ -449,7 +444,10 @@ fetch( 'http://localhost:3000/api/TC/BC', {
    	
  	}
 function MIC_07(){
-	
+	  if(MIC_02() == false){
+	     $("#mensaje").text("Campos requeridos");
+	     return;
+		}
 		let parametro = $('#IC2').val().toUpperCase(); 
 	fetch( 'http://localhost:3000/api/TC/BO', {  
     method: 'POST', 
@@ -462,21 +460,16 @@ function MIC_07(){
 	)	 
 	.then(res => res.json())
      .then(obj => {
-	   if(obj.data[0]==null)
-	MIC_01();
-	else {
+	if(obj.data[0]==null)
+	   MIC_01();
+	   else{ 
 	if(obj.data[0].tc_3=="SIN OFICIO")
-	{
-		console.log("El size es: " + obj.data[0].tc_3.lenght);
 		MIC_01();
-	}
-	
 	else
-	  document.getElementById("mensaje").innerHTML="Fallo al realizar la acción, la correspondencia a ingresar ya existe";
+	  $("#mensaje").text("Fallo al realizar la acción, la correspondencia a ingresar ya existe"); 
 	  }
    })
 		.catch(err => {
-		 document.getElementById("mensaje").innerHTML="Fallo al realizar la acción, la correspondencia a ingresar ya existe";
 		console.log('Request failed', err)});
 		
 	}
