@@ -54,7 +54,6 @@
 	  
 	   <!---Cuerpo--->
 	   <body background="img/situn4.png">
-
 	      <div class="col-md-1"></div>
 	   <div class="col-md-4">
          <span class="text-danger"><h4>Ingreso de Correspondencia</h4></span>
@@ -120,13 +119,8 @@
 	   
 	   
 		<div class="col-md-2 form-group"><!--Genera el espacio entre componentes---->	 
-<<<<<<< HEAD
 			<span class="text-danger"><h4>Alarma</h4></span>
 			<Select id="op" onchange = "pro_Alarma()" >
-=======
-			<span class="text-danger"><h4>Limite de respuesta</h4></span>
-			<Select >
->>>>>>> refs/remotes/origin/master
 				<Option Selected value="3d" >3 días
 				<Option value="5d">5 días
 				<Option value="7d" >7 dias
@@ -151,7 +145,6 @@
 			<center><span class="text-danger"><h4>Alarmas del día</h4></span>
 			<div> No hay disponibles</div></center>	
 			</div> 
-
 			<!---div class="date hero-unit"  style="background-color:#60161E; margin-top:200px; color:white;" ><!-- div calendario----->
           
             <center><div class="date panel panel-danger "  style="background-color:#60161E;  color:white;" ></center><!-- div calendario----->
@@ -167,13 +160,10 @@
    
       
     
-
  <script src="Correspondencia.js"></script>
 	   
 	  
-
   
-
 	   
 <script type="text/javascript">
  document.addEventListener("DOMContentLoaded", MIC_08);
@@ -197,7 +187,6 @@ if(document.getElementById("IC12").checked==true){
 	document.getElementById("IC2").disabled=false;
 	}
 }
-
  $(document).ready(function () {
                 
                 $('.date').datepicker({
@@ -205,10 +194,8 @@ if(document.getElementById("IC12").checked==true){
                 });
             
      });
-
    $(function() {
     $('#datetimepicker3').datetimepicker({
-
       pickTime: false
     });
   });
@@ -357,7 +344,6 @@ function MIC_02(){
 	document.getElementById("div9").className ="  form-group" ;
 	document.getElementById("IC9").title = "" ;
 	}
-
 	return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
 }
 <!--limpia todos los campos--->
@@ -365,7 +351,6 @@ function MIC_09(){
 MIC_03();
 limpiarMensaje();
 }
-
 function MIC_03(){
 for(let i=0;i<10;i++){
 MIC_04(i);
@@ -383,9 +368,7 @@ MIC_04(i);
 	document.getElementById("IC11").disabled=true;
 	document.getElementById("IC12").checked=false;
 	document.getElementById("IC2").disabled=false;
-
 	}
-
 function limpiarMensaje(){
 $("#mensaje").text("");
 }
@@ -421,9 +404,7 @@ let r=$("#IC3").val();
 		document.getElementById("IC3").title = "Fecha de oficio mayor a la de recibido" ;
 	return false;}
 }
-
  function MIC_06(){
-
 fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
@@ -442,8 +423,6 @@ fetch( 'http://localhost:3000/api/TC/BC', {
    .then( _ => window.location.href='http://localhost:3000/node_modules/bootstrap/dist/paginas/Enlace%20de%20Documentos.html')
    
 //<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html">
-
-
   .catch(function(error) {  
   // document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
    console.log('Request failed', error);  
@@ -480,7 +459,6 @@ function MIC_07(){
 		console.log('Request failed', err)});
 		
 	}
-
 	
 	//--- NUEVO --//
 	function pro_Alarma(){
@@ -516,8 +494,6 @@ function MIC_07(){
 	let b5 = getDateLimit();
 	let c5 = getDateNotice(); 
 	let d5 = 0;
-
-
  fetch( 'http://localhost:3000/api/TA/I', {  
     method: 'POST', 
     datatype:'json',
@@ -542,7 +518,6 @@ function MIC_07(){
 	   var f = new Date(),
            addTime = can * 86400; //Tiempo en segundos
            f.setSeconds(addTime); //Añado el tiempo
-
 	return f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
 	}
 	
@@ -565,7 +540,6 @@ function MIC_07(){
 	  case "5d": return getDate(3);
 	  case "7d": return getDate(4);
 	  case "Pd": return getDate(parseInt($("#input_dias").val())-3);
-
 	  }
 	}
 	
@@ -588,8 +562,5 @@ function MIC_07(){
 	}
 	
 </script>
-
-
     </body>
 </html>
-
