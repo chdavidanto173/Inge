@@ -111,7 +111,7 @@ drop table x;
 END $BODY$ LANGUAGE 'plpgsql'
 --------------------------------------------------------
 ------------EJECUTAR FUNCION ----------------------------
-select final(xn integer); --el valor xn es el numero q se buscara de la correspondecia
+select final(xn); --el valor xn es el numero q se buscara de la correspondecia eJemplo select final(1)
 -----------CONSULTA FINAL -------------------------------
 --*******************************************************
 select tc_1,tc_2,tc_3,tc_4,tc_5,tc_6,tc_7,tc_8,tc_9,tc_10,tc_11 from tc,x where tc_1=x.a group by tc.tc_1,a order by tc_1;
