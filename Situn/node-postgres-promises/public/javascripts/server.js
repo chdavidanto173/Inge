@@ -95,10 +95,9 @@ function createTD(req, res, next) {
 //-------- CREACION DE UN NUEVO TA EN LA TABLA ----------
 function createTA(req, res, next) {
 	 req.body.TA_1 = parseInt(req.body.TA_1);
-	  req.body.TA_5 = parseInt(req.body.TA_5);
-	 req.body.TA_6 = parseInt(req.body.TA_6);
-     db.none('insert into TA (TA_1, TA_2, TA_3, TA_4, TA_5, TA_6)' +
-      'values(${TA_1}, ${TA_2}, ${TA_3}, ${TA_4}, ${TA_5}, ${TA_6})',
+	 req.body.TA_4 = parseInt(req.body.TA_4);
+     db.none('insert into TA (TA_1, TA_2, TA_3, TA_4)' +
+      'values(${TA_1}, ${TA_2}, ${TA_3}, ${TA_4})',
 	     req.body)
     .then(function () {
       res.status(200)
@@ -375,9 +374,8 @@ function updateTD(req, res, next) {
 //-------- ACTUALIZACION DE LA TABLA TA ----------
 function updateTA(req, res, next) {
 	 req.body.TA_1 = parseInt(req.body.TA_1);
-	 req.body.TA_5 = parseInt(req.body.TA_5);
-	 req.body.TA_6 = parseInt(req.body.TA_6);
-  db.none('update TA set TA_3=${TA_3},TA_4=${TA_4}, TA_5=${TA_5}, TA_6=${TA_6}'+
+	 req.body.TA_4 = parseInt(req.body.TA_4);
+  db.none('update TA set TA_3=${TA_3},TA_4=${TA_4}'+
           'where TA_1=${TA_1} and TA_2=${TA_2}',
     req.body)
     .then(function () {
