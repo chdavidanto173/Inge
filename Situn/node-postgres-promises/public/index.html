@@ -27,7 +27,7 @@
 	
    </head>
    
-    <body>      	  	   
+    <body  id = "buscar" data-ng-init = "init()">      	  	   
 	<nav class="navbar navbar-default" style="background-color:#60161E; ">
     <div class="container-fluid">
     <!-- REsponsive -->
@@ -171,8 +171,7 @@
 		</tbody>    
 	        </table>
 			
-			<input type="text" class="form45" id="buscar"  >
-				<input type = "button" class="btn btn-default" id="buscar" value = "Buscar" ng-click="buscar()" >
+			
 			</div> 
 			<!---div class="date hero-unit"  style="background-color:#60161E; margin-top:200px; color:white;" ><!-- div calendario----->
           
@@ -201,9 +200,11 @@
 let app = angular.module('app', []);
 function ControllerAngular($scope)
  {
+ 
 	$scope.alarmas = new Array();
 	$scope.updateAlarmas= c => $scope.alarmas = c;
-	$scope.buscar = _ => busqueda($scope);
+	$scope.init = _ => busqueda($scope);
+	
 		
   }
   
