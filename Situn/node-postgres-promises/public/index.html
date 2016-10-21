@@ -144,6 +144,19 @@
 			<div class="panel panel-danger"  style=" border-radius: 5px 5px 5px 5px;"><!---div alarmas--->
 			<center><span class="text-danger"><h4>Alarmas del día</h4></span>
 			<div> No hay disponibles</div></center>	
+			<table class="table" id="tabla_busqueda">
+		<thead> 
+			<tr class="danger">
+			<td>Nº Oficio</td>
+			<td>Fecha de aviso</td>
+			<td>Fecha de limite</td>
+			
+			</tr>
+		</thead>
+	  
+	</table>
+			
+			
 			</div> 
 			<!---div class="date hero-unit"  style="background-color:#60161E; margin-top:200px; color:white;" ><!-- div calendario----->
           
@@ -489,29 +502,34 @@ function MIC_07(){
   });
    	*/
 	//console.log("Ultimo "+devuelveUltimo().then(function(obj){obj}));
+	var aux = devuelveUltimo();
+	aux.then(data=> {
+
+		let a5 = data;  // Cambiar eso falta
+		let b5 = getDateLimit();
+		let c5 = getDateNotice(); 
+		let d5 = 0;
 	
-	let a5 = 15;  // Cambiar eso falta
-	let b5 = getDateLimit();
-	let c5 = getDateNotice(); 
-	let d5 = 0;
- fetch( 'http://localhost:3000/api/TA/I', {  
-    method: 'POST', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } ,
-    body: "TA_1="+ a5+ "&TA_2="+ b5+ "&TA_3="+c5+"&TA_4="+ d5 
-      }
+		fetch( 'http://localhost:3000/api/TA/I', {  
+			method: 'POST', 
+			datatype:'json',
+			headers: {  
+				"Content-type": "application/x-www-form-urlencoded"  
+			} ,
+			body: "TA_1="+ a5+ "&TA_2="+ b5+ "&TA_3="+c5+"&TA_4="+ d5 
+		}
 	  )
-  .then(function(response) {
-  return response.text().then(function(res) {
-    console.log("Resultado: "+res);
+		.then(function(response) {
+			return response.text().then(function(res) {
+					console.log("Resultado: "+res);
     
-  });
-})
-  .catch(function(error) {  
-   console.log('Request failed', error);  
-  });
+			});
+		})
+		.catch(function(error) {  
+			console.log('Request failed', error);  
+		});
+	});
+  
 	}
 	
 	function getDate(can){
@@ -544,7 +562,7 @@ function MIC_07(){
 	}
 	
 	function devuelveUltimo(){ 
-	return fetch( 'http://localhost:3000/api/TC/BC', {  
+	return Promise.resolve(fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
     headers: {  
@@ -557,8 +575,8 @@ function MIC_07(){
   
   .catch(function(error) {  
    console.log('Request failed', error);  
-  });
-   	
+  })
+   	);
 	}
 	
 </script>
