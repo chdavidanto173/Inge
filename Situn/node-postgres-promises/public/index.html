@@ -149,19 +149,19 @@
 			
 			<div class="panel panel-danger"  style=" border-radius: 5px 5px 5px 5px;"><!---div alarmas--->
 			<center><span class="text-danger"><h4>Alarmas del día</h4></span>
-			<div> No hay disponibles</div></center>	
-			
-	<p align="left"><p align="left"><div class="table table-bordered"  style="height: 100px;   overflow-y:auto;">
-	<p align="left"><table class="table" id="tabla_busqueda" >
-		      <thead> 
+			<div> </div></center>	
+			<table class="table" >
+			<thead> 
 			    <tr class="danger">
 			      <td>Nº Oficio</td>
 			      <td>Fecha de aviso</td>
 			      <td>Fecha de limite</td>
 			    </tr>
-		     </thead>
-	  
-			<tbody>
+				  </thead>
+				</table>
+    <div class="table table-bordered"  style="height: 100px;   overflow-y:auto;">
+	<p align="left"><table class="table" id="tabla_busqueda" >
+		  <tbody>
 			<tr ng-repeat = "c in alarmas">
 					<td> {{c.tc_3}} </td>
 					<td> {{c.ta_3 | date:'dd/MM/yyyy'}} </td>
@@ -173,9 +173,7 @@
 			
 			
 			</div> 
-		  
-			
-        </div>
+		   </div>
 		
 		<!---div class="date hero-unit"  style="background-color:#60161E; margin-top:200px; color:white;" ><!-- div calendario----->
           
