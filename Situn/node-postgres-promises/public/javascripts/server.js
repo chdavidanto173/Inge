@@ -197,8 +197,9 @@ function getSingleTU(req, res, next) {
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_3 ---------------------
 function getALLTC1(req, res, next) {
- req.body.TC_3 = req.body.TC_3+'%';
-  db.any('select * from TC where TC_3 LIKE ${TC_3}', req.body)
+	var low = req.body.TC_3.toLowerCase();
+ req.body.TC_3 = '%' + low + '%';
+  db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -214,8 +215,9 @@ function getALLTC1(req, res, next) {
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_5 ---------------------
 function getALLTC2(req, res, next) {
- req.body.TC_5 =  req.body.TC_5+'%';
-  db.any('select * from TC where TC_5 LIKE ${TC_5}', req.body)
+	var low = req.body.TC_5.toLowerCase();
+ req.body.TC_5 =  '%' + low + '%';
+  db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -231,8 +233,9 @@ function getALLTC2(req, res, next) {
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_7 ---------------------
 function getALLTC3(req, res, next) {
-  req.body.TC_7 =  req.body.TC_7+'%';
-  db.any('select * from TC where TC_7 LIKE ${TC_7}', req.body)
+	var low = req.body.TC_7.toLowerCase();
+  req.body.TC_7 =  '%' + low + '%';
+  db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -249,8 +252,8 @@ function getALLTC3(req, res, next) {
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_8 ---------------------
 function getALLTC4(req, res, next) {
 	var low = req.body.TC_8.toLowerCase();
- req.body.TC_8 =  '%' +low+'%';
-  db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
+	req.body.TC_8 =  '%' +low+'%';
+	db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
