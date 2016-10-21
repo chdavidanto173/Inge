@@ -284,9 +284,11 @@ function getALLTD_ONE(req, res, next) {
     });
 }
 
-//------ RETORNO DE UNO O VARIOS TA ESPECIFICOS SEGUN TA_2 ---------------------
+//------ RETORNO DE UNO O VARIOS TA ESPECIFICOS SEGUN TA_3 ---------------------
 function getALLTA_FECHA(req, res, next) {
-  db.any('select * from TA where TA_2 >= current_date and TA_2<= ${TA_2}', req.body)
+  db.any('Select TC_3, TA.TA_2, TA.TA_3 '+ 
+		'from TC,(select TA.TA_1, TA.TA_2, TA.TA_3 from TA where TA_3 = current_date and TA_4 = 0) as TA '+ 
+		'where TC_1 = TA.TA_1;', req.body)
     .then(function (data) {
       res.status(200)
         .json({
