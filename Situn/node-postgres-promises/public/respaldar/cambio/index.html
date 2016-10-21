@@ -119,19 +119,29 @@
 	   </div>
 	   
 	   
-		<div class="col-md-2 form-group"><!--Genera el espacio entre componentes---->	 
-			<span class="text-danger"><h4>Alarma</h4></span>
-			<Select id="op" onchange = "pro_Alarma()" >
-				<Option Selected value="3d" >3 días
-				<Option value="5d">5 días
-				<Option value="7d" >7 dias
-				<Option value="Pd" >Programar
-				<Option value="Nd" Selected>Ninguna
-			</select>	
-			<div  style="display:none" id="div_dias"><span class="text-danger"><h4>Cantidad de días:</h4></span>
-				<input type="text"  class="form-control" id = "input_dias"></input>
-	  		</div>
-				<button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
+		<div class="col-md-3 form-group"><!--Genera el espacio entre componentes---->	 
+			<label class="text-danger">Programar Alarmas</label>
+		 <table id="IC11">
+			<tr>
+                    <td> <label class="text-danger">Fecha  Limite</label></td>
+                    <td> <div id="datetimepicker12" class="input-append form-group"><input class="form-control"id="IC12" data-format="dd-MM-yyyy" type="text" onfocus="clear_focus(12)" > <!--****** NUEVO ***********-->
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="clear_focus(12)"></i></span> 
+					</div>
+					</td>
+                </tr>
+					<tr>
+                    <td> <label class="text-danger">Fecha  Alarma</label></td>
+                    <td> <div id="datetimepicker13" class="input-append form-group"><input class="form-control"id="IC13" data-format="dd-MM-yyyy" type="text" onfocus="clear_focus(13)" > <!--****** NUEVO ***********-->
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="clear_focus(12)"></i></span> 
+					</div>
+					</td>
+                </tr>
+				<tr>
+				<td ><center><button type="button" class="btn btn-default" onclick="" disabled>Programar</button></td>
+			     <td ><center><button type="button" class="btn btn-default" onclick="" disabled>Cancelar</button></td>
+				</tr>
+		</table>
+	
 	 	
 		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
 		
@@ -153,7 +163,8 @@
 			   
 				 <script src="bootstrap-datepicker.js"></script> <!---Si se borra el pierde trate de acomodarlo 
 		        en donde estan los otros js pero dice que no se encuentran, como que este y el bootstrap-datepicker.min.js chocan--->	
-			
+			<label class="text-danger">Realizar un enlace de documentos</label>
+			<P><button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
 			
 				
         </div>
@@ -208,6 +219,20 @@ if(document.getElementById("IC12").checked==true){
     });
   });
   
+   $(function() {
+    $('#datetimepicker12').datetimepicker({
+
+      pickTime: false
+    });
+  });
+  
+   $(function() {
+    $('#datetimepicker13').datetimepicker({
+
+      pickTime: false
+    });
+  });
+  
   
  function MIC_01(){
 	//let a3 = document.getElementById('a3').value;
@@ -239,8 +264,6 @@ if(document.getElementById("IC12").checked==true){
 	
 	if(res.indexOf("error")==-1){
  $("#mensaje").text("Acción realizada con exito");
-  if($("#op").val() != "Nd")
-  insertTA(); // Analizar
   MIC_03();
   document.getElementById("IC11").disabled=false;
   
@@ -476,111 +499,6 @@ function MIC_07(){
 		
 	}
 
-	
-	//--- NUEVO --//
-	function pro_Alarma(){
-		if($("#op").val() == "Pd"){ // En caso de programar la alarma
-			$("#div_dias").show();  
-		}
-	
-		else{
-			$("#div_dias").hide();
-		}
-	
-	}
-	
-	function insertTA(){
-	/*fetch( 'http://localhost:3000/api/TC/BC', {  
-    method: 'GET', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } 
-      }
-	  )
-   .then(res =>res.json())*/
-  // .then(obj =>{ obj.data[0].tc_1; /* TC_1*/})
-  
-  /*.catch(function(error) {  
-   console.log('Request failed', error);  
-  });
-   	*/
-	//console.log("Ultimo "+devuelveUltimo().then(function(obj){obj}));
-	
-	let a5 = 15;  // Cambiar eso falta
-	let b5 = getDateLimit();
-	let c5 = getDateNotice(); 
-	let d5 = 0;
-
-
- fetch( 'http://localhost:3000/api/TA/I', {  
-    method: 'POST', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } ,
-    body: "TA_1="+ a5+ "&TA_2="+ b5+ "&TA_3="+c5+"&TA_4="+ d5 
-      }
-	  )
-  .then(function(response) {
-  return response.text().then(function(res) {
-    console.log("Resultado: "+res);
-    
-  });
-})
-  .catch(function(error) {  
-   console.log('Request failed', error);  
-  });
-	}
-	
-	function getDate(can){
-	   var f = new Date(),
-           addTime = can * 86400; //Tiempo en segundos
-           f.setSeconds(addTime); //Añado el tiempo
-
-	return f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
-	}
-	
-	function getDateLimit(){
-	  let opcion = $("#op").val();
-	  switch(opcion){
-	  case "3d": return getDate(3);
-	  case "5d": return getDate(5);
-	  case "7d": return getDate(7);
-	  case "Pd": return getDate(can_dias = $("#input_dias").val());
-	  }
-	}
-	
-	
-	
-	function getDateNotice(){
-	   let opcion = $("#op").val();
-	  switch(opcion){
-	  case "3d": return getDate(2);
-	  case "5d": return getDate(3);
-	  case "7d": return getDate(4);
-	  case "Pd": return getDate(parseInt($("#input_dias").val())-3);
-
-	  }
-	}
-	
-	function devuelveUltimo(){ 
-	return fetch( 'http://localhost:3000/api/TC/BC', {  
-    method: 'GET', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } 
-      }
-	  )
-   .then(res =>res.json())
-   .then(obj =>obj.data[0].tc_1)
-  
-  .catch(function(error) {  
-   console.log('Request failed', error);  
-  });
-   	
-	}
 	
 </script>
 
