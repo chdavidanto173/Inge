@@ -113,13 +113,12 @@
                     <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  ></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_07()">Guardar</button></td>
+                    <td ><center><button type="button" class="btn btn-default"  ng-click ="guardarCorrespondencia()">Guardar</button></td>
                     <td ><center><button type="button" class="btn btn-default" onclick="MIC_09()">Cancelar</button></td>
                 </tr>
 						</tbody>
 		           </table>  
         </form>  
-   
 	   </div>
 	   
 	   
@@ -153,6 +152,7 @@
 			<table class="table" >
 			<thead> 
 			    <tr class="danger">
+				  <td> <td>
 			      <td>Nº Oficio</td>
 			      <td>Fecha de aviso</td>
 			      <td>Fecha de limite</td>
@@ -163,6 +163,9 @@
 	<p align="left"><table class="table" id="tabla_busqueda" >
 		  <tbody>
 			<tr ng-repeat = "c in alarmas">
+			<!--ng-click="visto(c)"        <img src="img/check.ico" border="0" width="5">-->
+		 
+					<td> <button ng-click="visto(c)">-</button> </td>
 					<td> {{c.tc_3}} </td>
 					<td> {{c.ta_3 | date:'dd/MM/yyyy'}} </td>
 					<td> {{c.ta_2 | date:'dd/MM/yyyy'}} </td>
@@ -198,21 +201,20 @@
  document.addEventListener("DOMContentLoaded", MIC_08);
  
 let app = angular.module('app', []);
+
 function ControllerAngular($scope)
  {
- 
 	$scope.alarmas = new Array();
 	$scope.updateAlarmas= c => $scope.alarmas = c;
-	$scope.init = _ => busqueda($scope);
-	
-		
+	$scope.init = _ => busqueda($scope);	
+	$scope.visto = a => visto(a, $scope);
+	$scope.guardarCorrespondencia = _ => MIC_07($scope);
   }
   
    app.controller('ControllerAngular', ControllerAngular); 
 
   function busqueda($scope)
  {
-
 	 fetch( 'http://localhost:3000/api/TA/ALL_FECHA', {  
     method: 'POST', 
     datatype:'json',
@@ -225,6 +227,34 @@ function ControllerAngular($scope)
 	.then(obj => $scope.$apply( _=>	$scope.updateAlarmas(obj.data)))
 	.catch(err => console.log('Request failed', err));
  }
+ 
+ function visto(a, $scope)
+	{
+	fetch( 'http://localhost:3000/api/TA/UD', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded"  
+      } ,
+    body: "TA_1="+ a.ta_1+ "&TA_2="+ a.ta_2+ "&TA_3="+a.ta_3+
+	"&TA_4="+ 1
+      }
+	  )
+  .then(function(response) {
+  return response.text().then(function(res) {
+     busqueda($scope);
+    console.log("Resultado: "+res);
+  });
+})
+  .catch(function(error) {  
+   console.log('Request failed', error);  
+  });
+	
+		/*$scope.current == 1? ($scope.codi =  a, $("#editDoc1").show() ): ($scope.doc2 = a , $("#editDoc2").show());
+		let id = ($scope.current == 1)? "Documento1" : "Documento2";
+		$("#" + id ).prop('disabled', true);*/
+	}
+	
 
  
 
@@ -263,7 +293,7 @@ if(document.getElementById("IC12").checked==true){
   });
   
   
- function MIC_01(){
+ function MIC_01($scope){
 	//let a3 = document.getElementById('a3').value;
 	let b3 = $('#IC1').val().toUpperCase();
 	let c3 = $('#IC2').val().toUpperCase(); 
@@ -294,7 +324,7 @@ if(document.getElementById("IC12").checked==true){
 	if(res.indexOf("error")==-1){
  $("#mensaje").text("Acción realizada con exito");
   if($("#op").val() != "Nd")
-  insertTA(); // Analizar
+  insertTA($scope); // Analizar
   MIC_03();
   document.getElementById("IC11").disabled=false;
   
@@ -491,7 +521,7 @@ fetch( 'http://localhost:3000/api/TC/BC', {
   });
    	
  	}
-function MIC_07(){
+function MIC_07($scope){
 	  if(MIC_02() == false){
 	     $("#mensaje").text("Campos requeridos");
 	     return;
@@ -509,10 +539,10 @@ function MIC_07(){
 	.then(res => res.json())
      .then(obj => {
 	if(obj.data[0]==null)
-	   MIC_01();
+	   MIC_01($scope);
 	   else{ 
 	if(obj.data[0].tc_3=="SIN OFICIO")
-		MIC_01();
+		MIC_01($scope);
 	else
 	  $("#mensaje").text("Fallo al realizar la acción, la correspondencia a ingresar ya existe"); 
 	  }
@@ -534,7 +564,7 @@ function MIC_07(){
 	
 	}
 	
-	function insertTA(){
+	function insertTA($scope){
 	/*fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
@@ -570,6 +600,7 @@ function MIC_07(){
 	  )
 		.then(function(response) {
 			return response.text().then(function(res) {
+				busqueda($scope);
 					console.log("Resultado: "+res);
     
 			});
