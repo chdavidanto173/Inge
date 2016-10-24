@@ -208,7 +208,7 @@ function ControllerAngular($scope)
 	$scope.updateAlarmas= c => $scope.alarmas = c;
 	$scope.init = _ => busqueda($scope);	
 	$scope.visto = a => visto(a, $scope);
-	$scope.guardarCorrespondencia = _ => MIC_07($scope);
+	$scope.guardarCorrespondencia =   _  => MIC_07($scope);
   }
   
    app.controller('ControllerAngular', ControllerAngular); 
@@ -226,10 +226,11 @@ function ControllerAngular($scope)
 	.then(res => res.json())
 	.then(obj => $scope.$apply( _=>	$scope.updateAlarmas(obj.data)))
 	.catch(err => console.log('Request failed', err));
+	
  }
  
- function visto(a, $scope)
-	{
+ function visto(a, $scope){
+ 
 	fetch( 'http://localhost:3000/api/TA/UD', {  
     method: 'POST', 
     datatype:'json',
@@ -347,11 +348,12 @@ function MIC_02(){
 	IC3 = true;
 	IC4	= true;
 	IC5 = true;
-	IC6 = true
-	IC7 = true
-	IC8 = true
-	IC9 = true
-	IC10 = true
+	IC6 = true;
+	IC7 = true;
+	IC8 = true;
+	IC9 = true;
+	IC10 = true;
+	IC11;
 	
 	if($("#IC1").val().length == 0){
 		document.getElementById("datetimepicker4").className ="input-append  form-group has-error" ;
@@ -435,7 +437,14 @@ function MIC_02(){
 	document.getElementById("div9").className ="  form-group" ;
 	document.getElementById("IC9").title = "" ;
 	}
-	return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
+	if($("#op").val() == "Pd"){ // En caso de programar la alarma
+	    IC11=validarAlarma();
+		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && IC11 && MIC_05());
+		}
+		else{
+		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
+		}
+
 }
 <!--limpia todos los campos--->
 function MIC_09(){
@@ -602,6 +611,7 @@ function MIC_07($scope){
 				busqueda($scope);
 					console.log("Resultado: "+res);
                  $("#op > option[value=Nd]").attr("selected",true);
+				  $("#input_dias").val("");
 				 $("#div_dias").hide();
 			});
 		})
@@ -609,7 +619,6 @@ function MIC_07($scope){
 			console.log('Request failed', error);  
 		});
 	});
-  
 	}
 	
 	function getDate(can){
@@ -658,6 +667,33 @@ function MIC_07($scope){
   })
    	);
 	}
+	
+function validarAlarma(){
+A1=true;
+A2=true;
+
+  if($("#input_dias").val().length == 0){
+		document.getElementById("div_dias").className ="input-append  form-group has-error" ;
+		document.getElementById("input_dias").title = "Campo Obligatoria" ;
+		A1=false;
+	}
+	else{
+	document.getElementById("div_dias").className ="form-group" ;
+	document.getElementById("input_dias").title = "" ;
+	}
+	
+	 if( $("#input_dias").val() < 4  || $("#input_dias").val()==5  || $("#input_dias").val()== 7 ){
+		document.getElementById("div_dias").className ="input-append  form-group has-error" ;
+		document.getElementById("input_dias").title = "La cantidad de dias debe ser mayor  o  igual 4  ( No puede ser 5 o 7 )" ;
+		A2=false;
+	}
+	else{
+	document.getElementById("div_dias").className ="form-group" ;
+	document.getElementById("input_dias").title = "" ;
+	}
+	
+	   return ( A1 && A2 );
+}
 	
 </script>
     </body>
