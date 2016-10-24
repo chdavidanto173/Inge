@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html ng-app = "app">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ingreso Correspondencia</title>
      
-  
+	 
  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
    
   <link rel="stylesheet" href="\node_modules\bootstrap\dist\css\bootstrap.min.css">
@@ -20,9 +20,14 @@
  
  <link rel="stylesheet" href="datepicker.css">
         <link rel="stylesheet" href="bootstrap.css">   
+		
+			
+	<!-- Angular--> 
+	<script src="\node_modules\bootstrap\dist\js\angular.min.js"></script>
+	
    </head>
    
-    <body>      	  	   
+    <body  id = "buscar" data-ng-init = "init()">      	  	   
 	<nav class="navbar navbar-default" style="background-color:#60161E; ">
     <div class="container-fluid">
     <!-- REsponsive -->
@@ -53,8 +58,7 @@
 </nav>
 	  
 	   <!---Cuerpo--->
-	   <body background="img/situn4.png">
-
+	   <body background="img/situn4.png" ng-app ng-controller = "ControllerAngular">
 	      <div class="col-md-1"></div>
 	   <div class="col-md-4">
          <span class="text-danger"><h4>Ingreso de Correspondencia</h4></span>
@@ -109,29 +113,28 @@
                     <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  ></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default" onclick="MIC_07()">Guardar</button></td>
+                    <td ><center><button type="button" class="btn btn-default"  ng-click ="guardarCorrespondencia()">Guardar</button></td>
                     <td ><center><button type="button" class="btn btn-default" onclick="MIC_09()">Cancelar</button></td>
                 </tr>
 						</tbody>
 		           </table>  
         </form>  
-   
 	   </div>
 	   
 	   
 		<div class="col-md-2 form-group"><!--Genera el espacio entre componentes---->	 
-			<span class="text-danger"><h4>Limite de respuesta</h4></span>
-			<Select >
+			<span class="text-danger"><h4>Alarma</h4></span>
+			<Select id="op" onchange = "pro_Alarma()" >
 				<Option Selected value="3d" >3 días
 				<Option value="5d">5 días
 				<Option value="7d" >7 dias
 				<Option value="Pd" >Programar
 				<Option value="Nd" Selected>Ninguna
 			</select>	
-			<div  style="display:none"><span class="text-danger"><h4>Cantidad de días:</h4></span>
-				<input type="text"  class="form-control" id = ""></input>
-			</div>
-	<button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
+			<div  style="display:none" id="div_dias"><span class="text-danger"><h4>Cantidad de días:</h4></span>
+				<input type="text"  class="form-control" id = "input_dias"></input>
+	  		</div>
+				<button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
 	 	
 		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
 		
@@ -139,39 +142,123 @@
 	
 		<div class="col-md-1 "></div><!--Genera el espacio entre componentes---->	
 		
+
 			
-			<div class="col-md-3 "> 			
+			<div class="col-md-4"> 			
 			
 			<div class="panel panel-danger"  style=" border-radius: 5px 5px 5px 5px;"><!---div alarmas--->
 			<center><span class="text-danger"><h4>Alarmas del día</h4></span>
-			<div> No hay disponibles</div></center>	
+			<div> </div></center>	
+			<table class="table" >
+			<thead> 
+			    <tr class="danger">
+				  <td> <td>
+			      <td>Nº Oficio</td>
+			      <td>Fecha de aviso</td>
+			      <td>Fecha de limite</td>
+			    </tr>
+				  </thead>
+				</table>
+    <div class="table table-bordered"  style="height: 100px;   overflow-y:auto;">
+	<p align="left"><table class="table" id="tabla_busqueda" >
+		  <tbody>
+			<tr ng-repeat = "c in alarmas">
+			<!--ng-click="visto(c)"        <img src="img/check.ico" border="0" width="5">-->
+		 
+					<td> <button ng-click="visto(c)">-</button> </td>
+					<td> {{c.tc_3}} </td>
+					<td> {{c.ta_3 | date:'dd/MM/yyyy'}} </td>
+					<td> {{c.ta_2 | date:'dd/MM/yyyy'}} </td>
+			
+			</tr>
+		</tbody>    
+	        </table>
+			
+			
 			</div> 
-
-			<!---div class="date hero-unit"  style="background-color:#60161E; margin-top:200px; color:white;" ><!-- div calendario----->
+		   </div>
+		
+		<!---div class="date hero-unit"  style="background-color:#60161E; margin-top:200px; color:white;" ><!-- div calendario----->
           
             <center><div class="date panel panel-danger "  style="background-color:#60161E;  color:white;" ></center><!-- div calendario----->
 			   
 				 <script src="bootstrap-datepicker.js"></script> <!---Si se borra el pierde trate de acomodarlo 
 		        en donde estan los otros js pero dice que no se encuentran, como que este y el bootstrap-datepicker.min.js chocan--->	
-			
-			
-				
-        </div>
-        </div>
-  
-   
+		</div>
+		
+		</div>
+       
+         
       
     
-
  <script src="Correspondencia.js"></script>
 	   
 	  
-
   
-
 	   
 <script type="text/javascript">
+
  document.addEventListener("DOMContentLoaded", MIC_08);
+ 
+let app = angular.module('app', []);
+
+function ControllerAngular($scope)
+ {
+	$scope.alarmas = new Array();
+	$scope.updateAlarmas= c => $scope.alarmas = c;
+	$scope.init = _ => busqueda($scope);	
+	$scope.visto = a => visto(a, $scope);
+	$scope.guardarCorrespondencia = _ => MIC_07($scope);
+  }
+  
+   app.controller('ControllerAngular', ControllerAngular); 
+
+  function busqueda($scope)
+ {
+	 fetch( 'http://localhost:3000/api/TA/ALL_FECHA', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded"  
+      } 
+      }
+	)	
+	.then(res => res.json())
+	.then(obj => $scope.$apply( _=>	$scope.updateAlarmas(obj.data)))
+	.catch(err => console.log('Request failed', err));
+ }
+ 
+ function visto(a, $scope)
+	{
+	fetch( 'http://localhost:3000/api/TA/UD', {  
+    method: 'POST', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded"  
+      } ,
+    body: "TA_1="+ a.ta_1+ "&TA_2="+ a.ta_2+ "&TA_3="+a.ta_3+
+	"&TA_4="+ 1
+      }
+	  )
+  .then(function(response) {
+  return response.text().then(function(res) {
+     busqueda($scope);
+    console.log("Resultado: "+res);
+  });
+})
+  .catch(function(error) {  
+   console.log('Request failed', error);  
+  });
+	
+		/*$scope.current == 1? ($scope.codi =  a, $("#editDoc1").show() ): ($scope.doc2 = a , $("#editDoc2").show());
+		let id = ($scope.current == 1)? "Documento1" : "Documento2";
+		$("#" + id ).prop('disabled', true);*/
+	}
+	
+
+ 
+
+ 
  
  function clear_focus(n){
   limpiarMensaje();
@@ -192,7 +279,6 @@ if(document.getElementById("IC12").checked==true){
 	document.getElementById("IC2").disabled=false;
 	}
 }
-
  $(document).ready(function () {
                 
                 $('.date').datepicker({
@@ -200,16 +286,14 @@ if(document.getElementById("IC12").checked==true){
                 });
             
      });
-
    $(function() {
     $('#datetimepicker3').datetimepicker({
-
       pickTime: false
     });
   });
   
   
- function MIC_01(){
+ function MIC_01($scope){
 	//let a3 = document.getElementById('a3').value;
 	let b3 = $('#IC1').val().toUpperCase();
 	let c3 = $('#IC2').val().toUpperCase(); 
@@ -239,6 +323,8 @@ if(document.getElementById("IC12").checked==true){
 	
 	if(res.indexOf("error")==-1){
  $("#mensaje").text("Acción realizada con exito");
+  if($("#op").val() != "Nd")
+  insertTA($scope); // Analizar
   MIC_03();
   document.getElementById("IC11").disabled=false;
   
@@ -350,7 +436,6 @@ function MIC_02(){
 	document.getElementById("div9").className ="  form-group" ;
 	document.getElementById("IC9").title = "" ;
 	}
-
 	return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
 }
 <!--limpia todos los campos--->
@@ -358,7 +443,6 @@ function MIC_09(){
 MIC_03();
 limpiarMensaje();
 }
-
 function MIC_03(){
 for(let i=0;i<10;i++){
 MIC_04(i);
@@ -376,9 +460,7 @@ MIC_04(i);
 	document.getElementById("IC11").disabled=true;
 	document.getElementById("IC12").checked=false;
 	document.getElementById("IC2").disabled=false;
-
 	}
-
 function limpiarMensaje(){
 $("#mensaje").text("");
 }
@@ -414,9 +496,7 @@ let r=$("#IC3").val();
 		document.getElementById("IC3").title = "Fecha de oficio mayor a la de recibido" ;
 	return false;}
 }
-
  function MIC_06(){
-
 fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
@@ -435,15 +515,13 @@ fetch( 'http://localhost:3000/api/TC/BC', {
    .then( _ => window.location.href='http://localhost:3000/node_modules/bootstrap/dist/paginas/Enlace%20de%20Documentos.html')
    
 //<a href="\node_modules\bootstrap\dist\paginas\Enlace de Documentos.html">
-
-
   .catch(function(error) {  
   // document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
    console.log('Request failed', error);  
   });
    	
  	}
-function MIC_07(){
+function MIC_07($scope){
 	  if(MIC_02() == false){
 	     $("#mensaje").text("Campos requeridos");
 	     return;
@@ -461,10 +539,10 @@ function MIC_07(){
 	.then(res => res.json())
      .then(obj => {
 	if(obj.data[0]==null)
-	   MIC_01();
+	   MIC_01($scope);
 	   else{ 
 	if(obj.data[0].tc_3=="SIN OFICIO")
-		MIC_01();
+		MIC_01($scope);
 	else
 	  $("#mensaje").text("Fallo al realizar la acción, la correspondencia a ingresar ya existe"); 
 	  }
@@ -473,11 +551,114 @@ function MIC_07(){
 		console.log('Request failed', err)});
 		
 	}
+	
+	//--- NUEVO --//
+	function pro_Alarma(){
+		if($("#op").val() == "Pd"){ // En caso de programar la alarma
+			$("#div_dias").show();  
+		}
+	
+		else{
+			$("#div_dias").hide();
+		}
+	
+	}
+	
+	function insertTA($scope){
+	/*fetch( 'http://localhost:3000/api/TC/BC', {  
+    method: 'GET', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded"  
+      } 
+      }
+	  )
+   .then(res =>res.json())*/
+  // .then(obj =>{ obj.data[0].tc_1; /* TC_1*/})
+  
+  /*.catch(function(error) {  
+   console.log('Request failed', error);  
+  });
+   	*/
+	//console.log("Ultimo "+devuelveUltimo().then(function(obj){obj}));
+	var aux = devuelveUltimo();
+	aux.then(data=> {
 
+		let a5 = data;  // Cambiar eso falta
+		let b5 = getDateLimit();
+		let c5 = getDateNotice(); 
+		let d5 = 0;
+	
+		fetch( 'http://localhost:3000/api/TA/I', {  
+			method: 'POST', 
+			datatype:'json',
+			headers: {  
+				"Content-type": "application/x-www-form-urlencoded"  
+			} ,
+			body: "TA_1="+ a5+ "&TA_2="+ b5+ "&TA_3="+c5+"&TA_4="+ d5 
+		}
+	  )
+		.then(function(response) {
+			return response.text().then(function(res) {
+				busqueda($scope);
+					console.log("Resultado: "+res);
+    
+			});
+		})
+		.catch(function(error) {  
+			console.log('Request failed', error);  
+		});
+	});
+  
+	}
+	
+	function getDate(can){
+	   var f = new Date(),
+           addTime = can * 86400; //Tiempo en segundos
+           f.setSeconds(addTime); //Añado el tiempo
+	return f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
+	}
+	
+	function getDateLimit(){
+	  let opcion = $("#op").val();
+	  switch(opcion){
+	  case "3d": return getDate(3);
+	  case "5d": return getDate(5);
+	  case "7d": return getDate(7);
+	  case "Pd": return getDate(can_dias = $("#input_dias").val());
+	  }
+	}
+	
+	
+	
+	function getDateNotice(){
+	   let opcion = $("#op").val();
+	  switch(opcion){
+	  case "3d": return getDate(2);
+	  case "5d": return getDate(3);
+	  case "7d": return getDate(4);
+	  case "Pd": return getDate(parseInt($("#input_dias").val())-3);
+	  }
+	}
+	
+	function devuelveUltimo(){ 
+	return Promise.resolve(fetch( 'http://localhost:3000/api/TC/BC', {  
+    method: 'GET', 
+    datatype:'json',
+    headers: {  
+      "Content-type": "application/x-www-form-urlencoded"  
+      } 
+      }
+	  )
+   .then(res =>res.json())
+   .then(obj =>obj.data[0].tc_1)
+  
+  .catch(function(error) {  
+   console.log('Request failed', error);  
+  })
+   	);
+	}
 	
 </script>
-
-
     </body>
 </html>
-

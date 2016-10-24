@@ -38,6 +38,6 @@ TD // Tabla de Enlace
   
    TA_1 // Codigo de correspondencia (genera sistema)
    TA_2 // Fecha Maxima
-   TA_3 // Asunto por ahora
-   TA_4 // Si se realizo seria un numero (0,1,2,3) = atendida, espera, omitido ,cancelado
+   TA_3 // Fehcha de aviso
+   TA_4 // Si se realizo seria un numero (0,1) = Sin atender, atendida
    

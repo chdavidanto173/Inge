@@ -16,7 +16,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:admin123@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -95,10 +95,9 @@ function createTD(req, res, next) {
 //-------- CREACION DE UN NUEVO TA EN LA TABLA ----------
 function createTA(req, res, next) {
 	 req.body.TA_1 = parseInt(req.body.TA_1);
-	  req.body.TA_5 = parseInt(req.body.TA_5);
-	 req.body.TA_6 = parseInt(req.body.TA_6);
-     db.none('insert into TA (TA_1, TA_2, TA_3, TA_4, TA_5, TA_6)' +
-      'values(${TA_1}, ${TA_2}, ${TA_3}, ${TA_4}, ${TA_5}, ${TA_6})',
+	 req.body.TA_4 = parseInt(req.body.TA_4);
+     db.none('insert into TA (TA_1, TA_2, TA_3, TA_4)' +
+      'values(${TA_1}, ${TA_2}, ${TA_3}, ${TA_4})',
 	     req.body)
     .then(function () {
       res.status(200)
@@ -198,8 +197,9 @@ function getSingleTU(req, res, next) {
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_3 ---------------------
 function getALLTC1(req, res, next) {
- req.body.TC_3 = req.body.TC_3+'%';
-  db.any('select * from TC where TC_3 LIKE ${TC_3}', req.body)
+	var low = req.body.TC_3.toLowerCase();
+ req.body.TC_3 = '%' + low + '%';
+  db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -215,8 +215,9 @@ function getALLTC1(req, res, next) {
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_5 ---------------------
 function getALLTC2(req, res, next) {
- req.body.TC_5 =  req.body.TC_5+'%';
-  db.any('select * from TC where TC_5 LIKE ${TC_5}', req.body)
+	var low = req.body.TC_5.toLowerCase();
+ req.body.TC_5 =  '%' + low + '%';
+  db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -232,8 +233,9 @@ function getALLTC2(req, res, next) {
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_7 ---------------------
 function getALLTC3(req, res, next) {
-  req.body.TC_7 =  req.body.TC_7+'%';
-  db.any('select * from TC where TC_7 LIKE ${TC_7}', req.body)
+	var low = req.body.TC_7.toLowerCase();
+  req.body.TC_7 =  '%' + low + '%';
+  db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -250,8 +252,8 @@ function getALLTC3(req, res, next) {
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_8 ---------------------
 function getALLTC4(req, res, next) {
 	var low = req.body.TC_8.toLowerCase();
- req.body.TC_8 =  '%' +low+'%';
-  db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
+	req.body.TC_8 =  '%' +low+'%';
+	db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -282,9 +284,11 @@ function getALLTD_ONE(req, res, next) {
     });
 }
 
-//------ RETORNO DE UNO O VARIOS TA ESPECIFICOS SEGUN TA_2 ---------------------
+//------ RETORNO DE UNO O VARIOS TA ESPECIFICOS SEGUN TA_3 ---------------------
 function getALLTA_FECHA(req, res, next) {
-  db.any('select * from TA where TA_2 >= current_date and TA_2<= ${TA_2}', req.body)
+  db.any('Select TA.TA_1, TC_3, TA.TA_2, TA.TA_3 '+ 
+		'from TC,(select TA.TA_1, TA.TA_2, TA.TA_3 from TA where TA_3 = current_date and TA_4 = 0) as TA '+ 
+		'where TC_1 = TA.TA_1;', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -372,9 +376,8 @@ function updateTD(req, res, next) {
 //-------- ACTUALIZACION DE LA TABLA TA ----------
 function updateTA(req, res, next) {
 	 req.body.TA_1 = parseInt(req.body.TA_1);
-	 req.body.TA_5 = parseInt(req.body.TA_5);
-	 req.body.TA_6 = parseInt(req.body.TA_6);
-  db.none('update TA set TA_3=${TA_3},TA_4=${TA_4}, TA_5=${TA_5}, TA_6=${TA_6}'+
+	 req.body.TA_4 = parseInt(req.body.TA_4);
+  db.none('update TA set TA_3=${TA_3},TA_4=${TA_4}'+
           'where TA_1=${TA_1} and TA_2=${TA_2}',
     req.body)
     .then(function () {
