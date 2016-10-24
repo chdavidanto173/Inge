@@ -327,7 +327,6 @@ if(document.getElementById("IC12").checked==true){
   insertTA($scope); // Analizar
   MIC_03();
   document.getElementById("IC11").disabled=false;
-  
   }
   else
   document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
@@ -602,7 +601,8 @@ function MIC_07($scope){
 			return response.text().then(function(res) {
 				busqueda($scope);
 					console.log("Resultado: "+res);
-    
+                 $("#op > option[value=Nd]").attr("selected",true);
+				 $("#div_dias").hide();
 			});
 		})
 		.catch(function(error) {  
