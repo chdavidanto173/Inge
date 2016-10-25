@@ -3,7 +3,7 @@ TC // Tabla de Correspondencia
 TA // Tabla de Alarmas
 TU // Tabla de Usuarios
 TP // Tabla de Personas
-TD // Tabla de Enlace
+TE // Tabla de Enlace
 
 ---- Table TP ------
   TP_1 // Nombre 
@@ -30,9 +30,9 @@ TD // Tabla de Enlace
   TC_10 =  ESTADO 	
   TC_11 =  OBSERVACION	
 
----- Table TD ------
-  TD_1 // CODIGO correspondencia 1
-  TD_2 // CODIGO correspondencia 2
+---- Table TE ------
+  TE_1 // CODIGO correspondencia 1
+  TE_2 // CODIGO correspondencia 2
 
 --------- TA --------
   

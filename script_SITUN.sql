@@ -36,12 +36,12 @@ CONSTRAINT fkTC FOREIGN KEY (TC_9) REFERENCES TP (TP_4)
 
 
 
-CREATE TABLE TD(
-TD_1 INTEGER,
-TD_2 INTEGER,
-CONSTRAINT fkTD1 FOREIGN KEY (TD_1) REFERENCES TC (TC_1),
-CONSTRAINT fkTD2 FOREIGN KEY (TD_2) REFERENCES TC (TC_1),
-CONSTRAINT pkTD PRIMARY KEY (TD_1, TD_2)
+CREATE TABLE TE(
+TE_1 INTEGER,
+TE_2 INTEGER,
+CONSTRAINT fkTE1 FOREIGN KEY (TE_1) REFERENCES TC (TC_1),
+CONSTRAINT fkTE2 FOREIGN KEY (TE_2) REFERENCES TC (TC_1),
+CONSTRAINT pkTE PRIMARY KEY (TE_1, TE_2)
 );
 
 
@@ -69,9 +69,9 @@ CREATE OR REPLACE FUNCTION post(xn integer) RETURNS void  AS
 $BODY$
 DECLARE
 v_i integer;
-BEGIN insert into x (select td_2 from td where td_1=xn );
-   FOR v_i IN select td_2 from td,x where td.td_1=x.a loop
-       insert into x(select td_2 from td,x where td.td_1=x.a group by td_2,a order by a);
+BEGIN insert into x (select TE_2 from TE where TE_1=xn );
+   FOR v_i IN select TE_2 from TE,x where TE.TE_1=x.a loop
+       insert into x(select TE_2 from TE,x where TE.TE_1=x.a group by TE_2,a order by a);
        end loop;  
 END $BODY$ LANGUAGE 'plpgsql'
 
@@ -82,9 +82,9 @@ CREATE OR REPLACE FUNCTION pre(xn integer) RETURNS void  AS
 $BODY$
 DECLARE
 v_i integer;
-BEGIN insert into x (select td_1 from td where td_2=xn );
-   FOR v_i IN select td_1 from td,x where td.td_2=x.a loop
-      insert into x(select td_1 from td,x where td.td_2=x.a group by a,td_1 order by a);
+BEGIN insert into x (select TE_1 from TE where TE_2=xn );
+   FOR v_i IN select TE_1 from TE,x where TE.TE_2=x.a loop
+      insert into x(select TE_1 from TE,x where TE.TE_2=x.a group by a,TE_1 order by a);
        end loop; 
 END $BODY$ LANGUAGE 'plpgsql'
 
