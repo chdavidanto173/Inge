@@ -124,7 +124,7 @@
 	   
 		<div class="col-md-2 form-group"><!--Genera el espacio entre componentes---->	 
 			<span class="text-danger"><h4>Alarma</h4></span>
-			<Select id="op" onchange = "pro_Alarma()" >
+			<Select id="op" onchange = "MIC_12()" >
 				<Option Selected value="3d" >3 días
 				<Option value="5d">5 días
 				<Option value="7d" >7 dias
@@ -206,14 +206,14 @@ function ControllerAngular($scope)
  {
 	$scope.alarmas = new Array();
 	$scope.updateAlarmas= c => $scope.alarmas = c;
-	$scope.init = _ => busqueda($scope);	
-	$scope.visto = a => visto(a, $scope);
-	$scope.guardarCorrespondencia = _ => MIC_07($scope);
+	$scope.init = _ => MIC_10($scope);	
+	$scope.visto = a => MIC_11(a, $scope);
+	$scope.guardarCorrespondencia =   _  => MIC_07($scope);
   }
   
    app.controller('ControllerAngular', ControllerAngular); 
 
-  function busqueda($scope)
+  function MIC_10($scope)
  {
 	 fetch( 'http://localhost:3000/api/TA/ALL_FECHA', {  
     method: 'POST', 
@@ -226,10 +226,11 @@ function ControllerAngular($scope)
 	.then(res => res.json())
 	.then(obj => $scope.$apply( _=>	$scope.updateAlarmas(obj.data)))
 	.catch(err => console.log('Request failed', err));
+	
  }
  
- function visto(a, $scope)
-	{
+ function MIC_11(a, $scope){
+ 
 	fetch( 'http://localhost:3000/api/TA/UD', {  
     method: 'POST', 
     datatype:'json',
@@ -242,7 +243,7 @@ function ControllerAngular($scope)
 	  )
   .then(function(response) {
   return response.text().then(function(res) {
-     busqueda($scope);
+     MIC_10($scope);
     console.log("Resultado: "+res);
   });
 })
@@ -324,10 +325,9 @@ if(document.getElementById("IC12").checked==true){
 	if(res.indexOf("error")==-1){
  $("#mensaje").text("Acción realizada con exito");
   if($("#op").val() != "Nd")
-  insertTA($scope); // Analizar
+  MIC_13($scope); // Analizar
   MIC_03();
   document.getElementById("IC11").disabled=false;
-  
   }
   else
   document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
@@ -348,11 +348,12 @@ function MIC_02(){
 	IC3 = true;
 	IC4	= true;
 	IC5 = true;
-	IC6 = true
-	IC7 = true
-	IC8 = true
-	IC9 = true
-	IC10 = true
+	IC6 = true;
+	IC7 = true;
+	IC8 = true;
+	IC9 = true;
+	IC10 = true;
+	IC11;
 	
 	if($("#IC1").val().length == 0){
 		document.getElementById("datetimepicker4").className ="input-append  form-group has-error" ;
@@ -436,7 +437,14 @@ function MIC_02(){
 	document.getElementById("div9").className ="  form-group" ;
 	document.getElementById("IC9").title = "" ;
 	}
-	return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
+	if($("#op").val() == "Pd"){ // En caso de programar la alarma
+	    IC11=MIC_18();
+		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && IC11 && MIC_05());
+		}
+		else{
+		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
+		}
+
 }
 <!--limpia todos los campos--->
 function MIC_09(){
@@ -553,7 +561,7 @@ function MIC_07($scope){
 	}
 	
 	//--- NUEVO --//
-	function pro_Alarma(){
+	function MIC_12(){
 		if($("#op").val() == "Pd"){ // En caso de programar la alarma
 			$("#div_dias").show();  
 		}
@@ -564,7 +572,7 @@ function MIC_07($scope){
 	
 	}
 	
-	function insertTA($scope){
+	function MIC_13($scope){
 	/*fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
@@ -580,13 +588,13 @@ function MIC_07($scope){
    console.log('Request failed', error);  
   });
    	*/
-	//console.log("Ultimo "+devuelveUltimo().then(function(obj){obj}));
-	var aux = devuelveUltimo();
+	//console.log("Ultimo "+MIC_17().then(function(obj){obj}));
+	var aux = MIC_17();
 	aux.then(data=> {
 
 		let a5 = data;  // Cambiar eso falta
-		let b5 = getDateLimit();
-		let c5 = getDateNotice(); 
+		let b5 = MIC_15();
+		let c5 = MIC_16(); 
 		let d5 = 0;
 	
 		fetch( 'http://localhost:3000/api/TA/I', {  
@@ -600,48 +608,49 @@ function MIC_07($scope){
 	  )
 		.then(function(response) {
 			return response.text().then(function(res) {
-				busqueda($scope);
+				MIC_10($scope);
 					console.log("Resultado: "+res);
-    
+                 $("#op > option[value=Nd]").attr("selected",true);
+				  $("#input_dias").val("");
+				 $("#div_dias").hide();
 			});
 		})
 		.catch(function(error) {  
 			console.log('Request failed', error);  
 		});
 	});
-  
 	}
 	
-	function getDate(can){
+	function MIC_14(can){
 	   var f = new Date(),
            addTime = can * 86400; //Tiempo en segundos
            f.setSeconds(addTime); //Añado el tiempo
-	return f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
+	return f.Date() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
 	}
 	
-	function getDateLimit(){
+	function MIC_15(){
 	  let opcion = $("#op").val();
 	  switch(opcion){
-	  case "3d": return getDate(3);
-	  case "5d": return getDate(5);
-	  case "7d": return getDate(7);
-	  case "Pd": return getDate(can_dias = $("#input_dias").val());
+	  case "3d": return MIC_14(3);
+	  case "5d": return MIC_14(5);
+	  case "7d": return MIC_14(7);
+	  case "Pd": return MIC_14(can_dias = $("#input_dias").val());
 	  }
 	}
 	
 	
 	
-	function getDateNotice(){
+	function MIC_16(){
 	   let opcion = $("#op").val();
 	  switch(opcion){
-	  case "3d": return getDate(2);
-	  case "5d": return getDate(3);
-	  case "7d": return getDate(4);
-	  case "Pd": return getDate(parseInt($("#input_dias").val())-3);
+	  case "3d": return MIC_14(2);
+	  case "5d": return MIC_14(3);
+	  case "7d": return MIC_14(4);
+	  case "Pd": return MIC_14(parseInt($("#input_dias").val())-3);
 	  }
 	}
 	
-	function devuelveUltimo(){ 
+	function MIC_17(){ 
 	return Promise.resolve(fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
@@ -658,6 +667,33 @@ function MIC_07($scope){
   })
    	);
 	}
+	
+function MIC_18(){
+A1=true;
+A2=true;
+
+  if($("#input_dias").val().length == 0){
+		document.getElementById("div_dias").className ="input-append  form-group has-error" ;
+		document.getElementById("input_dias").title = "Campo Obligatoria" ;
+		A1=false;
+	}
+	else{
+	document.getElementById("div_dias").className ="form-group" ;
+	document.getElementById("input_dias").title = "" ;
+	}
+	
+	 if( $("#input_dias").val() < 4  || $("#input_dias").val()==5  || $("#input_dias").val()== 7 ){
+		document.getElementById("div_dias").className ="input-append  form-group has-error" ;
+		document.getElementById("input_dias").title = "La cantidad de dias debe ser mayor  o  igual a 4  ( No puede ser 5 o 7 )" ;
+		A2=false;
+	}
+	else{
+	document.getElementById("div_dias").className ="form-group" ;
+	document.getElementById("input_dias").title = "" ;
+	}
+	
+	   return ( A1 && A2 );
+}
 	
 </script>
     </body>
