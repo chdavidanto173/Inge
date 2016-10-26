@@ -68,44 +68,44 @@
                     <td><label class="text-danger">Fecha recibido</label></td>
                     <td> 
 					<div id="datetimepicker4" class=" form-group" >	<!-- Calendario--->
-					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text" onfocus= "clear_focus(1)" disabled></input> 
+					<input id="IC1" data-format="dd-MM-yyyy" class="form-control"type="text" onfocus= "MIC_20(1)" disabled></input> 
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">N° Oficio</label> </td>
-                    <td><div  id="div2"class="form-group"><textarea id="IC2" type="text" class="form-control" onfocus="clear_focus(2)"></textarea>
-					<label class="text-danger" style=""><input  type="checkbox" id="IC12" value="first_checkbox" onchange="me()">Sin Oficio</label></div></td>           
+                    <td><div  id="div2"class="form-group"><textarea id="IC2" type="text" class="form-control" onfocus="MIC_20(2)"></textarea>
+					<label class="text-danger" style=""><input  type="checkbox" id="IC12" value="first_checkbox" onchange="MIC_21()">Sin Oficio</label></div></td>           
 					</tr>
                 <tr>
                     <td> <label class="text-danger">Fecha Oficio</label></td>
-                    <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text" onfocus="clear_focus(3)" > <!--****** NUEVO ***********-->
-					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="clear_focus(3)"></i></span> 
+                    <td> <div id="datetimepicker3" class="input-append form-group"><input class="form-control"id="IC3" data-format="dd-MM-yyyy" type="text" onfocus="MIC_20(3)" > <!--****** NUEVO ***********-->
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_20(3)"></i></span> 
 					</div>
 					</td>
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Destinatario </label></td>
-                    <td><div id="div4" class="form-group"><textarea id="IC4" type="text" class="form-control"  onfocus="clear_focus(4)"></textarea></div></td> 
+                    <td><div id="div4" class="form-group"><textarea id="IC4" type="text" class="form-control"  onfocus="MIC_20(4)"></textarea></div></td> 
                 </tr>
 				 <tr>
                     <td> <label class="text-danger">Copia </label></td>
-                    <td><div id="div5" class="form-group"><textarea id="IC5" type="text" class="form-control" onfocus="clear_focus(5)"></textarea></div></td> 
+                    <td><div id="div5" class="form-group"><textarea id="IC5" type="text" class="form-control" onfocus="MIC_20(5)"></textarea></div></td> 
                 </tr>
 				 <tr>
                     <td> <label class="text-danger">Remitente </label></td>
-                    <td><div id="div6" class="form-group"><textarea id="IC6" type="text" class="form-control" onfocus="clear_focus(6)"></textarea></div></td>                </tr>
+                    <td><div id="div6" class="form-group"><textarea id="IC6" type="text" class="form-control" onfocus="MIC_20(6)"></textarea></div></td>                </tr>
                 <tr>
                     <td> <label class="text-danger">Asunto</label></td>
-                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 onfocus="clear_focus(7)"></textarea></input></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div7"class="form-group"><textarea id="IC7" type="text" class="form-control"rows=4 cols=30 onfocus="MIC_20(7)"></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
 				<tr>
                     <td> <label class="text-danger">Recibido</label></td>
-                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" onfocus="clear_focus(8)" value="GRETTEL CASTRO CRUZ" disabled></input> <div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div8"class="form-group"><input id="IC8" type="text"class="form-control" onfocus="MIC_20(8)" value="GRETTEL CASTRO CRUZ" disabled></input> <div></td> <!--****** NUEVO ***********-->
                 </tr>
 				<tr>
                     <td> <label class="text-danger">Estado</label></td>
-                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onfocus="clear_focus(9)"></textarea></div></td> <!--****** NUEVO ***********-->
+                    <td><div id="div9"class="form-group"><textarea type="text" class="form-control" id="IC9"  onfocus="MIC_20(9)"></textarea></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
                     <td> <label class="text-danger">Observaciones</label></td>
@@ -201,7 +201,7 @@
  
 let app = angular.module('app', []);
 
-function ControllerAngular($scope)
+function MIC_22($scope)//ControllerAngular 
  {
 	$scope.alarmas = new Array();
 	$scope.updateAlarmas= c => $scope.alarmas = c;
@@ -210,7 +210,7 @@ function ControllerAngular($scope)
 	$scope.guardarCorrespondencia =   _  => MIC_07($scope);
   }
   
-   app.controller('ControllerAngular', ControllerAngular); 
+   app.controller('ControllerAngular', MIC_22); 
 
   function MIC_10($scope)
  {
@@ -260,16 +260,16 @@ function ControllerAngular($scope)
 
  
  
- function clear_focus(n){
+ function MIC_20(n){//Limpia los campos cuando se enfocan
   MIC_19();
   MIC_04(n);
  }
  
-function MIC_08(){  
+function MIC_08(){  //Toma la fecha del sistema y la refleja en el campo de la fecha de recibido
 	var f = new Date();
 	$("#IC1").val(f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear());
 }
-function me(){
+function MIC_21(){ //Cambia el valor del campo referente al numero de oficio si la opcion SIN OFICIO esta marcada
 if(document.getElementById("IC12").checked==true){
 	document.getElementById("IC2").value="SIN OFICIO";
 	document.getElementById("IC2").disabled=true;
@@ -472,7 +472,7 @@ MIC_04(i);
 function MIC_19(){//Limpia el div con el id=mensaje
 $("#mensaje").text("");
 }
-function MIC_04(op){
+function MIC_04(op){//Realiza un cambio de clase a los campos de entrada del formulario de la clase has-error a from-group
 	switch(op){
 	case 1: document.getElementById("datetimepicker4").className= "input-append form-group";break;
 	case 2: document.getElementById("div2").className ="form-group" ; break;
@@ -488,7 +488,7 @@ function MIC_04(op){
 	default: break;
 	}
 }	
-function MIC_05(){
+function MIC_05(){//Realiza el cambio de clase de los campon de estrada del formulario a la clase has-error
 let t=$("#IC1").val();
 let r=$("#IC3").val();
 	if(t>=r){
@@ -504,7 +504,8 @@ let r=$("#IC3").val();
 		document.getElementById("IC3").title = "Fecha de oficio mayor a la de recibido" ;
 	return false;}
 }
- function MIC_06(){
+ function MIC_06(){//Realiza la consulta del id de la ultima correspondencia ingresada
+					//Guarda el dato en el localstorage y cambia a la pagina a la de enlace
 fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
@@ -529,7 +530,7 @@ fetch( 'http://localhost:3000/api/TC/BC', {
   });
    	
  	}
-function MIC_07($scope){
+function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar ya existe
 	  if(MIC_02() == false){
 	     $("#mensaje").text("Campos requeridos");
 	     return;
@@ -561,7 +562,7 @@ function MIC_07($scope){
 	}
 	
 	//--- NUEVO --//
-	function MIC_12(){
+	function MIC_12(){//Oculta Muestra el div con id=div_dias  
 		if($("#op").val() == "Pd"){ // En caso de programar la alarma
 			$("#div_dias").show();  
 		}
@@ -572,7 +573,7 @@ function MIC_07($scope){
 	
 	}
 	
-	function MIC_13($scope){
+	function MIC_13($scope){//Programa una alarma de una correspondencia 
 	/*fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
@@ -650,7 +651,7 @@ function MIC_07($scope){
 	  }
 	}
 	
-	function MIC_17(){ 
+	function MIC_17(){  //
 	return Promise.resolve(fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
