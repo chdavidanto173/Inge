@@ -261,7 +261,7 @@ function ControllerAngular($scope)
  
  
  function clear_focus(n){
-  limpiarMensaje();
+  MIC_19();
   MIC_04(n);
  }
  
@@ -293,7 +293,8 @@ if(document.getElementById("IC12").checked==true){
   });
   
   
- function MIC_01($scope){
+ function MIC_01($scope){ //Recoge los datos de los campos y realiza el fecth de inserción 
+							//a la base de datos
 	//let a3 = document.getElementById('a3').value;
 	let b3 = $('#IC1').val().toUpperCase();
 	let c3 = $('#IC2').val().toUpperCase(); 
@@ -341,7 +342,7 @@ if(document.getElementById("IC12").checked==true){
 }
 	
 <!--valida todos los campos--->
-function MIC_02(){	
+function MIC_02(){	 //Valida los campos 
 	IC1 = true;
 	IC2 = true;
 	IC3 = true;
@@ -446,11 +447,11 @@ function MIC_02(){
 
 }
 <!--limpia todos los campos--->
-function MIC_09(){
+function MIC_09(){//Metodo de cancelar
 MIC_03();
-limpiarMensaje();
+MIC_19();
 }
-function MIC_03(){
+function MIC_03(){//Limpia el valor de los campos de entrada
 for(let i=0;i<10;i++){
 MIC_04(i);
 }
@@ -468,7 +469,7 @@ MIC_04(i);
 	document.getElementById("IC12").checked=false;
 	document.getElementById("IC2").disabled=false;
 	}
-function limpiarMensaje(){
+function MIC_19(){//Limpia el div con el id=mensaje
 $("#mensaje").text("");
 }
 function MIC_04(op){
