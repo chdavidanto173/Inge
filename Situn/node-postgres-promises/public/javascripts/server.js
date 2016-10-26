@@ -16,7 +16,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:admin123@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -75,16 +75,16 @@ function createTC(req, res, next) {
     });
 }
 
-//-------- CREACION DE UN NUEVO TD EN LA TABLA ----------
-function createTD(req, res, next) {
-     db.none('insert into TD (TD_1, TD_2)' +
-      'values(${TD_1}, ${TD_2})',
+//-------- CREACION DE UN NUEVO TE EN LA TABLA ----------
+function createTE(req, res, next) {
+     db.none('insert into TE (TE_1, TE_2)' +
+      'values(${TE_1}, ${TE_2})',
 	     req.body)
     .then(function () {
       res.status(200)
         .json({
           status: 'success',
-          message: 'Inserted one TD'
+          message: 'Inserted one TE'
         });
     })
     .catch(function (err) {
@@ -267,16 +267,16 @@ function getALLTC4(req, res, next) {
     });
 }
 
-//------ RETORNO DE UNO O VARIOS TD ESPECIFICOS SEGUN TD_1 ---------------------
-function getALLTD_ONE(req, res, next) {
-	  req.body.TD_1 = parseInt(req.body.TD_1);
-  db.any('select * from TD where TD_1 = ${TD_1}', req.body)
+//------ RETORNO DE UNO O VARIOS TE ESPECIFICOS SEGUN TE_1 ---------------------
+function getALLTE_ONE(req, res, next) {
+	  req.body.TE_1 = parseInt(req.body.TE_1);
+  db.any('select * from TE where TE_1 = ${TE_1}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
           data: data,
-          message: 'Retrieved ONE TD'
+          message: 'Retrieved ONE TE'
         });
     })
     .catch(function (err) {
@@ -286,7 +286,7 @@ function getALLTD_ONE(req, res, next) {
 
 //------ RETORNO DE UNO O VARIOS TA ESPECIFICOS SEGUN TA_3 ---------------------
 function getALLTA_FECHA(req, res, next) {
-  db.any('Select TC_3, TA.TA_2, TA.TA_3 '+ 
+  db.any('Select TA.TA_1, TC_3, TA.TA_2, TA.TA_3 '+ 
 		'from TC,(select TA.TA_1, TA.TA_2, TA.TA_3 from TA where TA_3 = current_date and TA_4 = 0) as TA '+ 
 		'where TC_1 = TA.TA_1;', req.body)
     .then(function (data) {
@@ -357,15 +357,15 @@ function updateTC(req, res, next) {
     });
 }
 
-//-------- ACTUALIZACION DE LA TABLA TD ----------
-function updateTD(req, res, next) {
-  db.none('update TD set TD_2=${TD_2} where TD_1=${TD_1} and TD_2=${TD_AUX}',
+//-------- ACTUALIZACION DE LA TABLA TE ----------
+function updateTE(req, res, next) {
+  db.none('update TE set TE_2=${TE_2} where TE_1=${TE_1} and TE_2=${TE_AUX}',
     req.body)
     .then(function () {
       res.status(200)
         .json({
           status: 'success',
-          message: 'Updated TD'
+          message: 'Updated TE'
         });
     })
     .catch(function (err) {
@@ -447,15 +447,15 @@ function removeTC(req, res, next) {
     });
 }
 
-//-------- ELIMINACION DE UN DATO EN LA TABLA TD ----------
-function removeTD(req, res, next) {
-  db.result('delete from TD where TD_1 = ${TD_1} and  TD_2=${TD_2}',
+//-------- ELIMINACION DE UN DATO EN LA TABLA TE ----------
+function removeTE(req, res, next) {
+  db.result('delete from TE where TE_1 = ${TE_1} and  TE_2=${TE_2}',
     req.body)
     .then(function() {
       res.status(200)
         .json({
           status: 'success',
-          message: 'Remove one TD'
+          message: 'Remove one TE'
         });
     })
     .catch(function (err) {
@@ -511,22 +511,22 @@ module.exports = {
   getALLTC2: getALLTC2,
   getALLTC3: getALLTC3,
   getALLTC4: getALLTC4,
-  getALLTD_ONE: getALLTD_ONE,
+  getALLTE_ONE: getALLTE_ONE,
   getALLTA_FECHA: getALLTA_FECHA,
   createTP: createTP,
   createTU: createTU,
   createTC: createTC,
-  createTD: createTD,
+  createTE: createTE,
   createTA: createTA,
   removeTP: removeTP,
   removeTU: removeTU,
   removeTC: removeTC,
-  removeTD: removeTD,
+  removeTE: removeTE,
   removeTA: removeTA,
   updateTP: updateTP,
   updateTU: updateTU,
   updateTC: updateTC,
-  updateTD: updateTD,
+  updateTE: updateTE,
   getLastTC: getLastTC,
   updateTA: updateTA
 };
