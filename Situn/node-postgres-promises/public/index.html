@@ -623,10 +623,10 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 	}
 	
 	function MIC_14(can){
-	   var f = new Date(),
+	   var f = new Date();
            addTime = can * 86400; //Tiempo en segundos
            f.setSeconds(addTime); //Añado el tiempo
-	return f.Date() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
+	return f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
 	}
 	
 	function MIC_15(){
