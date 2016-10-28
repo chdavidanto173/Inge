@@ -30,7 +30,7 @@
     <body  id = "buscar" data-ng-init = "init()">      	  	   
 	<nav class="navbar navbar-default" style="background-color:#60161E; ">
     <div class="container-fluid">
-    <!-- REsponsive -->
+    <!-- ReEsponsive -->
     <div class="navbar-header" >
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="icon-bar"></span>
@@ -123,13 +123,15 @@
 	   
 		<div class="col-md-2 form-group"><!--Genera el espacio entre componentes---->	 
 			<span class="text-danger"><h4>Alarma</h4></span>
-			<Select id="op" onchange = "MIC_12()" >
-				<Option Selected value="3d" >3 días
-				<Option value="5d">5 días
-				<Option value="7d" >7 dias
-				<Option value="Pd" >Programar
-				<Option value="Nd" Selected>Ninguna
-			</select>	
+                <label class="text-danger">Fecha Aviso</label>
+                   <div id="datetimepicker5" class="input-append form-group"><input class="form-control"id="IC14" data-format="dd-MM-yyyy" type="text" onfocus="MIC_20(3)" > <!--****** NUEVO ***********-->
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_20(3)"></i></span> 
+					</div>
+				<label class="text-danger">Fecha limite</label>
+                   <div id="datetimepicker6" class="input-append form-group"><input class="form-control"id="IC13" data-format="dd-MM-yyyy" type="text" onfocus="MIC_20(3)" > <!--****** NUEVO ***********-->
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_20(3)"></i></span> 
+					</div>
+		
 			<div  style="display:none" id="div_dias"><span class="text-danger"><h4>Cantidad de días:</h4></span>
 				<input type="text"  class="form-control" id = "input_dias"></input>
 	  		</div>
@@ -292,6 +294,18 @@ if(document.getElementById("IC12").checked==true){
     });
   });
   
+   $(function() {
+    $('#datetimepicker5').datetimepicker({
+      pickTime: false
+    });
+  });
+  
+  $(function() {
+    $('#datetimepicker6').datetimepicker({
+      pickTime: false
+    });
+  });
+  
   
  function MIC_01($scope){ //Recoge los datos de los campos y realiza el fecth de inserción 
 							//a la base de datos
@@ -324,10 +338,9 @@ if(document.getElementById("IC12").checked==true){
 	
 	if(res.indexOf("error")==-1){
  $("#mensaje").text("Acción realizada con exito");
-  if($("#op").val() != "Nd")
-  MIC_13($scope); // Analizar
-  MIC_03();
-  document.getElementById("IC11").disabled=false;
+  MIC_13($scope); 
+
+  document.getElementById("IC11").disabled=true; //VER
   }
   else
   document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
@@ -353,7 +366,7 @@ function MIC_02(){	 //Valida los campos
 	IC8 = true;
 	IC9 = true;
 	IC10 = true;
-	IC11;
+
 	
 	if($("#IC1").val().length == 0){
 		document.getElementById("datetimepicker4").className ="input-append  form-group has-error" ;
@@ -464,6 +477,8 @@ MIC_04(i);
 	//document.getElementById("IC8").value = "";
 	$("#IC9").val("");
 	$("#IC10").val("");
+	$("#IC13").val("");
+	$("#IC14").val("");
 	//document.getElementById("mensaje").innerHTML="";
 	document.getElementById("IC11").disabled=true;
 	document.getElementById("IC12").checked=false;
@@ -594,10 +609,14 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 	aux.then(data=> {
 
 		let a5 = data;  // Cambiar eso falta
-		let b5 = MIC_15();
-		let c5 = MIC_16(); 
+
+		let b5 = $('#IC13').val().toUpperCase(); 
+		let c5 = $('#IC14').val().toUpperCase();
+		console.log('Fecha limte '+b5);  // QUITAR
+			console.log('Fecha aviso '+c5);
 		let d5 = 0;
-	
+	    MIC_03();
+		if(b5!= "" && c5!=""){ 
 		fetch( 'http://localhost:3000/api/TA/I', {  
 			method: 'POST', 
 			datatype:'json',
@@ -619,6 +638,7 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 		.catch(function(error) {  
 			console.log('Request failed', error);  
 		});
+		}
 	});
 	}
 	

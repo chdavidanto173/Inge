@@ -16,7 +16,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:admin123@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -285,9 +285,11 @@ function getALLTE_ONE(req, res, next) {
 }
 
 //------ RETORNO DE UNO O VARIOS TA ESPECIFICOS SEGUN TA_3 ---------------------
+
+
 function getALLTA_FECHA(req, res, next) {
   db.any('Select TA.TA_1, TC_3, TA.TA_2, TA.TA_3 '+ 
-		'from TC,(select TA.TA_1, TA.TA_2, TA.TA_3 from TA where TA_3 = current_date and TA_4 = 0) as TA '+ 
+		'from TC,(select TA.TA_1, TA.TA_2, TA.TA_3 from TA where TA_3 <= current_date and TA_2 >= current_date and TA_4 = 0) as TA '+ 
 		'where TC_1 = TA.TA_1;', req.body)
     .then(function (data) {
       res.status(200)
