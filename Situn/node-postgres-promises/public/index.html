@@ -6,6 +6,8 @@
      
 	 
  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+ 
+
    
   <link rel="stylesheet" href="\node_modules\bootstrap\dist\css\bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -27,10 +29,11 @@
 	
    </head>
    
-    <body  id = "buscar" data-ng-init = "init()">      	  	   
+    <body  id = "buscar" data-ng-init = "init()">  
+    <a name="arriba"></a>	
 	<nav class="navbar navbar-default" style="background-color:#60161E; ">
     <div class="container-fluid">
-    <!-- REsponsive -->
+    <!-- ReEsponsive -->
     <div class="navbar-header" >
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="icon-bar"></span>
@@ -112,7 +115,8 @@
                     <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  ></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default"  ng-click ="guardarCorrespondencia()">Guardar</button></td>
+                    <td ><center><button type="button" class="btn btn-default"  ng-click ="guardarCorrespondencia()"><a href="#arriba">Guardar</button>
+					</a></td>
                     <td ><center><button type="button" class="btn btn-default" onclick="MIC_09()">Cancelar</button></td>
                 </tr>
 						</tbody>
@@ -123,13 +127,15 @@
 	   
 		<div class="col-md-2 form-group"><!--Genera el espacio entre componentes---->	 
 			<span class="text-danger"><h4>Alarma</h4></span>
-			<Select id="op" onchange = "MIC_12()" >
-				<Option Selected value="3d" >3 días
-				<Option value="5d">5 días
-				<Option value="7d" >7 dias
-				<Option value="Pd" >Programar
-				<Option value="Nd" Selected>Ninguna
-			</select>	
+                <label class="text-danger">Fecha Aviso</label>
+                   <div id="datetimepicker5" class="input-append form-group"><input class="form-control"id="IC14" data-format="dd-MM-yyyy" type="text" onfocus="MIC_20(3)" > <!--****** NUEVO ***********-->
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_20(3)"></i></span> 
+					</div>
+				<label class="text-danger">Fecha limite</label>
+                   <div id="datetimepicker6" class="input-append form-group"><input class="form-control"id="IC13" data-format="dd-MM-yyyy" type="text" onfocus="MIC_20(3)"> <!--****** NUEVO ***********-->
+					<span class="add-on"><i  data-date-icon="icon-calendar" onclick="MIC_20(3)"></i></span> 
+					</div>
+		
 			<div  style="display:none" id="div_dias"><span class="text-danger"><h4>Cantidad de días:</h4></span>
 				<input type="text"  class="form-control" id = "input_dias"></input>
 	  		</div>
@@ -164,12 +170,14 @@
 			<tr ng-repeat = "c in alarmas">
 			<!--ng-click="visto(c)"        <img src="img/check.ico" border="0" width="5">-->
 		 
-					<td> <button ng-click="visto(c)">-</button> </td>
+					<td> <button   ng-click="visto(c)"  data-toggle="modal" data-target="#myModal"  >-</button> </td>
 					<td> {{c.tc_3}} </td>
 					<td> {{c.ta_3 | date:'dd/MM/yyyy'}} </td>
 					<td> {{c.ta_2 | date:'dd/MM/yyyy'}} </td>
 			
+			
 			</tr>
+			
 		</tbody>    
 	        </table>
 			
@@ -186,7 +194,24 @@
 		</div>
 		
 		</div>
-       
+		
+
+
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog"  style="margin: 0 auto; background-color:#60161E;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" >
+      <div class="modal-header" style="background-color:#F5F5DC; color:#60161E;">
+       <center><h4 class="modal-title" >Esta seguro de que desea quitar la alarma?</h4>
+      </div>
+      <div class="modal-footer">
+        <center><button type="button" data-dismiss="modal" class="btn btn-success"  id="IC15" >Aceptar</button>
+         <button type="button"  class="btn btn-primary"  onclick="location.reload()" >Cancelar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
          
       
     
@@ -228,9 +253,14 @@ function MIC_22($scope)//ControllerAngular
 	
  }
  
+
  function MIC_11(a, $scope){
  
-	fetch( 'http://localhost:3000/api/TA/UD', {  
+ 
+
+  
+$("#IC15").click(function(){
+    fetch( 'http://localhost:3000/api/TA/UD', {  
     method: 'POST', 
     datatype:'json',
     headers: {  
@@ -249,10 +279,11 @@ function MIC_22($scope)//ControllerAngular
   .catch(function(error) {  
    console.log('Request failed', error);  
   });
+
+		});
+
+
 	
-		/*$scope.current == 1? ($scope.codi =  a, $("#editDoc1").show() ): ($scope.doc2 = a , $("#editDoc2").show());
-		let id = ($scope.current == 1)? "Documento1" : "Documento2";
-		$("#" + id ).prop('disabled', true);*/
 	}
 	
 
@@ -261,6 +292,7 @@ function MIC_22($scope)//ControllerAngular
  
  
  function MIC_20(n){//Limpia los campos cuando se enfocan
+ document.getElementById("IC11").disabled=true;
   MIC_19();
   MIC_04(n);
  }
@@ -288,6 +320,18 @@ if(document.getElementById("IC12").checked==true){
      });
    $(function() {
     $('#datetimepicker3').datetimepicker({
+      pickTime: false
+    });
+  });
+  
+   $(function() {
+    $('#datetimepicker5').datetimepicker({
+      pickTime: false
+    });
+  });
+  
+  $(function() {
+    $('#datetimepicker6').datetimepicker({
       pickTime: false
     });
   });
@@ -324,10 +368,9 @@ if(document.getElementById("IC12").checked==true){
 	
 	if(res.indexOf("error")==-1){
  $("#mensaje").text("Acción realizada con exito");
-  if($("#op").val() != "Nd")
-  MIC_13($scope); // Analizar
-  MIC_03();
-  document.getElementById("IC11").disabled=false;
+  MIC_13($scope); 
+
+  document.getElementById("IC11").disabled=true; //VER
   }
   else
   document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
@@ -353,7 +396,7 @@ function MIC_02(){	 //Valida los campos
 	IC8 = true;
 	IC9 = true;
 	IC10 = true;
-	IC11;
+
 	
 	if($("#IC1").val().length == 0){
 		document.getElementById("datetimepicker4").className ="input-append  form-group has-error" ;
@@ -437,7 +480,7 @@ function MIC_02(){	 //Valida los campos
 	document.getElementById("div9").className ="  form-group" ;
 	document.getElementById("IC9").title = "" ;
 	}
-	if($("#op").val() == "Pd"){ // En caso de programar la alarma
+	if( $("#IC13").val().length != 0 ||   $("#IC14").val().length != 0  ){ // En caso de programar la alarma
 	    IC11=MIC_18();
 		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && IC11 && MIC_05());
 		}
@@ -464,6 +507,8 @@ MIC_04(i);
 	//document.getElementById("IC8").value = "";
 	$("#IC9").val("");
 	$("#IC10").val("");
+	$("#IC13").val("");
+	$("#IC14").val("");
 	//document.getElementById("mensaje").innerHTML="";
 	document.getElementById("IC11").disabled=true;
 	document.getElementById("IC12").checked=false;
@@ -574,30 +619,18 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 	}
 	
 	function MIC_13($scope){//Programa una alarma de una correspondencia 
-	/*fetch( 'http://localhost:3000/api/TC/BC', {  
-    method: 'GET', 
-    datatype:'json',
-    headers: {  
-      "Content-type": "application/x-www-form-urlencoded"  
-      } 
-      }
-	  )
-   .then(res =>res.json())*/
-  // .then(obj =>{ obj.data[0].tc_1; /* TC_1*/})
-  
-  /*.catch(function(error) {  
-   console.log('Request failed', error);  
-  });
-   	*/
-	//console.log("Ultimo "+MIC_17().then(function(obj){obj}));
 	var aux = MIC_17();
 	aux.then(data=> {
 
 		let a5 = data;  // Cambiar eso falta
-		let b5 = MIC_15();
-		let c5 = MIC_16(); 
+
+		let b5 = $('#IC13').val().toUpperCase(); 
+		let c5 = $('#IC14').val().toUpperCase();
+		console.log('Fecha limte '+b5);  // QUITAR
+			console.log('Fecha aviso '+c5);
 		let d5 = 0;
-	
+	    MIC_03();
+		if(b5!= "" && c5!=""){ 
 		fetch( 'http://localhost:3000/api/TA/I', {  
 			method: 'POST', 
 			datatype:'json',
@@ -619,39 +652,13 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 		.catch(function(error) {  
 			console.log('Request failed', error);  
 		});
+		}
 	});
 	}
 	
-	function MIC_14(can){
-	   var f = new Date();
-           addTime = can * 86400; //Tiempo en segundos
-           f.setSeconds(addTime); //Añado el tiempo
-	return f.getDate() + "-" + (f.getMonth() +1) + "-" + f.getFullYear();
-	}
-	
-	function MIC_15(){
-	  let opcion = $("#op").val();
-	  switch(opcion){
-	  case "3d": return MIC_14(3);
-	  case "5d": return MIC_14(5);
-	  case "7d": return MIC_14(7);
-	  case "Pd": return MIC_14(can_dias = $("#input_dias").val());
-	  }
-	}
 	
 	
-	
-	function MIC_16(){
-	   let opcion = $("#op").val();
-	  switch(opcion){
-	  case "3d": return MIC_14(2);
-	  case "5d": return MIC_14(3);
-	  case "7d": return MIC_14(4);
-	  case "Pd": return MIC_14(parseInt($("#input_dias").val())-3);
-	  }
-	}
-	
-	function MIC_17(){  //
+	function MIC_17(){  //Devuelve el ultimo codigo de la ultima correspondencia
 	return Promise.resolve(fetch( 'http://localhost:3000/api/TC/BC', {  
     method: 'GET', 
     datatype:'json',
@@ -672,29 +679,82 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 function MIC_18(){
 A1=true;
 A2=true;
+A3=true;
+A4=true;
+A5=true;
 
-  if($("#input_dias").val().length == 0){
-		document.getElementById("div_dias").className ="input-append  form-group has-error" ;
-		document.getElementById("input_dias").title = "Campo Obligatoria" ;
+  if($("#IC14").val().length == 0){
+		document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
+		document.getElementById("IC14").title = "Campo Obligatorio" ;
 		A1=false;
 	}
 	else{
-	document.getElementById("div_dias").className ="form-group" ;
-	document.getElementById("input_dias").title = "" ;
+	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
+	document.getElementById("IC14").title = "" ;
 	}
 	
-	 if( $("#input_dias").val() < 4  || $("#input_dias").val()==5  || $("#input_dias").val()== 7 ){
-		document.getElementById("div_dias").className ="input-append  form-group has-error" ;
-		document.getElementById("input_dias").title = "La cantidad de dias debe ser mayor  o  igual a 4  ( No puede ser 5 o 7 )" ;
+	  if($("#IC13").val().length == 0){
+		document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
+		document.getElementById("IC13").title = "Campo Obligatorio" ;
 		A2=false;
 	}
 	else{
-	document.getElementById("div_dias").className ="form-group" ;
-	document.getElementById("input_dias").title = "" ;
+	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
+	document.getElementById("IC13").title = "" ;
 	}
 	
-	   return ( A1 && A2 );
+	if($("#IC14").val().length > 0 && $("#IC13").val().length > 0 ){
+	
+	if(   $("#IC13").val()  <   $("#IC14").val() ){
+		document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
+		document.getElementById("IC13").title = "La fecha limite de respuesta del documento no puede ser menor a la fecha de aviso"+
+		"  de la alarma";
+		A3=false;
+	}
+	else{
+	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
+	document.getElementById("IC13").title = "" ;
+	
+	
+	
+	if(   $("#IC14").val() <   $("#IC1").val() ){
+		document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
+		document.getElementById("IC14").title = "La fecha de aviso de la alarma no puede ser menor  que la fecha actual";
+		A4=false;
+	}
+	else{
+	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
+	document.getElementById("IC14").title = "" ;
+	}
+	
+	
+	if(   $("#IC13").val() < $("#IC1").val() ){
+		document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
+		document.getElementById("IC13").title = "La fecha limite de respuesta del documento no puede ser menor  que la fecha actual";
+		A5=false;
+	}
+	else{
+	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
+	document.getElementById("IC13").title = "" ;
+	}
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	}
+	
+	return  ( A1 && A2 && A3 && A4 && A5); 
 }
+    
+    
+
+
 	
 </script>
     </body>
