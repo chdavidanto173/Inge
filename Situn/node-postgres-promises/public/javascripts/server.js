@@ -199,26 +199,77 @@ function getSingleTU(req, res, next) {
 function getALLTC1(req, res, next) {
 	var low = req.body.TC_3.toLowerCase();
  req.body.TC_3 = '%' + low + '%';
+ let promises = [];
   db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
-    .then(function (data) {
+	.then(a => a.map(e => 
+						( promises.push(
+										getAllEnlaces(e.tc_1)
+										.then(r => 
+													(
+														e.enlaces = r,
+														e
+													)
+											)
+										),e
+						)
+					)
+		)
+		.then( r => Promise.all(promises).then(function (data) {
       res.status(200)
         .json({
           status: 'success',
-          data: data,
+          data: r,
           message: 'Retrieved ONE TC'
         });
-    })
-    .catch(function (err) {
-      return next(err);
-    });
+    }));
+}
+
+
+
+function getAllEnlaces(c)	// devuelve los enlaces de una correspondencia
+{
+	let flag = true;
+	return db.func('Enlaces',c)
+	.then( v => v[0].enlaces)
+	.then(en => en.reduce( (ant, act) => 
+										(
+											(act.tc_1 != c ) ? 
+															ant[ flag ? 0 : 1 ].push(act.tc_1 )
+															: flag = false
+										
+											,ant 
+										)
+							,[[],[]]));
 }
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_5 ---------------------
 function getALLTC2(req, res, next) {
 	var low = req.body.TC_5.toLowerCase();
+	 let promises = [];
  req.body.TC_5 =  '%' + low + '%';
   db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
-    .then(function (data) {
+  .then(a => a.map(e => 
+						( promises.push(
+										getAllEnlaces(e.tc_1)
+										.then(r => 
+													(
+														e.enlaces = r,
+														e
+													)
+											)
+										),e
+						)
+					)
+		)
+		.then( r => Promise.all(promises).then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: r,
+          message: 'Retrieved ONE TC'
+        });
+    }));
+    /*.then(function (data) {
       res.status(200)
         .json({
           status: 'success',
@@ -228,15 +279,37 @@ function getALLTC2(req, res, next) {
     })
     .catch(function (err) {
       return next(err);
-    });
+    });*/
 }
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_7 ---------------------
 function getALLTC3(req, res, next) {
 	var low = req.body.TC_7.toLowerCase();
   req.body.TC_7 =  '%' + low + '%';
+   let promises = [];
   db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
-    .then(function (data) {
+  .then(a => a.map(e => 
+						( promises.push(
+										getAllEnlaces(e.tc_1)
+										.then(r => 
+													(
+														e.enlaces = r,
+														e
+													)
+											)
+										),e
+						)
+					)
+		)
+		.then( r => Promise.all(promises).then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: r,
+          message: 'Retrieved ONE TC'
+        });
+    }));
+    /*.then(function (data) {
       res.status(200)
         .json({
           status: 'success',
@@ -246,15 +319,37 @@ function getALLTC3(req, res, next) {
     })
     .catch(function (err) {
       return next(err);
-    });
+    });*/
 }
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_8 ---------------------
 function getALLTC4(req, res, next) {
 	var low = req.body.TC_8.toLowerCase();
 	req.body.TC_8 =  '%' +low+'%';
+	 let promises = [];
 	db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
-    .then(function (data) {
+	.then(a => a.map(e => 
+						( promises.push(
+										getAllEnlaces(e.tc_1)
+										.then(r => 
+													(
+														e.enlaces = r,
+														e
+													)
+											)
+										),e
+						)
+					)
+		)
+		.then( r => Promise.all(promises).then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: r,
+          message: 'Retrieved ONE TC'
+        });
+    }));
+    /*.then(function (data) {
       res.status(200)
         .json({
           status: 'success',
@@ -264,7 +359,7 @@ function getALLTC4(req, res, next) {
     })
     .catch(function (err) {
       return next(err);
-    });
+    });*/
 }
 
 //------ RETORNO DE UNO O VARIOS TE ESPECIFICOS SEGUN TE_1 ---------------------
