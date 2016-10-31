@@ -95,17 +95,34 @@ CREATE OR REPLACE FUNCTION final(x integer) RETURNS void  AS
 $BODY$
 DECLARE 
 BEGIN
+drop table if exists x;
 create temp table x(a integer);
 perform post(x);
 perform  pre(x);      
 END $BODY$ LANGUAGE 'plpgsql'
 --------------------------------------------------------
-CREATE OR REPLACE FUNCTION Borrado() RETURNS void  AS
+CREATE OR REPLACE FUNCTION Enlaces(x integer) RETURNS json AS   -- funcion a llamar
+$BODY$
+DECLARE 
+BEGIN
+perform final(x);
+return array_to_json(array_agg(row_to_json(r))) from (select tc_1 from tc,x where tc_1=x.a group by tc.tc_1,a order by tc_1) r;  
+END $BODY$ LANGUAGE 'plpgsql'
+--------------------------------------------------------
+
+
+
+-----	no utilizar esta (dejarla aqui por si las moscas XD)-----
+CREATE OR REPLACE FUNCTION Borrado() RETURNS void  AS -- no se utilizaria.
 $BODY$
 DECLARE 
 BEGIN
 drop table x;     
 END $BODY$ LANGUAGE 'plpgsql'
+------------
+
+
+
 --------------------------------------------------------
 ------------EJECUTAR FUNCION ----------------------------
 select final(xn); --el valor xn es el numero q se buscara de la correspondecia eJemplo select final(1)
