@@ -16,7 +16,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:admin123@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:postgres@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -230,7 +230,7 @@ function getAllEnlaces(c)	// devuelve los enlaces de una correspondencia
 {
 	let flag = true;
 	return db.func('Enlaces',c)
-	.then( v => v[0].enlaces)
+	.then( v => (v[0].enlaces) ? v[0].enlaces :[])
 	.then(en => en.reduce( (ant, act) => 
 										(
 											(act.tc_1 != c ) ? 
