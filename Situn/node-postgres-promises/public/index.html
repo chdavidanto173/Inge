@@ -195,9 +195,6 @@
 		
 		</div>
 		
-
-
-
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog"  style="margin: 0 auto; background-color:#60161E;">
   <div class="modal-dialog" role="document">
     <div class="modal-content" >
@@ -206,7 +203,7 @@
       </div>
       <div class="modal-footer">
         <center><button type="button" data-dismiss="modal" class="btn btn-success"  id="IC15" >Aceptar</button>
-         <button type="button"  class="btn btn-primary"  onclick="location.reload()" >Cancelar</button>
+		 <a href="index.html"  class="btn btn-primary">Cancelar</a>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -221,11 +218,9 @@
   
 	   
 <script type="text/javascript">
-
  document.addEventListener("DOMContentLoaded", MIC_08);
  
 let app = angular.module('app', []);
-
 function MIC_22($scope)//ControllerAngular 
  {
 	$scope.alarmas = new Array();
@@ -236,7 +231,6 @@ function MIC_22($scope)//ControllerAngular
   }
   
    app.controller('ControllerAngular', MIC_22); 
-
   function MIC_10($scope)
  {
 	 fetch( 'http://localhost:3000/api/TA/ALL_FECHA', {  
@@ -253,11 +247,9 @@ function MIC_22($scope)//ControllerAngular
 	
  }
  
-
  function MIC_11(a, $scope){
  
  
-
   
 $("#IC15").click(function(){
     fetch( 'http://localhost:3000/api/TA/UD', {  
@@ -279,16 +271,11 @@ $("#IC15").click(function(){
   .catch(function(error) {  
    console.log('Request failed', error);  
   });
-
 		});
-
-
 	
 	}
 	
-
  
-
  
  
  function MIC_20(n){//Limpia los campos cuando se enfocan
@@ -369,7 +356,6 @@ if(document.getElementById("IC12").checked==true){
 	if(res.indexOf("error")==-1){
  $("#mensaje").text("Acción realizada con exito");
   MIC_13($scope); 
-
   document.getElementById("IC11").disabled=true; //VER
   }
   else
@@ -396,7 +382,6 @@ function MIC_02(){	 //Valida los campos
 	IC8 = true;
 	IC9 = true;
 	IC10 = true;
-
 	
 	if($("#IC1").val().length == 0){
 		document.getElementById("datetimepicker4").className ="input-append  form-group has-error" ;
@@ -487,7 +472,6 @@ function MIC_02(){	 //Valida los campos
 		else{
 		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
 		}
-
 }
 <!--limpia todos los campos--->
 function MIC_09(){//Metodo de cancelar
@@ -621,9 +605,7 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 	function MIC_13($scope){//Programa una alarma de una correspondencia 
 	var aux = MIC_17();
 	aux.then(data=> {
-
 		let a5 = data;  // Cambiar eso falta
-
 		let b5 = $('#IC13').val().toUpperCase(); 
 		let c5 = $('#IC14').val().toUpperCase();
 		console.log('Fecha limte '+b5);  // QUITAR
@@ -679,9 +661,6 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 function MIC_18(){
 A1=true;
 A2=true;
-A3=true;
-A4=true;
-A5=true;
 
   if($("#IC14").val().length == 0){
 		document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
@@ -703,58 +682,11 @@ A5=true;
 	document.getElementById("IC13").title = "" ;
 	}
 	
-	if($("#IC14").val().length > 0 && $("#IC13").val().length > 0 ){
 	
-	if(   $("#IC13").val()  <   $("#IC14").val() ){
-		document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
-		document.getElementById("IC13").title = "La fecha limite de respuesta del documento no puede ser menor a la fecha de aviso"+
-		"  de la alarma";
-		A3=false;
-	}
-	else{
-	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
-	document.getElementById("IC13").title = "" ;
-	
-	
-	
-	if(   $("#IC14").val() <   $("#IC1").val() ){
-		document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
-		document.getElementById("IC14").title = "La fecha de aviso de la alarma no puede ser menor  que la fecha actual";
-		A4=false;
-	}
-	else{
-	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
-	document.getElementById("IC14").title = "" ;
-	}
-	
-	
-	if(   $("#IC13").val() < $("#IC1").val() ){
-		document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
-		document.getElementById("IC13").title = "La fecha limite de respuesta del documento no puede ser menor  que la fecha actual";
-		A5=false;
-	}
-	else{
-	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
-	document.getElementById("IC13").title = "" ;
-	}
-	
-	
-	}
-	
-	
-	
-	
-	
-	
-	
-	}
-	
-	return  ( A1 && A2 && A3 && A4 && A5); 
+	return  ( A1 && A2 ); 
 }
     
     
-
-
 	
 </script>
     </body>
