@@ -30,7 +30,7 @@
    </head>
    
     <body  id = "buscar" data-ng-init = "init()">  
-    <a name="arriba"></a>	
+	
 	<nav class="navbar navbar-default" style="background-color:#60161E; ">
     <div class="container-fluid">
     <!-- ReEsponsive -->
@@ -115,7 +115,7 @@
                     <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  ></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default"  ng-click ="guardarCorrespondencia()"><a href="#arriba">Guardar</button>
+                    <td ><center><button type="button" class="btn btn-default"  ng-click ="guardarCorrespondencia()">Guardar</button>
 					</a></td>
                     <td ><center><button type="button" class="btn btn-default" onclick="MIC_09()">Cancelar</button></td>
                 </tr>
@@ -326,10 +326,11 @@ if(document.getElementById("IC12").checked==true){
   
  function MIC_01($scope){ //Recoge los datos de los campos y realiza el fecth de inserción 
 							//a la base de datos
-	//let a3 = document.getElementById('a3').value;
-	let b3 = $('#IC1').val().toUpperCase();
+	var d=new Date();
+	let b3 = d.getFullYear() + '-'+d.getMonth() + '-' + d.getDate();
 	let c3 = $('#IC2').val().toUpperCase(); 
-	let d3 = $('#IC3').val().toUpperCase();
+	let fecha=$('#IC3').val();
+	let d3 = fecha.substring(10, 6)+'-'+fecha.substring(5, 3)+'-'+fecha.substring(2, 0);
 	let e3 = $('#IC4').val().toUpperCase();
 	let f3 = $('#IC5').val().toUpperCase();
 	let g3 = $('#IC6').val().toUpperCase();
@@ -337,7 +338,7 @@ if(document.getElementById("IC12").checked==true){
 	let i3 = '1'; // cambiar solo lo puse por que si no mamaron al ingresar
 	let j3 = $('#IC9').val().toUpperCase();
     let k3 = $('#IC10').val().toUpperCase();
-	
+
  fetch( 'http://localhost:3000/api/TC/I', {  
     method: 'POST', 
     datatype:'json',
@@ -517,9 +518,14 @@ function MIC_04(op){//Realiza un cambio de clase a los campos de entrada del for
 	default: break;
 	}
 }	
-function MIC_05(){//Realiza el cambio de clase de los campon de estrada del formulario a la clase has-error
-let t=$("#IC1").val();
-let r=$("#IC3").val();
+function MIC_05(){//Realiza el cambio de clase de los campon de fecha del formulario a la clase has-error
+
+	
+	let fecha1=$("#IC1").val();//Toma el valor del campo de la fecha
+	let fecha2=$("#IC3").val();
+	//La fecha debe de llevar el formato YYYY/MM/dd
+	let t=fecha1.substring(10, 6)+'-'+fecha1.substring(5, 3)+'-'+fecha1.substring(2, 0);//Toma los string correspondientes para crear la fecha
+	let r=fecha2.substring(10, 6)+'-'+fecha2.substring(5, 3)+'-'+fecha2.substring(2, 0);
 	if(t>=r){
 	document.getElementById("datetimepicker4").className ="input-append  form-group " ;
 	document.getElementById("IC1").title = "" ;
