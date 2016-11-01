@@ -140,8 +140,8 @@
 			<div  style="display:none" id="div_dias"><span class="text-danger"><h4>Cantidad de días:</h4></span>
 				<input type="text"  class="form-control" id = "input_dias"></input>
 	  		</div>
-				<button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
-				<label class="text-danger" style=""><input  type="checkbox" id="con_enlace" value="enlace_checkbox">Con Enlace</label>
+				<!--<button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
+				<label class="text-danger" style=""><input  type="checkbox" id="enlace_checkbox" value="enlace_checkbox">Con Enlace</label>
 		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
 		
 		</div>
@@ -196,20 +196,19 @@
 		
 		</div>
 		
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog"  style="margin: 0 auto; background-color:#60161E;">
-  <div class="modal-dialog" role="document">
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog"  style="margin: 0 auto;  width:400px; height:175px;">
+  <div class="modal-dialog" role="document" style="width:400px; height:100px;">
     <div class="modal-content" >
-      <div class="modal-header" style="background-color:#F5F5DC; color:#60161E;">
+      <div class="modal-header">
        <center><h4 class="modal-title" >Esta seguro de que desea quitar la alarma?</h4>
       </div>
       <div class="modal-footer">
-        <center><button type="button" data-dismiss="modal" class="btn btn-success"  id="IC15" >Aceptar</button>
+        <center><button type="button" data-dismiss="modal" class="btn btn-primary" id="IC15" >Aceptar</button>
 		 <a href="index.html"  class="btn btn-primary">Cancelar</a>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
          
       
     
@@ -357,8 +356,12 @@ if(document.getElementById("IC12").checked==true){
 					if(res.indexOf("error")==-1){
 						$("#mensaje").text("Acción realizada con exito");
 							MIC_13($scope); 
-							document.getElementById("IC11").disabled=true; //VER
-							MIC_06();
+							//document.getElementById("IC11").disabled=true; //VER
+							console.log($("#enlace_checkbox").is(':checked'));
+							if($("#enlace_checkbox").is(':checked'))
+							{
+								MIC_06();
+							}
 					}
 					else
 						document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
@@ -614,7 +617,10 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 		console.log('Fecha limte '+b5);  // QUITAR
 			console.log('Fecha aviso '+c5);
 		let d5 = 0;
-	    MIC_03();
+	    if( !$("#enlace_checkbox").is(':checked'))
+		{
+			MIC_03();
+		}
 		if(b5!= "" && c5!=""){ 
 		fetch( 'http://localhost:3000/api/TA/I', {  
 			method: 'POST', 
@@ -668,10 +674,19 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 	}
 	
 function MIC_18(){
-A1=true;
-A2=true;
+let A1=true;
+let  A2=true;
+let  A3=true;
 
-  if($("#IC14").val().length == 0){
+let fechaActual=$("#IC1").val();
+let fechaAviso=$("#IC14").val();//Toma el valor del campo de la fecha
+let fechaLimite=$("#IC13").val();
+	//La fecha debe de llevar el formato YYYY/MM/dd
+	let fA=fechaAviso.substring(10, 6)+'-'+fechaAviso.substring(5, 3)+'-'+fechaAviso.substring(2, 0);//Toma los string correspondientes para crear la fecha
+	let fL=fechaLimite.substring(10, 6)+'-'+fechaLimite.substring(5, 3)+'-'+fechaLimite.substring(2, 0);
+	let fAct=fechaActual.substring(10, 6)+'-'+fechaActual.substring(5, 3)+'-'+fechaActual.substring(2, 0);//Toma los string correspondientes para crear la 
+
+ /* if( fechaAviso.length == 0){
 		document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
 		document.getElementById("IC14").title = "Campo Obligatorio" ;
 		A1=false;
@@ -681,7 +696,7 @@ A2=true;
 	document.getElementById("IC14").title = "" ;
 	}
 	
-	  if($("#IC13").val().length == 0){
+	  if(fechaLimite.length == 0){
 		document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
 		document.getElementById("IC13").title = "Campo Obligatorio" ;
 		A2=false;
@@ -690,9 +705,52 @@ A2=true;
 	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
 	document.getElementById("IC13").title = "" ;
 	}
+	*/
 	
 	
-	return  ( A1 && A2 ); 
+
+	
+	if(   fA < fAct  ){
+	document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
+		document.getElementById("IC14").title = "La fecha de aviso de la alarma es un campo obligatorio y debe ser mayor o igual  a la fecha actual" ;
+		A1=false;
+	}
+	else{
+	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
+	document.getElementById("IC14").title = "" ;
+	}
+	
+	if(fL < fAct ){
+	document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
+		document.getElementById("IC13").title = "La  fecha limite de respuesta del documento es un campo obligatorio y debe ser mayor o igual a la fecha actual" ;
+		A2=false;
+	}
+	else{
+	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
+	document.getElementById("IC13").title = "" ;
+	}
+	
+	
+	
+	if(fechaAviso.length != 0 && fechaLimite != 0 ){
+	if(fA > fL){
+	document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
+		document.getElementById("IC14").title = "La fecha de aviso de la alarma no puede ser mayor a la fecha limite de respuesta"+
+		"  del documento" ;
+		A3=false;
+	}
+	else{
+	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
+	document.getElementById("IC14").title = "" ;
+	}
+	}
+
+	
+	
+	
+	
+	
+	return  ( A1 && A2 && A3); 
 }
     
     
