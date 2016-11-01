@@ -140,8 +140,8 @@
 			<div  style="display:none" id="div_dias"><span class="text-danger"><h4>Cantidad de días:</h4></span>
 				<input type="text"  class="form-control" id = "input_dias"></input>
 	  		</div>
-				<button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
-				<label class="text-danger" style=""><input  type="checkbox" id="con_enlace" value="enlace_checkbox">Con Enlace</label>
+				<!--<button id="IC11" style="margin-top:15px"type="button" onclick="MIC_06()"class="btn btn-default"disabled>Enlace</button><!--</a>-->
+				<label class="text-danger" style=""><input  type="checkbox" id="enlace_checkbox" value="enlace_checkbox">Con Enlace</label>
 		<div style="margin-top:60px"><label id="mensaje" class="text-danger"></label></div>
 		
 		</div>
@@ -356,8 +356,12 @@ if(document.getElementById("IC12").checked==true){
 					if(res.indexOf("error")==-1){
 						$("#mensaje").text("Acción realizada con exito");
 							MIC_13($scope); 
-							document.getElementById("IC11").disabled=true; //VER
-							MIC_06();
+							//document.getElementById("IC11").disabled=true; //VER
+							console.log($("#enlace_checkbox").is(':checked'));
+							if($("#enlace_checkbox").is(':checked'))
+							{
+								MIC_06();
+							}
 					}
 					else
 						document.getElementById("mensaje").innerHTML="Fallo al realizar la acción";
@@ -613,7 +617,10 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 		console.log('Fecha limte '+b5);  // QUITAR
 			console.log('Fecha aviso '+c5);
 		let d5 = 0;
-	    MIC_03();
+	    if( !$("#enlace_checkbox").is(':checked'))
+		{
+			MIC_03();
+		}
 		if(b5!= "" && c5!=""){ 
 		fetch( 'http://localhost:3000/api/TA/I', {  
 			method: 'POST', 
