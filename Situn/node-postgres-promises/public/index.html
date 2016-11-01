@@ -30,7 +30,7 @@
    </head>
    
     <body  id = "buscar" data-ng-init = "init()">  
-    <a name="arriba"></a>	
+	
 	<nav class="navbar navbar-default" style="background-color:#60161E; ">
     <div class="container-fluid">
     <!-- ReEsponsive -->
@@ -60,6 +60,7 @@
 </nav>
 	  
 	   <!---Cuerpo--->
+	   <a href='#' onclick='MIC_14();return false' title='Ir Arriba'></a><!--Para subir la pagina--->
 	   <body background="img/situn4.png" ng-app ng-controller = "ControllerAngular">
 	      <div class="col-md-1"></div>
 	   <div class="col-md-4">
@@ -115,7 +116,7 @@
                     <td><div id="div10"class="form-group"><textarea type="text"class="form-control" id="IC10"  ></textarea></input></div></td> <!--****** NUEVO ***********-->
                 </tr>
                 <tr>
-                    <td ><center><button type="button" class="btn btn-default"  ng-click ="guardarCorrespondencia()"><a href="#arriba">Guardar</button>
+                    <td ><center><button type="button" class="btn btn-default"  ng-click ="guardarCorrespondencia()">Guardar</button>
 					</a></td>
                     <td ><center><button type="button" class="btn btn-default" onclick="MIC_09()">Cancelar</button></td>
                 </tr>
@@ -195,20 +196,19 @@
 		
 		</div>
 		
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog"  style="margin: 0 auto; background-color:#60161E;">
-  <div class="modal-dialog" role="document">
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog"  style="margin: 0 auto;  width:400px; height:175px;">
+  <div class="modal-dialog" role="document" style="width:400px; height:100px;">
     <div class="modal-content" >
-      <div class="modal-header" style="background-color:#F5F5DC; color:#60161E;">
+      <div class="modal-header">
        <center><h4 class="modal-title" >Esta seguro de que desea quitar la alarma?</h4>
       </div>
       <div class="modal-footer">
-        <center><button type="button" data-dismiss="modal" class="btn btn-success"  id="IC15" >Aceptar</button>
+        <center><button type="button" data-dismiss="modal" class="btn btn-primary" id="IC15" >Aceptar</button>
 		 <a href="index.html"  class="btn btn-primary">Cancelar</a>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
          
       
     
@@ -326,10 +326,11 @@ if(document.getElementById("IC12").checked==true){
   
  function MIC_01($scope){ //Recoge los datos de los campos y realiza el fecth de inserción 
 							//a la base de datos
-	//let a3 = document.getElementById('a3').value;
-	let b3 = $('#IC1').val().toUpperCase();
+	var d=new Date();
+	let b3 = d.getFullYear() + '-'+d.getMonth() + '-' + d.getDate();
 	let c3 = $('#IC2').val().toUpperCase(); 
-	let d3 = $('#IC3').val().toUpperCase();
+	let fecha=$('#IC3').val();
+	let d3 = fecha.substring(10, 6)+'-'+fecha.substring(5, 3)+'-'+fecha.substring(2, 0);
 	let e3 = $('#IC4').val().toUpperCase();
 	let f3 = $('#IC5').val().toUpperCase();
 	let g3 = $('#IC6').val().toUpperCase();
@@ -337,7 +338,7 @@ if(document.getElementById("IC12").checked==true){
 	let i3 = '1'; // cambiar solo lo puse por que si no mamaron al ingresar
 	let j3 = $('#IC9').val().toUpperCase();
     let k3 = $('#IC10').val().toUpperCase();
-	
+
  fetch( 'http://localhost:3000/api/TC/I', {  
     method: 'POST', 
     datatype:'json',
@@ -517,9 +518,14 @@ function MIC_04(op){//Realiza un cambio de clase a los campos de entrada del for
 	default: break;
 	}
 }	
-function MIC_05(){//Realiza el cambio de clase de los campon de estrada del formulario a la clase has-error
-let t=$("#IC1").val();
-let r=$("#IC3").val();
+function MIC_05(){//Realiza el cambio de clase de los campon de fecha del formulario a la clase has-error
+
+	
+	let fecha1=$("#IC1").val();//Toma el valor del campo de la fecha
+	let fecha2=$("#IC3").val();
+	//La fecha debe de llevar el formato YYYY/MM/dd
+	let t=fecha1.substring(10, 6)+'-'+fecha1.substring(5, 3)+'-'+fecha1.substring(2, 0);//Toma los string correspondientes para crear la fecha
+	let r=fecha2.substring(10, 6)+'-'+fecha2.substring(5, 3)+'-'+fecha2.substring(2, 0);
 	if(t>=r){
 	document.getElementById("datetimepicker4").className ="input-append  form-group " ;
 	document.getElementById("IC1").title = "" ;
@@ -580,7 +586,8 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 	  $("#mensaje").text("Fallo al realizar la acción, la correspondencia a ingresar ya existe"); 
 	  }
    })
-		.catch(err => {
+	.then( _ => MIC_14())
+	.catch(err => {
 		console.log('Request failed', err)});
 		
 	}
@@ -633,7 +640,13 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 	});
 	}
 	
-	
+	function MIC_14() {
+	if (document.body.scrollTop != 0 || document.documentElement.scrollTop != 0) {
+	window.scrollBy(0, -15);
+	arriba = setTimeout('MIC_14()', 10);
+	}
+	else clearTimeout(arriba);
+	}
 	
 	function MIC_17(){  //Devuelve el ultimo codigo de la ultima correspondencia
 	return Promise.resolve(fetch( 'http://localhost:3000/api/TC/BC', {  
@@ -654,10 +667,19 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 	}
 	
 function MIC_18(){
-A1=true;
-A2=true;
+let A1=true;
+let  A2=true;
+let  A3=true;
 
-  if($("#IC14").val().length == 0){
+let fechaActual=$("#IC1").val();
+let fechaAviso=$("#IC14").val();//Toma el valor del campo de la fecha
+let fechaLimite=$("#IC13").val();
+	//La fecha debe de llevar el formato YYYY/MM/dd
+	let fA=fechaAviso.substring(10, 6)+'-'+fechaAviso.substring(5, 3)+'-'+fechaAviso.substring(2, 0);//Toma los string correspondientes para crear la fecha
+	let fL=fechaLimite.substring(10, 6)+'-'+fechaLimite.substring(5, 3)+'-'+fechaLimite.substring(2, 0);
+	let fAct=fechaActual.substring(10, 6)+'-'+fechaActual.substring(5, 3)+'-'+fechaActual.substring(2, 0);//Toma los string correspondientes para crear la 
+
+ /* if( fechaAviso.length == 0){
 		document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
 		document.getElementById("IC14").title = "Campo Obligatorio" ;
 		A1=false;
@@ -667,7 +689,7 @@ A2=true;
 	document.getElementById("IC14").title = "" ;
 	}
 	
-	  if($("#IC13").val().length == 0){
+	  if(fechaLimite.length == 0){
 		document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
 		document.getElementById("IC13").title = "Campo Obligatorio" ;
 		A2=false;
@@ -676,9 +698,52 @@ A2=true;
 	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
 	document.getElementById("IC13").title = "" ;
 	}
+	*/
 	
 	
-	return  ( A1 && A2 ); 
+
+	
+	if(   fA < fAct  ){
+	document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
+		document.getElementById("IC14").title = "La fecha de aviso de la alarma es un campo obligatorio y debe ser mayor o igual  a la fecha actual" ;
+		A1=false;
+	}
+	else{
+	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
+	document.getElementById("IC14").title = "" ;
+	}
+	
+	if(fL < fAct ){
+	document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
+		document.getElementById("IC13").title = "La  fecha limite de respuesta del documento es un campo obligatorio y debe ser mayor o igual a la fecha actual" ;
+		A2=false;
+	}
+	else{
+	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
+	document.getElementById("IC13").title = "" ;
+	}
+	
+	
+	
+	if(fechaAviso.length != 0 && fechaLimite != 0 ){
+	if(fA > fL){
+	document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
+		document.getElementById("IC14").title = "La fecha de aviso de la alarma no puede ser mayor a la fecha limite de respuesta"+
+		"  del documento" ;
+		A3=false;
+	}
+	else{
+	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
+	document.getElementById("IC14").title = "" ;
+	}
+	}
+
+	
+	
+	
+	
+	
+	return  ( A1 && A2 && A3); 
 }
     
     
