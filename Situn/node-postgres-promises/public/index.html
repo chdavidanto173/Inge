@@ -570,6 +570,7 @@ function MIC_05(){//Realiza el cambio de clase de los campon de fecha del formul
 function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar ya existe
 	  if(MIC_02() == false){
 	     $("#mensaje").text("Campos requeridos");
+		 MIC_14();
 	     return;
 		}
 		let parametro = $('#IC2').val().toUpperCase(); 
@@ -590,7 +591,11 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 	if(obj.data[0].tc_3=="SIN OFICIO")
 		MIC_01($scope);
 	else
-	  $("#mensaje").text("Fallo al realizar la acción, la correspondencia a ingresar ya existe"); 
+	{
+		MIC_14();
+		$("#mensaje").text("Fallo al realizar la acción, la correspondencia a ingresar ya existe"); 
+	}
+	  
 	  }
    })
 	.then( _ => MIC_14())
