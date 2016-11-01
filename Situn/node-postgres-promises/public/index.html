@@ -279,7 +279,7 @@ $("#IC15").click(function(){
  
  
  function MIC_20(n){//Limpia los campos cuando se enfocan
- document.getElementById("IC11").disabled=true;
+ //document.getElementById("IC11").disabled=true;
   MIC_19();
   MIC_04(n);
  }
@@ -470,8 +470,8 @@ function MIC_02(){	 //Valida los campos
 	document.getElementById("IC9").title = "" ;
 	}
 	if( $("#IC13").val().length != 0 ||   $("#IC14").val().length != 0  ){ // En caso de programar la alarma
-	    IC11=MIC_18();
-		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && IC11 && MIC_05());
+	   // IC11=MIC_18();
+		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && /*IC11 &&*/ MIC_05());
 		}
 		else{
 		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
@@ -498,7 +498,8 @@ MIC_04(i);
 	$("#IC13").val("");
 	$("#IC14").val("");
 	//document.getElementById("mensaje").innerHTML="";
-	document.getElementById("IC11").disabled=true;
+	
+	//document.getElementById("IC11").disabled=true;
 	document.getElementById("IC12").checked=false;
 	document.getElementById("IC2").disabled=false;
 	$( "#enlace_checkbox" ).prop( "checked", false );
