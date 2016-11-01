@@ -570,6 +570,7 @@ function MIC_05(){//Realiza el cambio de clase de los campon de fecha del formul
 function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar ya existe
 	  if(MIC_02() == false){
 	     $("#mensaje").text("Campos requeridos");
+		 MIC_14();
 	     return;
 		}
 		let parametro = $('#IC2').val().toUpperCase(); 
