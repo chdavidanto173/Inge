@@ -16,7 +16,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:postgres@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -60,10 +60,13 @@ function createTU(req, res, next) {
 
 //-------- CREACION DE UN NUEVO TC EN LA TABLA ----------
 function createTC(req, res, next) {
+	console.log("Insert received...");
+	console.log(req.body);
      db.none('insert into TC (TC_2, TC_3, TC_4, TC_5, TC_6, TC_7, TC_8, TC_9, TC_10, TC_11)' +
-      'values(${TC_2}, ${TC_3}, ${TC_4}, ${TC_5}, ${TC_6},${TC_7}, ${TC_8}, ${TC_9}, ${TC_10}, ${TC_11})',
+      'values(current_date, ${TC_3}, ${TC_4}, ${TC_5}, ${TC_6},${TC_7}, ${TC_8}, ${TC_9}, ${TC_10}, ${TC_11})',
 	     req.body)
     .then(function () {
+		console.log("Theniando en insert tc");
       res.status(200)
         .json({
           status: 'success',
@@ -71,6 +74,7 @@ function createTC(req, res, next) {
         });
     })
     .catch(function (err) {
+		console.log(" No Theniando en insert tc err "+ err);
       return next(err);
     });
 }
@@ -199,7 +203,7 @@ function getSingleTU(req, res, next) {
 function getALLTC1(req, res, next) {
 	var low = req.body.TC_3.toLowerCase();
  req.body.TC_3 = '%' + low + '%';
- let promises = [];
+ var promises = [];
   db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
 	.then(a => a.map(e => 
 						( promises.push(
@@ -228,7 +232,7 @@ function getALLTC1(req, res, next) {
 
 function getAllEnlaces(c)	// devuelve los enlaces de una correspondencia
 {
-	let flag = true;
+	var flag = true;
 	return db.func('Enlaces',c)
 	.then( v => (v[0].enlaces) ? v[0].enlaces :[])
 	.then(en => en.reduce( (ant, act) => 
@@ -245,7 +249,7 @@ function getAllEnlaces(c)	// devuelve los enlaces de una correspondencia
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_5 ---------------------
 function getALLTC2(req, res, next) {
 	var low = req.body.TC_5.toLowerCase();
-	 let promises = [];
+	 var promises = [];
  req.body.TC_5 =  '%' + low + '%';
   db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
   .then(a => a.map(e => 
@@ -286,7 +290,7 @@ function getALLTC2(req, res, next) {
 function getALLTC3(req, res, next) {
 	var low = req.body.TC_7.toLowerCase();
   req.body.TC_7 =  '%' + low + '%';
-   let promises = [];
+   var promises = [];
   db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
   .then(a => a.map(e => 
 						( promises.push(
@@ -326,7 +330,7 @@ function getALLTC3(req, res, next) {
 function getALLTC4(req, res, next) {
 	var low = req.body.TC_8.toLowerCase();
 	req.body.TC_8 =  '%' +low+'%';
-	 let promises = [];
+	 var promises = [];
 	db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
 	.then(a => a.map(e => 
 						( promises.push(
