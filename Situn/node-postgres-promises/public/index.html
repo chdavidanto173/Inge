@@ -525,12 +525,15 @@ function MIC_04(op){//Realiza un cambio de clase a los campos de entrada del for
 function MIC_05(){//Realiza el cambio de clase de los campon de fecha del formulario a la clase has-error
 
 	
-	let fecha1=$("#IC1").val();//Toma el valor del campo de la fecha
+	
+	var d=new Date();
+	
+	let fecha1 = d.getFullYear() + '-'+(d.getMonth()+1) + '-' + ((d.getDate()<10)?'0':'') + d.getDate();
 	let fecha2=$("#IC3").val();
 	//La fecha debe de llevar el formato YYYY/MM/dd
-	let t=fecha1.substring(10, 6)+'-'+fecha1.substring(5, 3)+'-'+fecha1.substring(2, 0);//Toma los string correspondientes para crear la fecha
+	
 	let r=fecha2.substring(10, 6)+'-'+fecha2.substring(5, 3)+'-'+fecha2.substring(2, 0);
-	if(t>=r){
+	if(fecha1>=r){
 	document.getElementById("datetimepicker4").className ="input-append  form-group " ;
 	document.getElementById("IC1").title = "" ;
 	document.getElementById("datetimepicker3").className ="input-append  form-group " ;
