@@ -473,7 +473,7 @@ function MIC_02(){	 //Valida los campos
 	}
 	if( $("#IC13").val().length != 0 ||   $("#IC14").val().length != 0  ){ // En caso de programar la alarma
 	  var aux=MIC_18();
-		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && aux/*IC11 &&*/ &&MIC_05());
+		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && aux &&MIC_05());
 		}
 		else{
 		return (IC1 && IC2  && IC3  && IC4 	&& IC5 && IC6 && IC7 && IC8 && IC9 && MIC_05());
@@ -688,18 +688,19 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 function MIC_18(){
 let A1=true;
 let  A2=true;
-let  A3=true;
-var d=new Date();
+let A3= true;
+let  A4 = true;
+let A5 = true;
+let A6= true;
+
 let fechaAviso=$("#IC14").val();//Toma el valor del campo de la fecha
 let fechaLimite=$("#IC13").val();
-	//La fecha debe de llevar el formato YYYY/MM/dd
-	let fA=fechaAviso.substring(10, 6)+'-'+fechaAviso.substring(5, 3)+'-'+fechaAviso.substring(2, 0);//Toma los string correspondientes para crear la fecha
-	let fL=fechaLimite.substring(10, 6)+'-'+fechaLimite.substring(5, 3)+'-'+fechaLimite.substring(2, 0);
-	let fAct=d.getFullYear() + '-'+(d.getMonth()+1) + '-' + ((d.getDate()<10)?'0':'') + d.getDate(); 
-	
-	
+var d=new Date();
+let fecha1 = d.getFullYear() + '-'+(d.getMonth()+1) + '-' + ((d.getDate()<10)?'0':'') + d.getDate();
 
- /* if( fechaAviso.length == 0){
+if(fechaAviso.length == 0 || fechaLimite.length == 0){
+	
+	if( fechaAviso.length == 0){
 		document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
 		document.getElementById("IC14").title = "Campo Obligatorio" ;
 		A1=false;
@@ -718,52 +719,63 @@ let fechaLimite=$("#IC13").val();
 	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
 	document.getElementById("IC13").title = "" ;
 	}
-	*/
+	
+	}
 	
 	
+	
+	
+	if( fechaAviso.length != 0  && fechaLimite.length != 0  ){
+	
+	let fA=fechaAviso.substring(10, 6)+'-'+fechaAviso.substring(5, 3)+'-'+fechaAviso.substring(2, 0);
+	let fL=fechaLimite.substring(10, 6)+'-'+fechaLimite.substring(5, 3)+'-'+fechaLimite.substring(2, 0);
 
+	if(fA< fecha1){
+	 document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
+	document.getElementById("IC14").title = "La fecha de aviso de la alarma debe ser mayor a la fecha Actual" ;
+	A3=false;
 	
-	if(   fA < fAct  ){
+	}
+	else{
+	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
+	document.getElementById("IC14").title = "" ;
+	if(fA>fL){
 	document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
-		document.getElementById("IC14").title = "La fecha de aviso de la alarma es un campo obligatorio y debe ser mayor o igual  a la fecha actual" ;
-		A1=false;
+	document.getElementById("IC14").title = "La fecha de Aviso de la alarma no puede ser mayor a la fecha limite de respuesta del documento" ;
+	A4=false;
+	
 	}
 	else{
 	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
 	document.getElementById("IC14").title = "" ;
 	}
+	}
 	
-	if(fL < fAct ){
-	document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
-		document.getElementById("IC13").title = "La  fecha limite de respuesta del documento es un campo obligatorio y debe ser mayor o igual a la fecha actual" ;
-		A2=false;
+    if(fL< fecha1){
+	 document.getElementById("datetimepicker6").className ="input-append  form-group has-error" ;
+	document.getElementById("IC13").title = "La fecha Limite de respuesta del documento debe ser mayor a la fecha Actual" ;
+	A5=false;
+	
 	}
 	else{
 	document.getElementById("datetimepicker6").className ="input-append  form-group" ;
 	document.getElementById("IC13").title = "" ;
-	}
-	
-	
-	
-	if(fechaAviso.length != 0 && fechaLimite != 0 ){
-	if(fA > fL){
+	if(fA>fL){
 	document.getElementById("datetimepicker5").className ="input-append  form-group has-error" ;
-		document.getElementById("IC14").title = "La fecha de aviso de la alarma no puede ser mayor a la fecha limite de respuesta"+
-		"  del documento" ;
-		A3=false;
+	document.getElementById("IC14").title = "La fecha de aviso de la alarma no puede ser mayor a la fecha limite de respuesta del documento" ;
+	A6=false;
+	
 	}
 	else{
 	document.getElementById("datetimepicker5").className ="input-append  form-group" ;
 	document.getElementById("IC14").title = "" ;
 	}
 	}
+	
+	
+	}
 
-	
-	
-	
-	
-	
-	return  ( A1 && A2 && A3); 
+	return  ( A1 && A2 && A3  && A4 && A5 && A6 ); 
 }
     
     
