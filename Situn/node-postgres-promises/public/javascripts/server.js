@@ -225,7 +225,7 @@ function getAllEnlaces(req, res, next)	// devuelve los enlaces de una correspond
 	.then(en => en.reduce( (ant, act) => 
 										(
 											(act.tc_1 != c ) ? 
-															ant[ flag ? 0 : 1 ].push(act.tc_1 )
+															ant[ flag ? 0 : 1 ].push(act.tc_3 )
 															: flag = false
 										
 											,ant 
