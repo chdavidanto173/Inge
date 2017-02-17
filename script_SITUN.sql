@@ -106,7 +106,7 @@ $BODY$
 DECLARE 
 BEGIN
 perform final(x);
-return array_to_json(array_agg(row_to_json(r))) from (select tc_3 from tc,x where tc_1=x.a group by tc.tc_1,a order by tc_1) r;  
+return array_to_json(array_agg(row_to_json(r))) from (select tc_1,tc_3 from tc,x where tc_1=x.a group by tc.tc_1,a order by tc_1) r;  
 END $BODY$ LANGUAGE 'plpgsql'
 --------------------------------------------------------
 
