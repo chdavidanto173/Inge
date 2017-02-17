@@ -4,6 +4,8 @@ var router = express.Router();
 var db = require('../public/javascripts/server');
 
 //----------- BUSQUEDA EN TABLAS -------------------------------------
+router.post('/api/ALL/ENLACES',db.getAllEnlaces);       // Busqueda todos lo TP
+
 //----------- DEVOLUCION DE TODO LOS DATOS DE UNA TABLA -------------------------------------
 router.post('/api/TP/ALL',db.getAllTP);       // Busqueda todos lo TP
 router.post('/api/TU/ALL',db.getAllTU);		// Busqueda todos lo TU

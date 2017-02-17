@@ -205,35 +205,22 @@ function getALLTC1(req, res, next) {
  req.body.TC_3 = '%' + low + '%';
  var promises = [];
   db.any('select * from TC where LOWER(TC_3) LIKE ${TC_3}', req.body)
-	.then(a => a.map(e => 
-						( promises.push(
-										getAllEnlaces(e.tc_1)
-										.then(r => 
-													(
-														e.enlaces = r,
-														e
-													)
-											)
-										),e
-						)
-					)
-		)
-		.then( r => Promise.all(promises).then(function (data) {
-      res.status(200)
+	.then( function (data) {
+		res.status(200)
         .json({
           status: 'success',
-          data: r,
+          data: data,
           message: 'Retrieved ONE TC'
         });
-    }));
+    });
 }
 
 
-
-function getAllEnlaces(c)	// devuelve los enlaces de una correspondencia
+function getAllEnlaces(req, res, next)	// devuelve los enlaces de una correspondencia
 {
+	var c = req.body.COD;
 	var flag = true;
-	return db.func('Enlaces',c)
+    db.func('Enlaces',c)
 	.then( v => (v[0].enlaces) ? v[0].enlaces :[])
 	.then(en => en.reduce( (ant, act) => 
 										(
@@ -243,7 +230,16 @@ function getAllEnlaces(c)	// devuelve los enlaces de una correspondencia
 										
 											,ant 
 										)
-							,[[],[]]));
+							,[[],[]]))
+	.then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ONE TC'
+        }
+			)
+	}	);
 }
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_5 ---------------------
@@ -252,28 +248,7 @@ function getALLTC2(req, res, next) {
 	 var promises = [];
  req.body.TC_5 =  '%' + low + '%';
   db.any('select * from TC where LOWER(TC_5) LIKE ${TC_5}', req.body)
-  .then(a => a.map(e => 
-						( promises.push(
-										getAllEnlaces(e.tc_1)
-										.then(r => 
-													(
-														e.enlaces = r,
-														e
-													)
-											)
-										),e
-						)
-					)
-		)
-		.then( r => Promise.all(promises).then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: r,
-          message: 'Retrieved ONE TC'
-        });
-    }));
-    /*.then(function (data) {
+    .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
@@ -283,7 +258,7 @@ function getALLTC2(req, res, next) {
     })
     .catch(function (err) {
       return next(err);
-    });*/
+    });
 }
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_7 ---------------------
@@ -292,28 +267,7 @@ function getALLTC3(req, res, next) {
   req.body.TC_7 =  '%' + low + '%';
    var promises = [];
   db.any('select * from TC where LOWER(TC_7) LIKE ${TC_7}', req.body)
-  .then(a => a.map(e => 
-						( promises.push(
-										getAllEnlaces(e.tc_1)
-										.then(r => 
-													(
-														e.enlaces = r,
-														e
-													)
-											)
-										),e
-						)
-					)
-		)
-		.then( r => Promise.all(promises).then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: r,
-          message: 'Retrieved ONE TC'
-        });
-    }));
-    /*.then(function (data) {
+      .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
@@ -323,7 +277,7 @@ function getALLTC3(req, res, next) {
     })
     .catch(function (err) {
       return next(err);
-    });*/
+    });
 }
 
 //------ RETORNO DE UN TC ESPECIFICO SEGUN TC_8 ---------------------
@@ -332,28 +286,7 @@ function getALLTC4(req, res, next) {
 	req.body.TC_8 =  '%' +low+'%';
 	 var promises = [];
 	db.any('select * from TC where LOWER(TC_8) LIKE ${TC_8}', req.body)
-	.then(a => a.map(e => 
-						( promises.push(
-										getAllEnlaces(e.tc_1)
-										.then(r => 
-													(
-														e.enlaces = r,
-														e
-													)
-											)
-										),e
-						)
-					)
-		)
-		.then( r => Promise.all(promises).then(function (data) {
-      res.status(200)
-        .json({
-          status: 'success',
-          data: r,
-          message: 'Retrieved ONE TC'
-        });
-    }));
-    /*.then(function (data) {
+    .then(function (data) {
       res.status(200)
         .json({
           status: 'success',
@@ -363,7 +296,7 @@ function getALLTC4(req, res, next) {
     })
     .catch(function (err) {
       return next(err);
-    });*/
+    });
 }
 
 //------ RETORNO DE UNO O VARIOS TE ESPECIFICOS SEGUN TE_1 ---------------------
@@ -629,5 +562,6 @@ module.exports = {
   updateTC: updateTC,
   updateTE: updateTE,
   getLastTC: getLastTC,
-  updateTA: updateTA
+  updateTA: updateTA,
+  getAllEnlaces: getAllEnlaces
 };
