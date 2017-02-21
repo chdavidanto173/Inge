@@ -696,7 +696,7 @@ let A6= true;
 let fechaAviso=$("#IC14").val();//Toma el valor del campo de la fecha
 let fechaLimite=$("#IC13").val();
 var d=new Date();
-let fecha1 = d.getFullYear() + '-'+(d.getMonth()+1) + '-' + ((d.getDate()<10)?'0':'') + d.getDate();
+let fecha1 = d.getFullYear() + '-'+((d.getMonth()+1<10)?'0':'') +(d.getMonth()+1) + '-' + ((d.getDate()<10)?'0':'') + d.getDate();
 
 if(fechaAviso.length == 0 || fechaLimite.length == 0){
 	
