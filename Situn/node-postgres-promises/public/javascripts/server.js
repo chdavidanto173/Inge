@@ -16,7 +16,7 @@ var options = {
 var pgp = require('pg-promise')(options);
 
 //------ CONEXION A LA BASE DE DATOS ------------------
-var connectionString = "pg://postgres:admin123@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
+var connectionString = "pg://postgres:root@localhost:5432/BD_SITUN"; // CAMBIAR POR CLAVE DEL POSTGRES DE USTEDES
 var db = pgp(connectionString);
 
 
@@ -81,6 +81,7 @@ function createTC(req, res, next) {
 
 //-------- CREACION DE UN NUEVO TE EN LA TABLA ----------
 function createTE(req, res, next) {
+	
      db.none('insert into TE (TE_1, TE_2)' +
       'values(${TE_1}, ${TE_2})',
 	     req.body)
@@ -98,6 +99,9 @@ function createTE(req, res, next) {
 
 //-------- CREACION DE UN NUEVO TA EN LA TABLA ----------
 function createTA(req, res, next) {
+	console.log("fecha 1");
+	console.log(req.body.TA_2);
+	db.query('SET datestyle = dmy');
 	 req.body.TA_1 = parseInt(req.body.TA_1);
 	 req.body.TA_4 = parseInt(req.body.TA_4);
      db.none('insert into TA (TA_1, TA_2, TA_3, TA_4)' +

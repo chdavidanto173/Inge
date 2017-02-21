@@ -646,7 +646,7 @@ function MIC_07($scope){//Realiza la consulta si la correspondencia a ingresar y
 		.then(function(response) {
 			return response.text().then(function(res) {
 				MIC_10($scope);
-					console.log("Resultado: "+res);
+					console.log("Resultado enlace: "+res);
                  $("#op > option[value=Nd]").attr("selected",true);
 				  $("#input_dias").val("");
 				 $("#div_dias").hide();
