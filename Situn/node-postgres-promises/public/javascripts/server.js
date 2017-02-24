@@ -173,7 +173,7 @@ function getAllTC(req, res, next) {
 
 //------ RETORNO DE UN TP ESPECIFICO ---------------------
 function getSingleTP(req, res, next) {
-  db.one('select * from TP where TP_4 = ${TP_4}', req.body)
+  db.any('select * from TP where TP_4 = ${TP_4}', req.body)
     .then(function (data) {
       res.status(200)
         .json({
@@ -200,6 +200,54 @@ function getSingleTU(req, res, next) {
     })
     .catch(function (err) {
       return next(err);
+    });
+}
+
+//----- RETORNO DE TODOS LOS TP SEGUN TP_1
+function getALLTP1(req, res, next) {
+	var low = req.body.TP_1.toLowerCase();
+ req.body.TP_1 = '%' + low + '%';
+ var promises = [];
+  db.any('select * from TP where LOWER(TP_1) LIKE ${TP_1}', req.body)
+	.then( function (data) {
+		res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ALL TP FROM TP_1'
+        });
+    });
+}
+
+//----- RETORNO DE TODOS LOS TP SEGUN TP_2
+function getALLTP2(req, res, next) {
+	var low = req.body.TP_2.toLowerCase();
+ req.body.TP_2 = '%' + low + '%';
+ var promises = [];
+  db.any('select * from TP where LOWER(TP_2) LIKE ${TP_2}', req.body)
+	.then( function (data) {
+		res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ALL TP FROM TP_2'
+        });
+    });
+}
+
+//----- RETORNO DE TODOS LOS TP SEGUN TP_3
+function getALLTP3(req, res, next) {
+	var low = req.body.TP_3.toLowerCase();
+ req.body.TP_3 = '%' + low + '%';
+ var promises = [];
+  db.any('select * from TP where LOWER(TP_3) LIKE ${TP_3}', req.body)
+	.then( function (data) {
+		res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved ALL TP FROM TP_3'
+        });
     });
 }
 
@@ -541,6 +589,9 @@ function getLastTC(req, res, next) {
 //------ EXPORTACIONES DE LOS MODULOS ---------
 module.exports = {
   getAllTP: getAllTP,
+  getALLTP1: getALLTP1,
+  getALLTP2: getALLTP2,
+  getALLTP3: getALLTP3,
   getAllTU: getAllTU,
   getAllTC: getAllTC,
   getSingleTP: getSingleTP,
