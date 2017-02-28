@@ -13,7 +13,10 @@ router.post('/api/TC/ALL',db.getAllTC);		// Busqueda todos lo TC
 
 
 //----------- DEVOLUCION DE DATOS DE UNA TABLA SEGUN UNA CONDICION ----------
-router.post('/api/TP/B', db.getSingleTP); // Busqueda TP especifico
+router.post('/api/TP/B', db.getSingleTP); // Busqueda TP especifico identificacion
+router.post('/api/TP/BN',db.getALLTP1); // Busqueda TP nombre
+router.post('/api/TP/BA1',db.getALLTP2); // Busqueda TP Primer apellido
+router.post('/api/TP/BA2',db.getALLTP3); // Busqueda TP Primer apellido
 router.post('/api/TU/B', db.getSingleTU); // Busqueda TU especifico
 router.post('/api/TC/BO', db.getALLTC1); // Busqueda TC  oficio
 router.post('/api/TC/BD', db.getALLTC2); // Busqueda TC  destinatario
